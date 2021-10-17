@@ -140,7 +140,7 @@ tl8.fromTo('.feature-1', { scale: 0.5, opacity: "0%", }, { scale: 1.1, opacity: 
 tl8.fromTo('.feature-2', { scale: 0.5, opacity: "0%" }, { scale: 1.1, opacity: "100%" })
 tl9.fromTo('.feature-1', { opacity: "100%", }, { scale: 0.5, opacity: "0%" })
 tl9.fromTo('.feature-2', { opacity: "100%" }, { scale: 0.5, opacity: "0%" })
-tl0.fromTo('.team-container', { scale: 0.5, opacity: 0 }, { scale: 3, opacity: 100 })
+tl0.fromTo('.team-container', { scale: 0.5, opacity: 0 }, { scale: 2.5, opacity: 100 })
     //tl.to('.firstPageRow2', { opacity: 0 });
 
 const words = ["Environment", "Method", "Style"]
