@@ -1,0 +1,21 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+
+/* css variables */
+
+:root {
+    --primary-color: #6699ff;
+    --white-text-color: #FFFFFF;
+    --key-color: #ff0000;
+    --black-text-color: #000000;
+    --gradient-color: linear-gradient(90deg, #3377ff 0%, #66b3ff 100%);
+    --shadow-color: 0px 10px 30px rgba(118, 85, 225, 0, 3);
+    --box-shadow: 0px 10px 30px rgba(51, 119, 255, 0, 205);
+    /* font family variables*/
+    --roboto: 'Roboto';
+}

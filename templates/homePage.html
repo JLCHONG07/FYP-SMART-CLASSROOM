@@ -1,0 +1,170 @@
+{% extends "layout.html" %} {% block title %} {% endblock %} {% block home %}
+
+<section class="contextHome " id="home">
+    <nav class="navbar navbar-dark  navbar-expand-lg px-md-5 custom-color-navbar ">
+        <div class="container-fluid ">
+            <span class="navbar-brand mb-0 h1 sliding-text" id="logo">Virtual Classroom<br>Can Be Every Where</br></span>
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" ></span>
+              </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <div class="me-auto"></div>
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a class="nav-link active px-5 home" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link  px-5 features" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link  px-5 team" href="#team">Team</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container firstPageRow1">
+        <div class="row">
+            <h1 class="display-3 text-start fw-bold fprwords"><span>Welcome To,</span></h1>
+        </div>
+    </div>
+
+    <div class="container firstPageRow2 ">
+        <div class="row">
+            <h1 class="display-1 text-center text-uppercase fw-bold fprwords ">Smart Classroom</h1>
+        </div>
+    </div>
+
+
+    <div class="container firstPageRow3 ">
+        <div class="row">
+            <h1 class="display-3 text-end fw-bold fprwords">
+
+                <span class="experience">Experience New Learning</span>
+                <span class="text"></span>
+                <span class="typing">_</span>
+            </h1>
+        </div>
+    </div>
+
+
+    <div class="container buttons-position">
+        <div class="d-flex flex-row flex-wrap justify-content-end  ">
+            <button type="button" class="btn button primary-button text-uppercase fw-bold display-3 mx-3">I'm New</button>
+            <button type="button" class="btn button secondary-button text-uppercase fw-bold display-3">Get Started Now</button>
+        </div>
+    </div>
+
+    <div class="container scroll-words-position ">
+        <div class="d-flex flex-row justify-content-center">
+            <h6 class="text-center fw-bold"><span>Scroll to Explore More<br><br>
+            <svg width="38" height="40" viewBox="0 0 38 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3.33333C10.26 3.33333 3.16666 10.8 3.16666 20C3.16666 29.2 10.26 36.6667 19 36.6667C27.74 36.6667 34.8333 29.2 34.8333 20C34.8333 10.8 27.74 3.33333 19 3.33333ZM6.33332 20C6.33332 18.9833 6.45999 17.9833 6.66582 17.0333L14.2342 25V26.6667C14.2342 28.5 15.6592 30 17.4008 30V33.2167C11.1783 32.3833 6.33332 26.7833 6.33332 20ZM28.3258 29C27.9142 27.65 26.7425 26.6667 25.3175 26.6667H23.7342V21.6667C23.7342 20.75 23.0217 20 22.1508 20H12.6508V16.6667H15.8175C16.6883 16.6667 17.4008 15.9167 17.4008 15V11.6667H20.5675C22.3092 11.6667 23.7342 10.1667 23.7342 8.33333V7.65C28.3733 9.61666 31.6667 14.4167 31.6667 20C31.6667 23.4667 30.3842 26.6333 28.3258 29Z" fill="white"/>
+                </svg>
+            </br>
+            </span>
+            </h6>
+        </div>
+    </div>
+
+
+
+
+
+</section>
+{% endblock %} {% block features %}
+<section data-index="1" class="contextFeatures invert-header" id="features">
+
+    <div class="container feature-1">
+        <div class="card mb-3 card-position " style="max-width: 1274px; ">
+            <div class="row g-0">
+                <div class="col-md-4 features-image">
+                    <img src="static/img/face-detection.png" class="img-fluid rounded-start" alt="face-detection-image">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container feature-2">
+        <div class="card mb-3 card-position" style="max-width: 1274px;">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 features-image">
+                    <img src="static/img/gesture-recognise.png" class="img-fluid rounded-start" alt="gesture-recognise-image">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+</section>
+
+{% endblock %} {% block team %}
+<section data-index="2" class="contextTeam invert-header" id="team">
+    <div class="container team-container">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+
+            </div>
+            <div class="carousel-inner" style="height: 640px">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <div class=" card mb-3 card-position " style="max-width: 1274px; height: 600px">
+                        <div class="row g-0">
+                            <div class="col-md-4 team-image">
+                                <img src="static/img/CJL.png" class="img-fluid rounded-start" alt="CJL-profile-image">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <div class=" card mb-3 card-position " style="max-width: 1274px; height: 600px">
+                        <div class="row g-0">
+                            <div class="col-md-4 team-image">
+                                <img src="static/img/LGL.png" class="img-fluid rounded-start" alt="LGL-profile0-image">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+</section>
+{% endblock %}

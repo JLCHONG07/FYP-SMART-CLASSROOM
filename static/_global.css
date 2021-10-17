@@ -1,0 +1,60 @@
+/*Global css file included buttons, paragraph size, all the often used attribute*/
+
+.navbar {
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.button {
+    padding: .8rem 2.2rem;
+    font-family: var(--roboto);
+    position: relative;
+    border: 3px solid transparent;
+    border-radius: 4px;
+}
+
+.button.primary-button {
+    background: var(--black-text-color);
+    background-clip: padding-box;
+    transition: background.6s ease;
+    box-shadow: var(--box-shadow);
+    color: var(--gradient-color);
+}
+
+.button.primary-button:hover {
+    background: var(--gradient-color);
+    color: var(--gradient-color);
+    box-shadow: var(--box-shadow);
+}
+
+.button.secondary-button {
+    background: var(--gradient-color);
+    background-clip: padding-box;
+    color: var(--white-text-color);
+    transition: background.6s ease;
+    box-shadow: var(--box-shadow);
+}
+
+.button.secondary-button:hover {
+    background: var(--black-text-color);
+    background-clip: padding-box;
+    color: var(--gradient-color);
+}
+
+
+/*this is to create border around the button*/
+
+.button.primary-button::after,
+.button.secondary-button::after {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
+    background: var(--gradient-color);
+    content: '';
+    z-index: -1;
+    border-radius: 4px;
+}
