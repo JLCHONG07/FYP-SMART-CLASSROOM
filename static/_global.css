@@ -15,6 +15,10 @@
     border-radius: 4px;
 }
 
+a.button:hover {
+    text-decoration: none;
+}
+
 .button.primary-button {
     background: var(--black-text-color);
     background-clip: padding-box;
