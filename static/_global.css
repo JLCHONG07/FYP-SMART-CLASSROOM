@@ -47,6 +47,19 @@ a.button:hover {
     color: var(--gradient-color);
 }
 
+.login-button {
+    background: white;
+    border-color: black;
+    width: 100%;
+    border-radius: 50px;
+}
+
+.login-button:hover {
+    background: var(--gradient-color);
+    color: whitesmoke;
+    box-shadow: var(--box-shadow);
+}
+
 
 /*this is to create border around the button*/
 

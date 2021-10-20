@@ -1,43 +1,104 @@
-/*import fonts from fonts.css file*/
-
-@import url(./fonts.css);
-* {
-    margin: 0;
-    padding: 0;
+    /*import css variables*/
+    
+    @import url(./partials/_variables.css);
+    /*import fonts from fonts.css file*/
+    
+    @import url(./fonts.css);
+    /*import global styling*/
+    
+    @import url(./_global.css);
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html,
+    body {
+        height: 100%;
+    }
+    
+    .login-container {
+        height: 100vh;
+        background: url(/static/img/loginRegisterBackground.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+        opacity: 70%;
+    }
+    
+    .login-container span .white-middle-form {
+        height: 86vh;
+        width: 87vw;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .login-container span .container .row .vertical-line {
+        border: 1px solid black;
+        height: 65vh;
+        width: 0.1vw;
+        margin-left: 50%;
+    }
+    
+    .login-container .classroom-logo {
+        background: url(/static/img/white-logo.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 8vh;
+        width: 20vw;
+    }
+    /*
+form input {
+    height: 10vh;
+    width: 30vw;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-html,
-body {
-    height: 100%;
-}
-
-.login-container {
-    height: 100vh;
-    background: url(/static/img/loginRegisterBackground.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    opacity: 70%;
-}
-
-.login-container span .container {
-    height: 86vh;
-    width: 87vw;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background-color: rgba(255, 255, 255, 0.7);
-}
-
-.login-container span .container .row .vertical-line {
-    border-left: 3px solid black;
-    height: 40vh;
-    position: absolute;
-    left: 35%;
-    margin-left: -3px;
-    top: 0;
-}
+*/
+    
+    form input {
+        height: 8vh;
+        width: 20vw;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background: none;
+    }
+    
+    .email,
+    .password {
+        background-color: #E5E5E5;
+        border-radius: 25px;
+        border: 3px solid rgba(0, 0, 0, 0.5);
+    }
+    
+    .forgot-pass {
+        color: red;
+    }
+    
+    .forgot-pass:hover {
+        text-decoration: underline;
+    }
+    
+    .create-acc {
+        color: black
+    }
+    
+    .create-acc:hover {
+        text-decoration: underline;
+    }
+    
+    .choice {
+        text-decoration: none;
+    }
+    
+    a.choice.active {
+        color: red;
+    }
