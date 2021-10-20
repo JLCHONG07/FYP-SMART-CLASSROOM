@@ -14,7 +14,10 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='homePageStyle.css')}}"> {% elif title == "Login" %}
     <title>Smart Classroom - {{title}}</title>
     <!--custom css-->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginPageStyle.css')}}"> {% endif %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='loginPageStyle.css')}}"> 
+    {% elif title == "Main Menu" %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
+    {% endif %}
     <!--custom font file-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts.css')}}">
 
@@ -44,8 +47,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/EasePack.min.js" integrity="sha512-t741mAYLscX9XVAuFQwQdCiv/DubkdST40DRVwBiL8uX6BK3n1TRm3H9kfi5O7qTes5xNzunr1ojv8/C8qPqfw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--custom js-->
     <script type="text/javascript" src="{{url_for('static',filename='homePage.js')}}"></script>
-    {% endif %}
 
+    {% elif title == "Main Menu" %}
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    {% endif %}
 </body>
 {% block footer %} {% endblock %}
 

@@ -16,5 +16,11 @@ def getStart():
 def login():
     return render_template('loginPage.html',title='Login')
 
+@app.route("/")
+@app.route("/mainMenu")
+def mainMenu():
+    return render_template('mainmenu.html',title='Main Menu')
+
+
 if __name__=='__main__':
     app.run(debug=True) 
