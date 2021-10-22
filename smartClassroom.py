@@ -16,7 +16,7 @@ def getStart():
 def login():
     return render_template('loginPage.html',title='Login')
 
-@app.route("/")
+@app.route("/loginPage")
 @app.route("/mainMenu")
 def mainMenu():
     return render_template('mainmenu.html',title='Main Menu')

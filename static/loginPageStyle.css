@@ -72,8 +72,7 @@ form input {
         background: none;
     }
     
-    .email,
-    .password {
+    .text-container {
         background-color: #E5E5E5;
         border-radius: 25px;
         border: 3px solid rgba(0, 0, 0, 0.5);
@@ -95,10 +94,24 @@ form input {
         text-decoration: underline;
     }
     
-    .choice {
+    a.choice {
         text-decoration: none;
     }
     
-    a.choice.active {
-        color: red;
+    a.choice.active h1 {
+        background: var(--gradient-color);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    a.choice h1:hover {
+        background: var(--gradient-color);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .active-text-container {
+        border: 3px solid rgba(0, 119, 255, 0.5);
     }
