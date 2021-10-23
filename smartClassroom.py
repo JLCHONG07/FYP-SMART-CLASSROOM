@@ -20,6 +20,7 @@ def login():
 @app.route("/mainMenu")
 def mainMenu():
     return render_template('mainmenu.html',title='Main Menu')
+  
 
 
 @app.route("/") 

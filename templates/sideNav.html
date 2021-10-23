@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {% block title %} {% endblock %} {% block sideNavBar %}
+
+<div class="wrapper">
+    <div class="sidebar">
+        <img src="/static/img/logo.png" style="width:200px;height:auto;">
+        <ul>
+            <li style="text-align:center;">
+                <a href="#" style="margin-top:30px"><img src="/static/img/teamwork1.svg" style="width:50px">
+                    <div style="font-size: 25pt;">Features</div>
+            </li>
+            <li style="text-align:center;">
+                <a href="#" style="margin-top:30px"><img src="/static/img/user1.svg" style="width:50px">
+                    <div style="font-size: 25pt;">Profile</div>
+            </li>
+            <li style="text-align:center; margin-top:410px;">
+                <a href="#" style="margin-top:30px; z-index: 1;"><img src="/static/img/logout1.svg" style="width:50px">
+                    <div style="font-size: 25pt;">Logout</div>
+            </li>
+        </ul>
+    </div>
+
+    {% endblock %}
