@@ -14,7 +14,7 @@ def getStart():
 @app.route("/")
 @app.route("/loginPage")
 def login():
-    return render_template('loginPage.html',title='Login')
+    return render_template('account_module/loginPage.html',title='Login')
 
 @app.route("/loginPage")
 @app.route("/mainMenu")
