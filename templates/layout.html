@@ -14,7 +14,13 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='homepage_module/homePageStyle.css')}}"> {% elif title == "Login" %}
     <title>Smart Classroom - {{title}}</title>
     <!--custom css-->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/loginPageStyle.css')}}"> {% elif title == "Main Menu"%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/accountPageStyle.css')}}">
+    <!--custom css-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/loginPageStyle.css')}}"> {% elif title == "Register" %}
+    <title>Smart Classroom - {{title}}</title>
+    <!--custom css-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/accountPageStyle.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/registerPageStyle.css')}}"> {% elif title == "Main Menu"%}
 
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
     <title>Smart Classroom - {{title}}</title>
@@ -57,7 +63,12 @@
 
     {% elif title == "Login" %}
     <!--custom js-->
-    <script type="text/javascript" src="{{url_for('static',filename='account_module/loginPage.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='account_module/accountPage.js')}}"></script>
+
+    {% elif title == "Register" %}
+    <!--custom js-->
+    <script type="text/javascript" src="{{url_for('static',filename='account_module/accountPage.js')}}"></script>
+
     {% elif title == "Main Menu"%}
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     {% elif title == "Quiz Menu"%}

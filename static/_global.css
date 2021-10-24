@@ -58,6 +58,7 @@ a.button:hover {
     background: var(--gradient-color);
     color: whitesmoke;
     box-shadow: var(--box-shadow);
+    text-decoration: none;
 }
 
 

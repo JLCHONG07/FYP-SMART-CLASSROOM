@@ -16,6 +16,12 @@ def getStart():
 def login():
     return render_template('account_module/loginPage.html',title='Login')
 
+
+@app.route("/")
+@app.route("/registerPage")
+def register():
+    return render_template('account_module/registerPage.html',title='Register')
+
 @app.route("/loginPage")
 @app.route("/mainMenu")
 def mainMenu():

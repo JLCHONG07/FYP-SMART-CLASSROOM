@@ -27,3 +27,8 @@ $("svg.pass-eye").click(function(e) {
     }
 
 })
+
+function register_done() {
+
+    alert("Successful Register Please Login to Continue!");
+}
