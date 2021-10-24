@@ -210,3 +210,9 @@ a.nav-link {
     margin: auto;
     margin-right: 66%;
 }
+
+.team-container p {
+    font-style: bold;
+    font-family: var(--roboto);
+    font-size: 30px;
+}
