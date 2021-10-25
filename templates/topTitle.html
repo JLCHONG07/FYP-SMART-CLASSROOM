@@ -1,0 +1,17 @@
+{% extends "sideNav.html" %} {% block topTitle %}
+
+<div class="topleftbar"> 
+    <div>
+        <!-- This h2 will shows the Page Title according to what the page is currently in.-->
+        <h3>{{title}} </h3> 
+     </div>
+     
+</div>
+            <!-- Above part is necessary for all pages with sidebar and topleftbar-->
+
+{% block quiz %} {% endblock %} 
+{% block createQuestion %} {% endblock %} 
+{% block questionSummary %} {% endblock %} 
+{% block reportSummary %} {% endblock %} 
+{% endblock %}
+
