@@ -1,0 +1,21 @@
+.box1 {
+    position: absolute;
+    width: 513px;
+    height: 166px;
+    left: 828px;
+    background: linear-gradient(90deg, #3377FF 0%, #66B3FF 97.95%);
+    box-shadow: 5px 5px 10px #3377FF;
+    border-radius: 25px;
+    text-align: center;
+    padding-top: 55px;
+}
+
+.box1:hover {
+    opacity: 0.92;
+    cursor: pointer;
+}
+
+.boxdesc {
+    font-size: 36px;
+    color: white;
+}

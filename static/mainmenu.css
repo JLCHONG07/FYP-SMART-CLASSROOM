@@ -1,0 +1,43 @@
+.img-code-1 {
+    position: absolute;
+    top: 150px;
+    left: 25%;
+    width: 1010px;
+    height: 250px;
+    background-image: url(/static/img/img_code1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.img-code-1:hover {
+    background-image: url(/static/img/img_code1.jpg);
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.img-code-2 {
+    position: absolute;
+    top: 150px;
+    left: 25%;
+    width: 1010px;
+    height: 250px;
+    background-image: url(/static/img/img_code2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.img-code-2:hover {
+    background-image: url(/static/img/img_code2.jpg);
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.img-text {
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    font-size: 28pt;
+    color: white;
+}
