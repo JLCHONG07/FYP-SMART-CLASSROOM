@@ -1,35 +1,35 @@
 {% extends "topTitle.html" %} {% block title %} {% endblock %} {% block createQuestion %}
-   
-            <div class="questionForm">
-                <div>
-                    <b class="questionDesc">Question: </b>
-                </div>
-                <div class="formInputs">
-                    <input type="text" class="inputsizing" placeholder="  Type Question" name="email" id="question" required>
 
-                    <input type="text" class="inputs" placeholder="  Question ID" name="email" id="qID" required >
+<div class="questionForm">
+    <div>
+        <b class="questionDesc">Question: </b>
+    </div>
+    <div class="formInputs">
+        <input type="text" class="inputsizing" placeholder="  Type Question" name="email" id="question" required>
 
-                    <input type="text" class="inputs" placeholder="  Option 1" name="email" id="opt1" required >
+        <input type="text" class="inputs" placeholder="  Question ID" name="email" id="qID" required>
 
-                    <input type="text" class="inputs" placeholder="  Option 2" name="email" id="opt2" required >
+        <input type="text" class="inputs" placeholder="  Option 1" name="email" id="opt1" required>
 
-                    <input type="text" class="inputs" placeholder="  Option 3" name="email" id="opt3" required >
+        <input type="text" class="inputs" placeholder="  Option 2" name="email" id="opt2" required>
 
-                    <input type="text" class="correctInput" placeholder="  Correct Option" name="email" id="optCorrect" required>
-                    
-                    <div class="endBar" style="width:95%; height:80px;margin-top:30px;">
+        <input type="text" class="inputs" placeholder="  Option 3" name="email" id="opt3" required>
 
-                        <button class="button btnSubmit"> Submit</button>
-                        <button class="button btnDesc"> Clear</button>
-                        <button class="button btnDesc"> Cancel</button>
+        <input type="text" class="correctInput" placeholder="  Correct Option" name="email" id="optCorrect" required>
 
-                    </div>
-                </div>
-               
-                </div>
+        <div class="endBar" style="width:95%; height:80px;margin-top:30px;">
 
-            </div>
+            <button class="button btnSubmit"> Submit</button>
+            <button class="button btnDesc"> Clear</button>
+            <a href="{{url_for('questionSummary')}}"> <button class="button btnDesc"> Cancel</button>
 
         </div>
+    </div>
 
-    {% endblock %}
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

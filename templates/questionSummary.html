@@ -1,31 +1,31 @@
 {% extends "topTitle.html" %} {% block title %} {% endblock %} {% block questionSummary %}
 
-<style type="text/css"> 
-b{
-    color:black;
-}
+<style type="text/css">
+    b {
+        color: black;
+    }
 </style>
 
-            <div class="titleCtnr"> <b>My Question</b></div>
-            <div class="titleBox">
-                <div class="titleBoxContent">
-                    <b>Question</b>
-                    <b style="margin-left: 20%;">Option 1</b>
-                    <b style="margin-left: 12%;">Option 2</b>
-                    <b style="margin-left: 12%;">Option 3</b>
-                    <b style="margin-left: 12%;">Correct Option</b>
-                    <hr/>
-                    <b>Content</b><br><br>
-                    <hr/>
-                    <b>Content</b><br><br>
-                    <hr/>
-                    <b>Content</b><br><br>
-                    <hr/>
-                    <!--TODO: change this icon to svg-->
-                    <a href="#" class="plusIcon"><img src="/static/img/plus.jpg" style="  display: block;   margin-left: auto;
+<div class="titleCtnr"> <b>My Question</b></div>
+<div class="titleBox">
+    <div class="titleBoxContent">
+        <b>Question</b>
+        <b style="margin-left: 20%;">Option 1</b>
+        <b style="margin-left: 12%;">Option 2</b>
+        <b style="margin-left: 12%;">Option 3</b>
+        <b style="margin-left: 12%;">Correct Option</b>
+        <hr/>
+        <b>Content</b><br><br>
+        <hr/>
+        <b>Content</b><br><br>
+        <hr/>
+        <b>Content</b><br><br>
+        <hr/>
+        <!--TODO: change this icon to svg-->
+        <a href="{{url_for('createQuizQuestion')}}" class="plusIcon"><img src="/static/img/plus.jpg" style="  display: block;   margin-left: auto;
                     margin-right: auto; margin-top:20px;"></a>
-                </div>
+    </div>
 
-            </div>
-        </div>
-    {% endblock %}
+</div>
+</div>
+{% endblock %}
