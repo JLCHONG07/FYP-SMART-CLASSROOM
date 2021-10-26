@@ -13,17 +13,17 @@
     color: black;
     box-shadow: 5px 5px 10px #2b2b2b;
     background-color: white;
+    z-index: 1;
 }
 
 .titleBox {
     position: absolute;
     width: 1500px;
     margin-left: 19%;
-    padding-left:4%;
-    padding-right:4%;
+    padding-left: 4%;
+    padding-right: 4%;
     height: 700px;
     top: 200px;
-    z-index: -1;
     border-width: 1px;
     text-align: center;
     padding-top: 60px;
