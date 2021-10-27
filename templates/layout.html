@@ -20,30 +20,27 @@
     <title>Smart Classroom - {{title}}</title>
     <!--custom css-->
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/accountPageStyle.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/registerPageStyle.css')}}"> 
-    
-
-    {% elif title == "Main Menu"%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='account_module/registerPageStyle.css')}}"> {% elif title == "Main Menu"%}
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mainmenu.css')}}">
     <title>Smart Classroom - {{title}}</title>
 
-    {% elif title == "Quiz Menu"%}
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}"> 
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='quizmenu.css')}}"> 
 
-    {% elif title == "Create Quiz Question"%}
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='createQuestion.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}"> 
-
-    {% elif title == "Question Summary"%}
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='summaryReports.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}"> 
-
-    {% elif title == "Report Summary"%}
+    {% elif title == "Smart Quiz"%}
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mainmenu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='smartQuiz.css')}}">
+    <title>Smart Classroom - {{title}}</title>
+
+    {% elif title == "Quiz Menu"%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='quizmenu.css')}}"> {% elif title == "Create Quiz Question"%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='createQuestion.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}"> {% elif title == "Question Summary"%}
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='summaryReports.css')}}">
-    {% endif %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}"> {% elif title == "Report Summary"%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='summaryReports.css')}}"> {% endif %}
     <!--custom font file-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts.css')}}">
 

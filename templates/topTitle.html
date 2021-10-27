@@ -1,6 +1,27 @@
-{% extends "sideNav.html" %} {% block topTitle %}
+{% extends "sideNav.html" %} {% block topTitle %} {% if title == "Smart Quiz" %}
 
-<div class="topleftbar col-10">
+
+<div class=" col-10 " style="z-index: 1;">
+
+    <!-- This h2 will shows the Page Title according to what the page is currently in.-->
+    <div class="row topBarWithImg " style=" background-color: #36474f; z-index: 1;">
+        <div class="bottom-0">
+            <h3>{{title}} </h3>
+        </div>
+
+    </div>
+
+    {% block SmartQuiz %}{% endblock %}
+
+
+</div>
+
+
+
+{% else %}
+
+
+<div class="topleftbar col-10 ">
     <div>
         <!-- This h2 will shows the Page Title according to what the page is currently in.-->
         <h3>{{title}} </h3>
@@ -8,5 +29,4 @@
 
 </div>
 <!-- Above part is necessary for all pages with sidebar and topleftbar-->
-
-{% block quiz %} {% endblock %} {% block createQuestion %} {% endblock %} {% block questionSummary %} {% endblock %} {% block reportSummary %} {% endblock %} {% endblock %}
+{% block quiz %} {% endblock %} {% block createQuestion %} {% endblock %} {% block questionSummary %} {% endblock %} {% block reportSummary %} {% endblock %} {% endif %} {% endblock %}

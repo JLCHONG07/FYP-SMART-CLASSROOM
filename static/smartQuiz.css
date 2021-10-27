@@ -1,0 +1,15 @@
+div.circle {
+    position: absolute;
+    width: 4vw;
+    height: 8vh;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: yellow;
+}
+
+div.quiz-room-scroll {
+    overflow-y: auto;
+    height: 100vh;
+}
