@@ -1,0 +1,36 @@
+.profileBox {
+    position: absolute;
+    top: 150px;
+    left: 21vw;
+    width: 1399px;
+    height: 738px;
+    background: linear-gradient(105.38deg, #80B4FB 1.18%, #80CB8E 100%);
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+}
+
+
+
+.nameBox{
+    width: 522px;
+    height: 79px;
+    background: #FFFFFF;
+    border-radius: 25px;
+}
+
+.detailsBox{
+    margin-top:5%;
+    width: 522px;
+    height: 437px;
+    background: #FFFFFF;
+    border-radius: 25px;
+}
+
+.picBox{
+    margin-left:15%;
+    width: 335px;
+    height: 460px;
+
+}

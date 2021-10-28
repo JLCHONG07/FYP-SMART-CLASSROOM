@@ -40,7 +40,13 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='summaryReports.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}"> {% elif title == "Report Summary"%}
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='summaryReports.css')}}"> {% endif %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='summaryReports.css')}}"> 
+    
+    {% elif title == "Profile" %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='profile.css')}}"> 
+    {% endif %}
+
     <!--custom font file-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts.css')}}">
 

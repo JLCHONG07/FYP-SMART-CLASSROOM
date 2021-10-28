@@ -27,6 +27,11 @@ def register():
 def mainMenu():
     return render_template('mainmenu.html',title='Main Menu')
   
+@app.route("/profile")
+def profile():
+    return render_template('profile.html',title='Profile')
+
+
 @app.route("/mainMenu/smartQuiz")
 def smartQuiz():
     return render_template('quizRoom.html',title='Smart Quiz')
