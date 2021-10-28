@@ -101,9 +101,9 @@ a:hover {
 }
 */
 
-hr {
-    margin-left: auto;
-    margin-right: auto;
+hr.line-btw-logo-featurea {
+    border-top: 1px solid white;
+    border-radius: 5px;
 }
 
 
@@ -134,7 +134,7 @@ hr {
 
 .topBarWithImg {
     z-index: 1;
-    height: 8.5vh;
+    height: 12vh;
     background: url(/static/img/Smart_Quiz.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -142,8 +142,7 @@ hr {
 
 .topleftbar {
     z-index: 1;
-    height: 78px;
-    top: 0px;
+    height: 12vh;
     background: #66B3FF;
     box-shadow: 0px 5px 5px #66B3FF;
 }

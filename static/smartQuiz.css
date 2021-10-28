@@ -14,12 +14,13 @@ div.circle {
     vertical-align: middle;
     border-radius: 50%;
     background: var(--gradient-color);
-    color: var(--white-text-color);
+    color: var(--black-text-color);
     box-shadow: var(--box-shadow);
     text-decoration: none;
     border-style: solid;
     border-width: thin;
     border-color: var(--black-text-color);
+    font-weight: bold;
 }
 
 div.box-shadow {
@@ -37,5 +38,5 @@ div.group-assigned p,
 div.quiz-code p,
 div.create-room-word h5 {
     font-family: var(--roboto);
-    font-weight: bold;
+    font-weight: bolder;
 }
