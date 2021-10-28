@@ -54,7 +54,8 @@ a.button:hover {
     border-radius: 50px;
 }
 
-.login-button:hover {
+.login-button:hover,
+.third-button {
     background: var(--gradient-color);
     color: whitesmoke;
     box-shadow: var(--box-shadow);

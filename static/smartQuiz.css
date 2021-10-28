@@ -1,3 +1,10 @@
+/*import fonts from fonts.css file*/
+
+@import url(/static/fonts.css);
+
+/*import global styling*/
+
+@import url(/static/_global.css);
 div.circle {
     position: absolute;
     width: 4vw;
@@ -6,10 +13,29 @@ div.circle {
     text-align: center;
     vertical-align: middle;
     border-radius: 50%;
-    background: yellow;
+    background: var(--gradient-color);
+    color: var(--white-text-color);
+    box-shadow: var(--box-shadow);
+    text-decoration: none;
+    border-style: solid;
+    border-width: thin;
+    border-color: var(--black-text-color);
+}
+
+div.box-shadow {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 div.quiz-room-scroll {
     overflow-y: auto;
     height: 100vh;
+}
+
+div.quiz-title h5,
+div.progress-word h6,
+div.group-assigned p,
+div.quiz-code p,
+div.create-room-word h5 {
+    font-family: var(--roboto);
+    font-weight: bold;
 }
