@@ -32,6 +32,13 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='smartQuiz.css')}}">
     <title>Smart Classroom - {{title}}</title>
 
+    {% elif title == "Answer"%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mainmenu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='answeringStyle.css')}}">
+
+    <title>Smart Classroom - {{title}}</title>
+
     {% elif title == "Quiz Menu"%}
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='quizmenu.css')}}"> {% elif title == "Create Quiz Question"%}

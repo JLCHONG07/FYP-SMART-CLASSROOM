@@ -18,8 +18,20 @@
 
 
 
-{% else %}
+{% elif title =="Answer" %}
 
+<div class=" col-10 " style="z-index: 1;">
+    <div class="row topleftbar">
+        <div class="pt-4">
+            <!-- This h2 will shows the Page Title according to what the page is currently in.-->
+            <h3>Question 1:.....</h3>
+        </div>
+    </div>
+    {% block answering %}{% endblock %}
+</div>
+
+
+{% else %}
 
 <div class="topleftbar col-10 ">
     <div>

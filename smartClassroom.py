@@ -1,55 +1,26 @@
-from flask import Flask,render_template
+from flask import Flask
+from hand_detection_and_recognation import class_calling
 
 
 app=Flask(__name__)
 
+app.add_url_rule('/','homePage',class_calling.getStart)
+app.add_url_rule('/loginPage','login',class_calling.login)
+app.add_url_rule('/registerPage','register',class_calling.register)
+
+app.add_url_rule('/mainMenu','mainMenu',class_calling.mainMenu)
+app.add_url_rule('/mainMenu/smartQuiz','smartQuiz',class_calling.smartQuiz)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu','quizMenu',class_calling.quizMenu)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz','quizRoom',class_calling.smartQuiz)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu','quizmenu',class_calling.quizMenu)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu','quizmenu',class_calling.quizMenu)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/questionSummary','questionSummary',class_calling.questionSummary)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/questionSummary/createQuizQuestion','createQuizQuestion',class_calling.createQuizQuestion)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering','answering',class_calling.answering)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering/handRealTimeCam','handRealTimeCam',class_calling.handRealtime)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/reportSummary','reportSummary',class_calling.reportSummary)
 
 
-@app.route("/homePage")
-@app.route("/")
-def getStart():
-    return render_template('homePage.html',title='Home')
-
-
-##@app.route("/")
-@app.route("/loginPage")
-def login():
-    return render_template('account_module/loginPage.html',title='Login')
-
-
-##@app.route("/")
-@app.route("/registerPage")
-def register():
-    return render_template('account_module/registerPage.html',title='Register')
-
-##@app.route("/loginPage")
-@app.route("/mainMenu")
-def mainMenu():
-    return render_template('mainmenu.html',title='Main Menu')
-  
-@app.route("/mainMenu/smartQuiz")
-def smartQuiz():
-    return render_template('quizRoom.html',title='Smart Quiz')
-
-##@app.route("/mainMenu") 
-@app.route("/mainMenu/quizmenu")
-def quizMenu():
-    return render_template('quizmenu.html',title='Quiz Menu')
-
-##@app.route("/") 
-@app.route("/mainMenu/quizmenu/questionSummary/createQuestion")
-def createQuizQuestion():
-    return render_template('createQuestion.html',title='Create Quiz Question')
-
-##@app.route("/") 
-@app.route("/mainMenu/quizmenu/questionSummary")
-def questionSummary():
-    return render_template('questionSummary.html',title='Question Summary')
-
-##@app.route("/") 
-@app.route("/mainMenu/quizmenu/reportSummary")
-def reportSummary():
-    return render_template('reportSummary.html',title='Report Summary')
 
 if __name__=='__main__':
     app.run(debug=True) 

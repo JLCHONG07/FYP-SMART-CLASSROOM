@@ -1,0 +1,50 @@
+    /*import fonts from fonts.css file*/
+    
+    @import url(/static/fonts.css);
+    /*import global styling*/
+    
+    @import url(/static/_global.css);
+    div.circle-timer {
+        width: 4vw;
+        height: 8vh;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 50%;
+        background: #C4C4C4;
+        color: var(--black-text-color);
+        text-decoration: none;
+        border-style: solid;
+        border-width: thin;
+        border-color: var(--black-text-color);
+        font-weight: bold;
+    }
+    
+    .answers {
+        border: 1px solid black;
+    }
+    
+    span.answer-text {
+        font-weight: bold;
+        font-family: var(--roboto);
+    }
+    
+    span.answer-text.active {
+        color: var(--white-text-color);
+        font-weight: bold;
+        font-family: var(--roboto);
+    }
+    
+    .answers.active {
+        border: 1px solid #66B3FF;
+        background: var(--gradient-color);
+        color: var(--white-text-color);
+        box-shadow: var(--box-shadow);
+    }
+    
+    .answers:hover {
+        border: 1px solid #66B3FF;
+        background: var(--gradient-color);
+        color: var(--white-text-color);
+        box-shadow: var(--box-shadow);
+    }

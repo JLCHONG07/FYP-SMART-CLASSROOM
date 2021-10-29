@@ -38,5 +38,5 @@ div.group-assigned p,
 div.quiz-code p,
 div.create-room-word h5 {
     font-family: var(--roboto);
-    font-weight: bolder;
+    font-weight: bold;
 }
