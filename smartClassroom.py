@@ -18,6 +18,7 @@ app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/questionSummar
 app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/questionSummary/createQuizQuestion','createQuizQuestion',class_calling.createQuizQuestion)
 app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering','answering',class_calling.answering)
 app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering/handRealTimeCam','handRealTimeCam',class_calling.handRealtime)
+app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering/handRealTimeCam2','handRealTimeCam2',class_calling.handRealtime)
 app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/reportSummary','reportSummary',class_calling.reportSummary)
 
 

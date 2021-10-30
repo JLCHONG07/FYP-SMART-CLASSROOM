@@ -44,6 +44,8 @@ def hand_detection():
         image.flags.writeable = True
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         image= cv2.putText(image, f'FPS:{int(fps)}', (7, 70), font, 3, (100, 255, 0), 3, cv2.LINE_AA)
+        image = ResizeWithAspectRatio(image, width=571) # Resize by width OR
+        # resize = ResizeWithAspectRatio(image, height=1280) # Resize by height 
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
               mp_drawing.draw_landmarks(
@@ -58,8 +60,22 @@ def hand_detection():
         frame = cv2.imencode('.jpg', image)[1].tobytes()
         yield b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
 
+def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
+    dim = None
+    (h, w) = image.shape[:2]
 
-def secondMode():
+    if width is None and height is None:
+        return image
+    if width is None:
+        r = height / float(h)
+        dim = (int(w * r), height)
+    else:
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    return cv2.resize(image, dim, interpolation=inter)
+
+def hand_detection_mode_2():
     prev_frame_time=0
     
     cap = cv2.VideoCapture(0)

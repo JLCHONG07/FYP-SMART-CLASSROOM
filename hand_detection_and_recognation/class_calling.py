@@ -1,6 +1,6 @@
 from flask import render_template, request, Response
 import os
-from hand_detection_and_recognation.hand_detection import hand_detection
+from hand_detection_and_recognation.hand_detection import hand_detection,hand_detection_mode_2
 
 
 def getStart():
@@ -28,6 +28,9 @@ def answering():
 
 def handRealtime():
    return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+def handRealtime2():
+    return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 def quizMenu():
