@@ -1,25 +1,57 @@
-from flask import Flask
-from hand_detection_and_recognation import class_calling
+from flask import Flask,render_template,Response
+from hand_detection_and_recognation.hand_detection import hand_detection,hand_detection_mode_2
 
 
 app=Flask(__name__)
 
-app.add_url_rule('/','homePage',class_calling.getStart)
-app.add_url_rule('/loginPage','login',class_calling.login)
-app.add_url_rule('/registerPage','register',class_calling.register)
+@app.route("/")
+def home():
+    return render_template('homePage.html',title='Home')
 
-app.add_url_rule('/mainMenu','mainMenu',class_calling.mainMenu)
-app.add_url_rule('/mainMenu/smartQuiz','smartQuiz',class_calling.smartQuiz)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu','quizMenu',class_calling.quizMenu)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz','quizRoom',class_calling.smartQuiz)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu','quizmenu',class_calling.quizMenu)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu','quizmenu',class_calling.quizMenu)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/questionSummary','questionSummary',class_calling.questionSummary)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/questionSummary/createQuizQuestion','createQuizQuestion',class_calling.createQuizQuestion)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering','answering',class_calling.answering)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering/handRealTimeCam','handRealTimeCam',class_calling.handRealtime)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/answering/handRealTimeCam2','handRealTimeCam2',class_calling.handRealtime)
-app.add_url_rule('/mainMenu/smartQuiz/quizmenu/smartQuiz/quizMenu/reportSummary','reportSummary',class_calling.reportSummary)
+@app.route("/login")
+def login():
+    return render_template('account_module/loginPage.html',title='Login')
+
+
+@app.route("/register")
+def register():
+    return render_template('account_module/registerPage.html',title='Register')
+
+@app.route("/mainMenu")
+def mainMenu():
+    return render_template('mainmenu.html',title='Main Menu')
+
+@app.route("/mainMenu/smartQuiz")
+def smartQuiz():
+    return render_template('quizRoom.html',title='Smart Quiz')
+
+
+@app.route("/mainMenu/smartQuiz/quizMenu")
+def quizMenu():
+    return render_template('quizmenu.html',title='Quiz Menu')
+
+@app.route("/mainMenu/smartQuiz/quizMenu/answering")
+def answering():
+    return render_template('answering.html',title='Answer')
+
+@app.route("/mainMenu/smartQuiz/quizMenu/questionSummary")    
+def questionSummary():
+    return render_template('questionSummary.html',title='Question Summary')
+
+@app.route("/mainMenu/smartQuiz/quizMenu/questionSummary/createQuetion")
+def createQuizQuestion():
+    return render_template('createQuestion.html',title='Create Quiz Question')
+
+@app.route("/mainMenu/smartQuiz/quizMenu/reportSummary/")
+def reportSummary():
+    return render_template('reportSummary.html',title='Report Summary')
+
+@app.route("/mainMenu/smartQuiz/quizMenu/answering/handRealTime")
+def handRealtime():
+   return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+def handRealtime2():
+    return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 
