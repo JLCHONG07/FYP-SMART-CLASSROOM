@@ -8,10 +8,10 @@ $(".navbar-words").click(function(e) {
 function logout() {
     var txt = confirm("Are You Sure Want to Logout?");
     if (txt) {
-        alert("Action successfully executed");
-        window.location = "loginPage.html";
+        // console.log("logout");
+        window.location = "loginPage";
     } else {
-        console.log("Action canceled");
+        // console.log("Action canceled");
     }
 
 }
