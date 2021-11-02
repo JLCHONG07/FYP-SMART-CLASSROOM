@@ -9,7 +9,9 @@
         <h1 class="display-6 fw-bold text-center ">Please Enter Your Information</h1>
     </div>
 
-    <form>
+    <form class="form" method="POST">
+
+        <input type="hidden" value="student" name="selected-choice" id="hidField"></input>
 
         <div class="text-container container mb-4 p-3 mt-4" style="height:12vh;">
             <div class="row">
@@ -27,7 +29,7 @@
                                     </svg>
                 </div>
                 <div class="col-8 px-1">
-                    <input type="email" class="input-text" placeholder="Enter Your Email Address">
+                    {{form.email}}
                 </div>
             </div>
 
@@ -53,7 +55,7 @@
 
                 </div>
                 <div class="col-8">
-                    <input type="password" class="input-text" placeholder="Enter Your Password">
+                    {{form.psw}}
                 </div>
                 <div class="col-2 text-center">
                     <a><svg width="80" height="81" class="pass-eye" viewBox="0 0 80 81" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,21 +91,24 @@
                         </svg>
                 </div>
                 <div class="col-8 px-3">
-                    <input type="text" class="input-text" placeholder="Enter Your MyCard Number">
+                    <input type="text" name="icno" class="input-text" placeholder="Enter Your MyCard Number">
                 </div>
             </div>
 
         </div>
 
+        <p class="error error-hidden"> </p>
+
+        <div class="container mb-3  mt-5">
+            <div class="d-flex flex-row flex-wrap container  justify-content-center text-center" style="height: 6vh;">
+                <button type="submit" class="btn login-button text-uppercase fw-bold  text-center  " onclick="register_done()">Register</button>
+            </div>
+        </div>
     </form>
 
 
 
-    <div class="container mb-3  mt-5">
-        <div class="d-flex flex-row flex-wrap container  justify-content-center text-center" style="height: 6vh;">
-            <a type="button" class="btn login-button text-uppercase fw-bold  text-center pt-3 " onclick="register_done()" href="{{url_for('login')}}">Register</a>
-        </div>
-    </div>
+
 
     <div class="container flex-wrap back-to-login">
         <a href="{{url_for('login')}}">

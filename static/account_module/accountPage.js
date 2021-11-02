@@ -23,7 +23,7 @@ $("svg.pass-eye").click(function(e) {
 
     } else {
         $(this).find("path").attr("fill", "#C4C4C4");
-        $("form").find('input:text').attr("type", "password");
+        $("form").find('.password-form').attr("type", "password");
     }
 
 })
@@ -31,4 +31,18 @@ $("svg.pass-eye").click(function(e) {
 function register_done() {
 
     alert("Successful Register Please Login to Continue!");
+    location.href = "login";
 }
+
+$(document).ready(function() {
+    $("#admin-choice").click(function() {
+        $("#hidField").val("admin").trigger("change");
+    });
+
+    $("#student-choice").click(function() {
+        $("#hidField").val("student").trigger("change");
+    });
+
+
+
+})

@@ -1,22 +1,29 @@
-from flask import Flask,render_template,Response
+from flask import Flask,render_template,Response,request,redirect,url_for,flash
 from hand_detection_and_recognation.hand_detection import hand_detection,hand_detection_mode_2
+from pymongo import MongoClient
+import module.account.model
 
 
 app=Flask(__name__)
+client=MongoClient("mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE")
+smartclassroom_db=client["smartclassroom"]
+users_db=smartclassroom_db["users"]
+app.secret_key = "abc"  
+
 
 @app.route("/")
 def home():
     return render_template('homePage.html',title='Home')
 
-@app.route("/login")
+@app.route("/login",methods=["GET","POST"])
 def login():
-    return render_template('account_module/loginPage.html',title='Login')
+    return module.account.model.login()
 
 
-@app.route("/register")
+@app.route("/register",methods=["GET","POST"])
 def register():
-    return render_template('account_module/registerPage.html',title='Register')
-
+    return module.account.model.register()
+  
 @app.route("/mainMenu")
 def mainMenu():
     return render_template('mainmenu.html',title='Main Menu')
@@ -48,10 +55,10 @@ def reportSummary():
 
 @app.route("/mainMenu/smartQuiz/quizMenu/answering/handRealTime")
 def handRealtime():
-   return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
+   return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame',title="hand_detect_mode1")
 
 def handRealtime2():
-    return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame',title="hand_detect_mode2")
 
 
 
