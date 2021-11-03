@@ -48,7 +48,7 @@ def login():
             #print(entry_psw)
             #Passing the data to user class and retrive back store to "user" variable
             user=User.find_user(type=entry_type,email=entry_email)
-            print(vars(user))
+            #print(vars(user))
 
             if user and pbkdf2_sha256.verify(entry_psw,user.psw):
                  return redirect(url_for("mainMenu"))

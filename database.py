@@ -3,12 +3,12 @@ import pymongo
 
 class Database(object):
 
-    URL="mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE"
+    URI="mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE"
     DATABASE=None
 
     @staticmethod
     def initialize():
-        client=pymongo.MongoClient(Database.URL)
+        client=pymongo.MongoClient(Database.URI)
         Database.DATABASE=client["smartclassroom"]
     
     @staticmethod
