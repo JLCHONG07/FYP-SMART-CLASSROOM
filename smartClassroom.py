@@ -1,13 +1,15 @@
 from flask import Flask,render_template,Response,request,redirect,url_for,flash
+from database import Database
 from hand_detection_and_recognation.hand_detection import hand_detection,hand_detection_mode_2
 from pymongo import MongoClient
 import module.account.model
 
 
 app=Flask(__name__)
-client=MongoClient("mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE")
-smartclassroom_db=client["smartclassroom"]
-users_db=smartclassroom_db["users"]
+#client=MongoClient("mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE")
+#smartclassroom_db=client["smartclassroom"]
+#users_db=smartclassroom_db["users"]
+Database.initialize()
 app.secret_key = "abc"  
 
 
