@@ -1,4 +1,6 @@
+from typing import NoReturn
 from flask import Flask,render_template,Response,request,redirect,url_for,flash
+from flask.globals import session
 from wtforms.validators import ValidationError
 import smartClassroom 
 from passlib.hash import pbkdf2_sha256
@@ -20,19 +22,28 @@ def register():
             entry_type=request.form.get("selected-choice")
             entry_id=uuid.uuid4().hex
             #print(request.form)
-
-            print(entry_email)
-
+            #print(entry_email)
             #Encrypt the password
             entry_psw=pbkdf2_sha256.encrypt(entry_psw)
 
-            #Passing the data to user class and retrive back store to "user" variable
-            user=User(_id=entry_id,email=entry_email,psw=entry_psw,icno=entry_ic,type=entry_type)
+            #user=User.get_user_email(entry_email)
             #print(vars(user))
-            user.save_to_mongodb()
+            #Passing the data to user class and retrive back store to "user" variable
+            #user=User(_id=entry_id,email=entry_email,psw=entry_psw,icno=entry_ic,type=entry_type)
+
+            #Check the email is that alrdy exists and store it if not exists
+            if User.register_valid(entry_id,entry_email,entry_psw,entry_ic,entry_type):
+                session.pop('_flashes', None)
+                return redirect(url_for('login'))
+            else:
+                flash("Email already exists")
+            return render_template('account_module/registerPage.html',title='Register',form=form)
+            #print(vars(user))
+            #user.save_to_mongodb()
             
             #user_db.insert_one(user)
-            return redirect(url_for('login'))
+            #return redirect(url_for('login'))
+            #return render_template('account_module/registerPage.html',title='Register',form=form)
         else:
             return render_template('account_module/registerPage.html',title='Register',form=form)
 
@@ -47,17 +58,19 @@ def login():
             #print(entry_type)
             #print(entry_psw)
             #Passing the data to user class and retrive back store to "user" variable
-            user=User.find_user(type=entry_type,email=entry_email)
+            #user=User.find_user(type=entry_type,email=entry_email)
             #print(vars(user))
 
-            if user and pbkdf2_sha256.verify(entry_psw,user.psw):
+            #Check if user email,password is valid with type selected
+            if User.login_valid(entry_email,entry_psw,entry_type):
+                 #flash("Account Created")
                  return redirect(url_for("mainMenu"))
-                 
-                
+        
             else:
                 #print if invalid user
                  error="Invalid email or password"
                  flash(error)
+                 User.logout()
                  #return redirect(url_for("login"))
             return render_template('account_module/loginPage.html',title='Login',form=form)  
         else:

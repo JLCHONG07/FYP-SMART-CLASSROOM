@@ -1,7 +1,9 @@
 from flask import Flask,render_template,Response,request,redirect,url_for,flash
+from flask.globals import session
 from database import Database
 from hand_detection_and_recognation.hand_detection import hand_detection,hand_detection_mode_2
 from pymongo import MongoClient
+from module.account.accountClass import User
 import module.account.model
 
 
@@ -9,9 +11,12 @@ app=Flask(__name__)
 #client=MongoClient("mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE")
 #smartclassroom_db=client["smartclassroom"]
 #users_db=smartclassroom_db["users"]
-Database.initialize()
+
 app.secret_key = "abc"  
 
+@app.before_first_request
+def database_initialize():
+    Database.initialize()
 
 @app.route("/")
 def home():
@@ -19,6 +24,7 @@ def home():
 
 @app.route("/login",methods=["GET","POST"])
 def login():
+  
     return module.account.model.login()
 
 
@@ -28,7 +34,12 @@ def register():
   
 @app.route("/mainMenu")
 def mainMenu():
-    return render_template('mainmenu.html',title='Main Menu')
+    if session["email"] is not None:
+        user=session["email"]
+        print(user)
+        return render_template('mainmenu.html',title='Main Menu')
+    else:
+        return redirect(url_for('login'))
 
 @app.route("/mainMenu/smartQuiz")
 def smartQuiz():
@@ -49,6 +60,7 @@ def questionSummary():
 
 @app.route("/mainMenu/smartQuiz/quizMenu/questionSummary/createQuetion")
 def createQuizQuestion():
+      
     return render_template('createQuestion.html',title='Create Quiz Question')
 
 @app.route("/mainMenu/smartQuiz/quizMenu/reportSummary/")
@@ -62,7 +74,10 @@ def handRealtime():
 def handRealtime2():
     return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame',title="hand_detect_mode2")
 
-
+@app.route("/logout")
+def logout():
+    User.logout()
+    return redirect(url_for('login'))
 
 if __name__=='__main__':
     app.run(debug=True) 

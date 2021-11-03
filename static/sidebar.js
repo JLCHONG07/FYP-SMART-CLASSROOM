@@ -9,7 +9,8 @@ function logout() {
     var txt = confirm("Are You Sure Want to Logout?");
     if (txt) {
         // console.log("logout");
-        window.location = "login";
+
+        window.location = "logout";
     } else {
         // console.log("Action canceled");
     }

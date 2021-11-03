@@ -29,9 +29,11 @@ $("svg.pass-eye").click(function(e) {
 })
 
 function register_done() {
+    if ($('#error-message').text() == "Account Created") {
+        alert("Successful Register Please Login to Continue!");
+    }
 
-    alert("Successful Register Please Login to Continue!");
-    location.href = "login";
+    //location.href = "login";
 }
 
 $(document).ready(function() {
