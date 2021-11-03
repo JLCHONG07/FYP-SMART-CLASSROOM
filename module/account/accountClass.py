@@ -26,7 +26,13 @@ class User(object):
                     "type":self.type
                 }
         
-        @staticmethod
-        def find_user(type,email):
-               return Database.find_one(collection="users",query={'type':type,'email':email})
+        @classmethod
+        def find_user(cls,type,email):
+               exists_user=Database.find_one(collection="users",query={'type':type,'email':email})
+
+               return cls(_id=exists_user['_id'],
+                          email=exists_user['email'],
+                          psw=exists_user['psw'],
+                          icno=exists_user['icno'],
+                          type=exists_user['type'])
       

@@ -28,7 +28,7 @@ def register():
 
             #Passing the data to user class and retrive back store to "user" variable
             user=User(_id=entry_id,email=entry_email,psw=entry_psw,icno=entry_ic,type=entry_type)
-            print(vars(user))
+            #print(vars(user))
             user.save_to_mongodb()
             
             #user_db.insert_one(user)
@@ -48,9 +48,9 @@ def login():
             #print(entry_psw)
             #Passing the data to user class and retrive back store to "user" variable
             user=User.find_user(type=entry_type,email=entry_email)
- 
+            print(vars(user))
 
-            if user and pbkdf2_sha256.verify(entry_psw,user['psw']):
+            if user and pbkdf2_sha256.verify(entry_psw,user.psw):
                  return redirect(url_for("mainMenu"))
                  
                 
