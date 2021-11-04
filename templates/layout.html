@@ -99,6 +99,11 @@
     {% elif title == "Quiz Menu"%}
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
+
+    {% elif title == "Smart Quiz"%}
+    <!--custom js-->
+    <script type="text/javascript" src="{{url_for('static',filename='quizRoom.js')}}"></script>
+
     {% elif title == "Answer"%}
     <!--custom js-->
     <script type="text/javascript" src="{{url_for('static',filename='answering.js')}}"></script>

@@ -1,7 +1,7 @@
 {% extends "topTitle.html" %} {% block SmartQuiz %}
 
 
-<div class="row quiz-room-scroll pt-4 pb-5 mx-5">
+<div class="row quiz-room-scroll pt-5 pb-5 mx-5">
 
     <div class="col-4 ">
         <a href="{{url_for('quizMenu')}}">
@@ -73,85 +73,88 @@
         </div>
 
     </div>
-
-
+    {% for classrooms in created_classroom %}
     <div class="col-4 ">
-        <a href="{{url_for('quizMenu')}}">
-            <div class="card border-secondary mb-3 mx-5 box-shadow" style="max-width: 20rem; border-radius: 5%;  border:2px solid black;">
-                <div class="card-header " style="height: 13vh; background-color: #66B3FF;">
-                    <div class="row ">
-                        <div class="col-10  quiz-title  mt-1">
-                            <h5>Discrete Mathematic</h5>
-                        </div>
-                        <div class="col-2 ">
-                            <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
+
+        <div class="card border-secondary mb-5 mx-5 box-shadow" style="max-width: 20rem; border-radius: 5%;  border:2px solid black;">
+            <div class="card-header " style="height: 13vh; background-color: #66B3FF;">
+                <div class="row ">
+                    <div class="col-10  quiz-title  mt-1">
+
+                        <h5>{{ classrooms["subject"]}}</h5>
+
+                    </div>
+                    <div class="col-2 ">
+                        <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                 <path d="M17 9.5C19.3375 9.5 21.25 7.3625 21.25 4.75C21.25 2.1375 19.3375 0 17 0C14.6625 0 12.75 2.1375 12.75 4.75C12.75 7.3625 14.6625 9.5 17 9.5ZM17 14.25C14.6625 14.25 12.75 16.3875 12.75 19C12.75 21.6125 14.6625 23.75 17 23.75C19.3375
     23.75 21.25 21.6125 21.25 19C21.25 16.3875 19.3375 14.25 17 14.25ZM17 28.5C14.6625 28.5 12.75 30.6375 12.75 33.25C12.75 35.8625 14.6625 38 17 38C19.3375 38 21.25 35.8625 21.25 33.25C21.25 30.6375 19.3375 28.5 17 28.5Z " fill="black "/>
                 </svg>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-4 ">
+
                     </div>
 
-                    <div class="row">
+                    <div class="col-4 text-end progress-word mt-5">
 
-                        <div class="col-4 ">
+                        <h5>Progress</h5>
 
-                        </div>
-
-                        <div class="col-4 text-end progress-word mt-5">
-
-                            <h5>Progress</h5>
-
-                        </div>
-                        <div class="col-4 " style="margin-top: 4.3vh; ">
-                            <div class="circle ">
+                    </div>
+                    <div class="col-4 " style="margin-top: 4.3vh; ">
+                        <div class="circle ">
 
 
-                                <div class="col">
-                                    <div class="row " style=" height: 4vh;border-bottom: 1px solid black;">
-                                        <p class="pt-2">21</p>
+                            <div class="col">
+                                <div class="row " style=" height: 4vh;border-bottom: 1px solid black;">
+                                    <p class="pt-2">21</p>
 
-
-                                    </div>
-
-                                    <div class="row" style="height: 4vh">
-                                        <p class="pt-2">21</p>
-                                    </div>
 
                                 </div>
+
+                                <div class="row" style="height: 4vh">
+                                    <p class="pt-2">{{ classrooms.total_progress }}</p>
+                                </div>
+
                             </div>
-
                         </div>
 
                     </div>
+
                 </div>
-                <div class="card-body group-assigned " style="height: 15vh; ">
+            </div>
+            <div class="card-body group-assigned " style="height: 15vh; ">
 
-                    <p class="card-text mt-5 ">Assign To: Group 6</p>
-                </div>
+                <p class="card-text mt-5 ">Assign to :{{ classrooms.assigned_to }}</p>
+            </div>
 
-                <div class="card-footer bg-transparent border-secondary  " style="height:7vh ">
+            <div class="card-footer bg-transparent border-secondary  " style="height:7vh ">
 
-                    <div class="row ">
-                        <div class="col-6 mt-2 quiz-code ">
-                            <p class="h5 ">000111</p>
-                        </div>
-
-                        <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
-
+                <div class="row ">
+                    <div class="col-6 mt-2 quiz-code ">
+                        <p class="h5 ">{{ classrooms.class_code }}</p>
                     </div>
 
+                    <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
+
                 </div>
-        </a>
+
+            </div>
+
         </div>
 
     </div>
+    {% endfor %}
 
     <div class="col-4 ">
-        <div class="card border-secondary mb-3 row mx-5 box-shadow" style="max-width: 20rem; border-radius: 5%;border: 3px dashed #000000; ">
+        <a class="create-classroom">
+            <div class="card border-secondary mb-3 row mx-5 box-shadow" style="max-width: 20rem; border-radius: 5%;border: 3px dashed #000000; ">
 
-            <div class="card-body " style="height: 35vh; ">
-                <div class="text-end ">
-                    <svg width="51 " height="50 " viewBox="0 0 51 50 " fill="none " xmlns="http://www.w3.org/2000/svg ">
+                <div class="card-body " style="height: 35vh; ">
+                    <div class="text-end ">
+                        <svg width="51 " height="50 " viewBox="0 0 51 50 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                     <path d="M25.5 47.9167C38.4097 47.9167 48.875 37.6566 48.875 25C48.875 12.3435 38.4097 2.08337 25.5 2.08337C12.5903 2.08337 2.125 12.3435 2.125 25C2.125 37.6566 12.5903 47.9167 25.5 47.9167Z " fill="#4DD0E1 "/>
                     <path d="M25.5 50C39.5611 50 51 38.7854 51 25C51 23.85 50.048 22.9167 48.875 22.9167C47.702 22.9167 46.75 23.85 46.75 25C46.75 36.4875 37.2173 45.8333 25.5 45.8333C13.7828 45.8333 4.25 36.4875 4.25 25C4.25 13.5125 13.7828 4.16667
                         25.5 4.16667C31.2046 4.16667 36.5585 6.35313 40.5769 10.3219C41.4035 11.1385 42.7486 11.1437 43.5827 10.3333C44.4157 9.52292 44.421 8.20417 43.5933 7.3875C38.7717 2.62396 32.3457 0 25.5 0C11.4389 0 0 11.2146 0 25C0 38.7854 11.4389
@@ -161,18 +164,18 @@
                     </svg>
 
 
+                    </div>
+
+                    <div class="text-center mt-5 pt-4">
+                        <h5>Create a Quiz Room</h5>
+                    </div>
                 </div>
 
-                <div class="text-center mt-5 pt-4">
-                    <h5>Create a Quiz Room</h5>
-                </div>
+
             </div>
-
-
-        </div>
     </div>
 
-
+    </a>
 
 </div>
 

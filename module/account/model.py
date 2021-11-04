@@ -1,8 +1,8 @@
-from typing import NoReturn
+
 from flask import Flask,render_template,Response,request,redirect,url_for,flash
 from flask.globals import session
-from wtforms.validators import ValidationError
-import smartClassroom 
+
+ 
 from passlib.hash import pbkdf2_sha256
 import uuid
 from appForm import loginForm,registerForm

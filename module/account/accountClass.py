@@ -16,6 +16,7 @@ class User(object):
         
         def save_to_mongodb(self):
             Database.insert(collection="users",data=self.json())    
+       
 
 
         def json(self):  
