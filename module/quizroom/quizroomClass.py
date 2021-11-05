@@ -1,5 +1,3 @@
-
-
 import uuid
 from flask.globals import session
 from database import Database
@@ -7,15 +5,15 @@ from database import Database
 
 
 
-class Classroom:
+class Quizroom:
 
-    def __init__(self,subject,total_progress,assigned_to,class_code,belongs_to,_id=None):
+    def __init__(self,subject,total_progress,assigned_to,quiz_code,belongs_to,_id=None):
        
      
         self.subject=subject
         self.total_progress=total_progress
         self.assigned_to=assigned_to
-        self.class_code=class_code
+        self.quiz_code=quiz_code
         self.belongs_to=belongs_to
         #self.classroom=[]
         self._id=uuid.uuid4().hex if _id is None else _id
@@ -23,7 +21,7 @@ class Classroom:
  
     
     def save_to_mongodb(self):
-        Database.insert(collection="classrooms",data=self.json())
+        Database.insert(collection="quizrooms",data=self.json())
 
 
     def update_to_mongodb(self):
@@ -31,12 +29,12 @@ class Classroom:
         print(query)
         update=self.json_update()
         print(update)
-        Database.update(collection="classrooms",query={"belongs_to":self.belongs_to},update={"$push":{
-                "classroom":{
+        Database.update(collection="quizrooms",query={"belongs_to":self.belongs_to},update={"$push":{
+                "quizrooms":{
                 "subject":"subject2",
                 "total_progress":23,
                 "assigned_to":"Group 3",
-                "class_code":787878,
+                "quiz_code":787878,
                 "_id":"4567890"
                 }
              }})
@@ -47,11 +45,11 @@ class Classroom:
         return {
             
             "belongs_to":self.belongs_to,
-            "classroom":[{
+            "quizrooms":[{
                "subject":self.subject,
               "total_progress":self.total_progress,
              "assigned_to":self.assigned_to,
-             "class_code":self.class_code,
+             "quiz_code":self.quiz_code,
              "_id":self._id,
             }]
 
@@ -62,11 +60,11 @@ class Classroom:
     def json_update(self):
         return{
              "$push":{
-                "classroom":{
+                "quizrooms":{
                 "subject":"subject2",
                 "total_progress":23,
                 "assigned_to":"Group 3",
-                "class_code":787878,
+                "quiz_code":787878,
                 "_id":"4567890"
                 }
              }
@@ -74,11 +72,11 @@ class Classroom:
     
 
     @staticmethod
-    def get_classroom(email):
-        classrooms=Database.find_one(collection="classrooms",query={'belongs_to':email})
+    def get_quizroom(email):
+        quizrooms=Database.find_one(collection="quizrooms",query={'belongs_to':email})
         #print(classrooms)
-        if classrooms is not None:
-            return classrooms
+        if quizrooms is not None:
+            return quizrooms
                       
             
 
@@ -99,30 +97,30 @@ class Classroom:
     #   return
 
     @staticmethod
-    def classroom_exists(email):
+    def quizroom_exists(email):
 
-        classroom_exists=Classroom.get_classroom(email)
+        quizroom_exists=Quizroom.get_quizroom(email)
 
-        if classroom_exists is not None:
+        if quizroom_exists is not None:
             return True
 
         else:
             return False
 
     @staticmethod
-    def display_all_classroom(email):
-       return  Database.find_one(collection="classrooms",query={'belongs_to':email})
+    def display_all_quizrooms(email):
+       return  Database.find_one(collection="quizrooms",query={'belongs_to':email})
 
     @classmethod
-    def create_new_classroom(cls,subject,total_progress,assigned_to,class_code,belongs_to,_id):
+    def create_new_quizroom(cls,subject,total_progress,assigned_to,quiz_code,belongs_to,_id):
         #new_classroom=Classroom.get_classroom(email)
-        update_to_exsists=cls.classroom_exists(belongs_to)
+        update_to_exsists=cls.quizroom_exists(belongs_to)
 
         if update_to_exsists:
-            update_classroom=cls(subject,total_progress,assigned_to,class_code,belongs_to,_id)
-            update_classroom.update_to_mongodb()
+            update_quizroom=cls(subject,total_progress,assigned_to,quiz_code,belongs_to,_id)
+            update_quizroom.update_to_mongodb()
         else:
-            new_classroom=cls(subject,total_progress,assigned_to,class_code,belongs_to,_id)
-            new_classroom.save_to_mongodb()
+            new_quizroom=cls(subject,total_progress,assigned_to,quiz_code,belongs_to,_id)
+            new_quizroom.save_to_mongodb()
             
 

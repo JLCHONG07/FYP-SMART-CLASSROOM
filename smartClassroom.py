@@ -5,7 +5,7 @@ from hand_detection_and_recognation.hand_detection import hand_detection,hand_de
 from pymongo import MongoClient
 from module.account.accountClass import User
 import module.account.model
-import module.classrooms.classroomModel
+import module.quizroom.quizroomModel
 
 
 app=Flask(__name__)
@@ -44,7 +44,7 @@ def mainMenu():
 
 @app.route("/mainMenu/smartQuiz")
 def smartQuiz():
-    return module.classrooms.classroomModel.classroom()
+    return module.quizroom.quizroomModel.quizrooms()
 
 
 @app.route("/mainMenu/smartQuiz/quizMenu")
@@ -80,9 +80,9 @@ def logout():
     User.logout()
     return redirect(url_for('login'))
 
-@app.route("/mainMenu/create_classroom")
-def create_classroom():
-   return module.classrooms.classroomModel.create_classroom()
+@app.route("/mainMenu/create_quizroom")
+def create_quizroom():
+   return module.quizroom.quizroomModel.create_quizroom()
 
 if __name__=='__main__':
     app.run(debug=True) 
