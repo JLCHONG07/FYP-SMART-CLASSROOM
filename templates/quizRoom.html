@@ -73,80 +73,81 @@
         </div>
 
     </div>
-    {% for quizrooms in created_quizroom %}
+    {%if created_quizroom.quizrooms is not none %} {% for quizrooms in created_quizroom.quizrooms %}
     <div class="col-4 ">
 
         <div class="card border-secondary mb-5 mx-5 box-shadow" style="max-width: 20rem; border-radius: 5%;  border:2px solid black;">
-            <div class="card-header " style="height: 13vh; background-color: #66B3FF;">
-                <div class="row ">
-                    <div class="col-10  quiz-title  mt-1">
+            <a href="{{url_for('quizMenu')}}">
+                <div class="card-header " style="height: 13vh; background-color: #66B3FF;">
+                    <div class="row ">
+                        <div class="col-10  quiz-title  mt-1">
 
-                        <h5>{{ quizrooms.subject}}</h5>
+                            <h5>{{ quizrooms.subject}}</h5>
 
-                    </div>
-                    <div class="col-2 ">
-                        <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
+                        </div>
+                        <div class="col-2 ">
+                            <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                 <path d="M17 9.5C19.3375 9.5 21.25 7.3625 21.25 4.75C21.25 2.1375 19.3375 0 17 0C14.6625 0 12.75 2.1375 12.75 4.75C12.75 7.3625 14.6625 9.5 17 9.5ZM17 14.25C14.6625 14.25 12.75 16.3875 12.75 19C12.75 21.6125 14.6625 23.75 17 23.75C19.3375
     23.75 21.25 21.6125 21.25 19C21.25 16.3875 19.3375 14.25 17 14.25ZM17 28.5C14.6625 28.5 12.75 30.6375 12.75 33.25C12.75 35.8625 14.6625 38 17 38C19.3375 38 21.25 35.8625 21.25 33.25C21.25 30.6375 19.3375 28.5 17 28.5Z " fill="black "/>
                 </svg>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-4 ">
-
+                        </div>
                     </div>
 
-                    <div class="col-4 text-end progress-word mt-5">
+                    <div class="row">
 
-                        <h5>Progress</h5>
+                        <div class="col-4 ">
 
-                    </div>
-                    <div class="col-4 " style="margin-top: 4.3vh; ">
-                        <div class="circle ">
+                        </div>
+
+                        <div class="col-4 text-end progress-word mt-5">
+
+                            <h5>Progress</h5>
+
+                        </div>
+                        <div class="col-4 " style="margin-top: 4.3vh; ">
+                            <div class="circle ">
 
 
-                            <div class="col">
-                                <div class="row " style=" height: 4vh;border-bottom: 1px solid black;">
-                                    <p class="pt-2">21</p>
+                                <div class="col">
+                                    <div class="row " style=" height: 4vh;border-bottom: 1px solid black;">
+                                        <p class="pt-2">{{ quizrooms.total_progress }}</p>
 
+
+                                    </div>
+
+                                    <div class="row" style="height: 4vh">
+                                        <p class="pt-2">{{ quizrooms.total_students }}</p>
+                                    </div>
 
                                 </div>
-
-                                <div class="row" style="height: 4vh">
-                                    <p class="pt-2">{{ quizrooms.total_progress }}</p>
-                                </div>
-
                             </div>
+
                         </div>
 
                     </div>
-
                 </div>
-            </div>
-            <div class="card-body group-assigned " style="height: 15vh; ">
+                <div class="card-body group-assigned " style="height: 15vh; ">
 
-                <p class="card-text mt-5 ">Assign to :{{ quizrooms.assigned_to }}</p>
-            </div>
+                    <p class="card-text mt-5 ">Assign to :{{ quizrooms.assigned_to }}</p>
+                </div>
 
-            <div class="card-footer bg-transparent border-secondary  " style="height:7vh ">
+                <div class="card-footer bg-transparent border-secondary  " style="height:7vh ">
 
-                <div class="row ">
-                    <div class="col-6 mt-2 quiz-code ">
-                        <p class="h5 ">{{ quizrooms.quiz_code }}</p>
+                    <div class="row ">
+                        <div class="col-6 mt-2 quiz-code ">
+                            <p class="h5 ">{{ quizrooms.quiz_code }}</p>
+                        </div>
+
+                        <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
+
                     </div>
 
-                    <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
-
                 </div>
-
-            </div>
-
+            </a>
         </div>
 
     </div>
-    {% endfor %}
+    {% endfor %}{% endif %}
 
     <div class="col-4 ">
         <a class="create-classroom">

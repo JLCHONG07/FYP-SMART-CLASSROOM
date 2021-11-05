@@ -5,17 +5,12 @@ from database import Database
 
 
 
-class Quizroom:
+class Quizroom(object):
 
-    def __init__(self,subject,total_progress,assigned_to,quiz_code,belongs_to,_id=None):
+    def __init__(self,belongs_to,quizrooms,_id=None):
        
-     
-        self.subject=subject
-        self.total_progress=total_progress
-        self.assigned_to=assigned_to
-        self.quiz_code=quiz_code
         self.belongs_to=belongs_to
-        #self.classroom=[]
+        self.quizrooms=quizrooms
         self._id=uuid.uuid4().hex if _id is None else _id
         
  
@@ -45,12 +40,14 @@ class Quizroom:
         return {
             
             "belongs_to":self.belongs_to,
+            "_id":self._id,
             "quizrooms":[{
-               "subject":self.subject,
-              "total_progress":self.total_progress,
-             "assigned_to":self.assigned_to,
-             "quiz_code":self.quiz_code,
-             "_id":self._id,
+               "subject":self.quizrooms[0],
+              "total_progress":self.quizrooms[1],
+             "assigned_to":self.quizrooms[2],
+             "quiz_code":self.quizrooms[3],
+             "total_students":self.quizrooms[4],
+             "_id":self.quizrooms[5],
             }]
 
         }
@@ -71,31 +68,15 @@ class Quizroom:
         }
     
 
-    @staticmethod
-    def get_quizroom(email):
-        quizrooms=Database.find_one(collection="quizrooms",query={'belongs_to':email})
+    @classmethod
+    def get_quizroom(cls,email):
+        data=Database.find_one(collection="quizrooms",query={'belongs_to':email})
         #print(classrooms)
-        if quizrooms is not None:
-            return quizrooms
-                      
-            
+        if data is not None:
+            return cls(**data)
 
-    #@classmethod
-    #def get_subject(cls,subject):
-     #   return
 
-    #@classmethod
-    #def get_total_progress(cls,total_progress):
-     #   return
-
-    #@classmethod
-    #def get_assigned_to(self,total_progress):
-    #    return
-
-    #@classmethod
-    #def get_class_code(cls,class_code):
-    #   return
-
+    
     @staticmethod
     def quizroom_exists(email):
 
@@ -112,15 +93,15 @@ class Quizroom:
        return  Database.find_one(collection="quizrooms",query={'belongs_to':email})
 
     @classmethod
-    def create_new_quizroom(cls,subject,total_progress,assigned_to,quiz_code,belongs_to,_id):
+    def create_new_quizroom(cls,belongs_to,quizrooms,_id):
         #new_classroom=Classroom.get_classroom(email)
         update_to_exsists=cls.quizroom_exists(belongs_to)
 
         if update_to_exsists:
-            update_quizroom=cls(subject,total_progress,assigned_to,quiz_code,belongs_to,_id)
+            update_quizroom=cls(belongs_to,quizrooms,_id)
             update_quizroom.update_to_mongodb()
         else:
-            new_quizroom=cls(subject,total_progress,assigned_to,quiz_code,belongs_to,_id)
+            new_quizroom=cls(belongs_to,quizrooms,_id)
             new_quizroom.save_to_mongodb()
             
 
