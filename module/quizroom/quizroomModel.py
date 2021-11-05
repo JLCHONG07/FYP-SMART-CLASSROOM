@@ -8,7 +8,7 @@ def quizrooms():
     email=session['email']
     if Quizroom.quizroom_exists(email):   
         create_quizroom=Quizroom.display_all_quizrooms(email)
-        print(create_quizroom)
+        #print(create_quizroom)
         #quizroom=create_quizroom['quizrooms']
         #print(quizroom)
 

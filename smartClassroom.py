@@ -76,6 +76,7 @@ def handRealtime2():
     return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame',title="hand_detect_mode2")
 
 @app.route("/logout")
+@app.route("/mainMenu/logout")
 def logout():
     User.logout()
     return redirect(url_for('login'))

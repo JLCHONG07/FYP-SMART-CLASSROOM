@@ -25,6 +25,14 @@ class Database(object):
 
     @staticmethod
     def update(collection,query,update):
-        
         return Database.DATABASE[collection].update(query,update)
+
+    #@staticmethod
+    ##def aggregate_count(collection,query):
+    #    return Database.DATABASE[collection].aggregate([{"$count":"quizrooms.quiz_code"}])
+
+    
+    @staticmethod
+    def find_total(collection,query):
+        return Database.DATABASE[collection].find({},query)
 

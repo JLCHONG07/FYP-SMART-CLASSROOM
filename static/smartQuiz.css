@@ -40,3 +40,47 @@ div.create-room-word h5 {
     font-family: var(--roboto);
     font-weight: bold;
 }
+
+
+/*hidden form*/
+
+.bg-modal {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contents {
+    height: 50vh;
+    width: 50vw;
+    background-color: white;
+    text-align: center;
+    position: relative;
+    border-radius: 4px;
+}
+
+input {
+    margin: 15px auto;
+    display: block;
+    width: 50%;
+    padding: 8px;
+    border: 1px solid gray;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 42px;
+    color: #333;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
