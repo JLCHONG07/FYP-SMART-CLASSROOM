@@ -134,7 +134,7 @@ class Quizroom(object):
         else:
             return False
             
-    #edit quiz room name
+    #edit quiz room subject name, assigned to
     @staticmethod
     def edit_quiz_room(_id,subject_name,assign_to_group):
         email=session['email']

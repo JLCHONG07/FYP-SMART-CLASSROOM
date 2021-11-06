@@ -4,6 +4,13 @@ from flask.globals import session
 import uuid
 from module.quizroom.quizroomClass import Quizroom
 
+
+##things to do:
+    #add delete feature
+    #hide important field eg _id
+    #remove uncessary background color
+    ###optional: make edit feild to look better
+
 def quizrooms():  
     email=session['email']
     if Quizroom.quizroom_exists(email):   
