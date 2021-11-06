@@ -44,8 +44,7 @@ def mainMenu():
 
 @app.route("/mainMenu/smartQuiz",methods=["GET","POST"])
 def smartQuiz():
-    editCreated=False
-    return module.quizroom.quizroomModel.quizrooms(editCreated)
+    return module.quizroom.quizroomModel.quizrooms()
 
 
 #@app.route("/mainMenu/smartQuiz/editQuizRoom",methods=["GET","POST"])

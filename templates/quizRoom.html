@@ -148,7 +148,7 @@
             </div>
             <div class="card-body group-assigned " style="height: 15vh; ">
 
-                <p class="card-text mt-5 group-assigned-name">Assign to :{{ quizrooms.assigned_to }}</p>
+                <p class="card-text mt-5 group-assigned-name">Assign To: Group {{ quizrooms.assigned_to }}</p>
             </div>
 
             <div class="card-footer bg-transparent border-secondary " style="height:7vh ">
@@ -210,7 +210,7 @@
 
         <h1>Edit Quiz Room Details</h1>
 
-        <form method="POST">
+        <form class="form" method="POST">
             <div class="form-group row" style="background-color: #66B3FF;">
                 <label class="col-sm-2 col-form-label pt-3">Subject</label>
                 <div class="col-sm-8">
@@ -220,7 +220,7 @@
             <div class="form-group row" style="background-color: yellow;">
                 <label for="inputPassword" class="col-sm-2 col-form-label ">Assign to</label>
                 <div class="col-sm-8 select_class">
-                    <select class="custom-select form-control " id="hidden-edit-form-group-assigned">
+                    <select class="custom-select form-control " id="hidden-edit-form-group-assigned" name="edit-group-assigned">
                         <option value="0" selected >Click to Select Group</option>
                         <option value="1">Group 1</option>
                         <option value="2">Group 2</option>
@@ -233,6 +233,8 @@
                 <button type="submit" class="btn btn-primary col-2 mx-2">Clear</button>
                 <button type="submit" class="btn btn-primary col-2 mx-2">Delete</button>
             </div>
+
+            <input type="text" name="edit-quiz-room-id" class="form-control" id="edit-hidden-field-id-input" placeholder="Select Your Quiz Room to Go"></input>
         </form>
 
 

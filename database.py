@@ -32,6 +32,10 @@ class Database(object):
     #    return Database.DATABASE[collection].aggregate([{"$count":"quizrooms.quiz_code"}])
 
     
+    #@staticmethod
+    #def my_update_one_test():
+    #    return Database.DATABASE['quizrooms'].update({"belongs_to":"student2@gmail.com","quizrooms._id":"2ba74ded8fcd446da652c7574ca51b4a"},{"$set":{"quizrooms.$.subject":"Science" }})
+    
     @staticmethod
     def find_total(collection,query):
         return Database.DATABASE[collection].find({},query)

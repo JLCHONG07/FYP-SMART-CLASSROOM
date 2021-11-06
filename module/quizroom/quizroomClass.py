@@ -134,4 +134,15 @@ class Quizroom(object):
         else:
             return False
             
+    #edit quiz room name
+    @staticmethod
+    def edit_quiz_room(_id,subject_name,assign_to_group):
+        email=session['email']
+        data=Database.update(collection="quizrooms",query={"belongs_to":email,"quizrooms._id":_id},
+        update={"$set":{"quizrooms.$.subject":subject_name,"quizrooms.$.assigned_to":assign_to_group }})
+
+        if data is not None:
+            return True
+        else:
+            return False
 

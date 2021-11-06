@@ -4,7 +4,7 @@ from flask.globals import session
 import uuid
 from module.quizroom.quizroomClass import Quizroom
 
-def quizrooms(editCreated):  
+def quizrooms():  
     email=session['email']
     if Quizroom.quizroom_exists(email):   
         create_quizroom=Quizroom.display_all_quizrooms(email)
@@ -15,18 +15,22 @@ def quizrooms(editCreated):
             if request.form.get('submit')=='Go':
                 _id=request.form.get("quiz-room-id")
                 print(_id)
-                
                 return render_template('quizmenu.html',title='Quiz Menu')
             elif request.form.get('submit')=='Edit':
-                name=request.form.get("quiz-room-name")
-                print(name)
-                editCreated=False
-                return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=create_quizroom,editTrue=editCreated)
+                _id=request.form.get("edit-quiz-room-id")
+                subject_name=request.form.get("quiz-room-name")
+                assign_to_group=request.form.get("edit-group-assigned")
+                #print(_id)
+                #print(subject_name)
+                #print(assign_to_group)
+                if Quizroom.edit_quiz_room(_id,subject_name,assign_to_group):
+                    #print("Successful updated")
+                    return redirect(url_for('smartQuiz'))
 
 
-        return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=create_quizroom,editTrue=editCreated)  
+        return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=create_quizroom)  
     else:
-         return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=[],editTrue=editCreated)  
+         return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=[])  
 
     
 
