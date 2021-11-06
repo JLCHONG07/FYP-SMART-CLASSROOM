@@ -31,7 +31,7 @@ class Quizroom(object):
                 "assigned_to":self.quizrooms[2],
                 "quiz_code":self.quizrooms[3],
                  "total_students":self.quizrooms[4],
-                "_id":"4567890"
+                "_id":self.quizrooms[5]
                 }
              }})
         

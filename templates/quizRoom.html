@@ -1,7 +1,24 @@
 {% extends "topTitle.html" %} {% block SmartQuiz %}
+<form method="POST" class="mt-2 mx-5 px-5" style="width: 75vw;">
+    <div class="form-group row" style="background-color: #66B3FF;">
+        <label class="col-2 col-form-label ">Selected Quiz Room :</label>
+        <div class="col-3">
+            <input type="text" name="quiz-room-name" class="form-control" id="subject-name" placeholder="Select Your Quiz Room to Go"></input>
+        </div>
+
+        <div class="col-3">
+            <button type="submit" class="btn btn-primary " name="submit" value="Go">Go</button>
+        </div>
+
+        <div class="col-3">
+            <input type="text" name="quiz-room-id" class="form-control" id="hidden-field-id-input" placeholder="Select Your Quiz Room to Go"></input>
+        </div>
+    </div>
 
 
-<div class="row quiz-room-scroll pt-5 pb-5 mx-5 ">
+</form>
+
+<div class="row quiz-room-scroll pt-2 pb-2 mx-5 " style="height: 85vh">
 
     <div class="col-4 ">
 
@@ -12,11 +29,11 @@
                         <h5>Discrete Mathematic</h5>
                     </div>
                     <div class="col-2 ">
-                        <a class="toggle"><svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
+                        <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                             <path d="M17 9.5C19.3375 9.5 21.25 7.3625 21.25 4.75C21.25 2.1375 19.3375 0 17 0C14.6625 0 12.75 2.1375 12.75 4.75C12.75 7.3625 14.6625 9.5 17 9.5ZM17 14.25C14.6625 14.25 12.75 16.3875 12.75 19C12.75 21.6125 14.6625 23.75
                     17 23.75C19.3375 23.75 21.25 21.6125 21.25 19C21.25 16.3875 19.3375 14.25 17 14.25ZM17 28.5C14.6625 28.5 12.75 30.6375 12.75 33.25C12.75 35.8625 14.6625 38 17 38C19.3375 38 21.25 35.8625 21.25 33.25C21.25 30.6375 19.3375 28.5 17 28.5Z
                     " fill="black "/>
-                            </svg></a>
+                            </svg>
                     </div>
                 </div>
 
@@ -77,74 +94,76 @@
     {%if created_quizroom.quizrooms is not none %} {% for quizrooms in created_quizroom.quizrooms %}
     <div class="col-4 ">
 
-        <div class="card border-secondary mb-5 mx-5 box-shadow " style="max-width: 20rem; border-radius: 5%; border:2px solid black; ">
-            <a href="{{url_for( 'quizMenu')}} ">
-                <div class="card-header " style="height: 13vh; background-color: #66B3FF; ">
-                    <div class="row ">
-                        <div class="col-10 quiz-title mt-1 ">
+        <div class="card border-secondary mb-5 mx-5 box-shadow " style="max-width: 20rem; border-radius: 5%; border:2px solid black;cursor: pointer; ">
 
-                            <h5>{{ quizrooms.subject}}</h5>
+            <div class="card-header " style="height: 13vh; background-color: #66B3FF; ">
+                <p class="hidden-id">{{quizrooms._id}}</p>
+                <div class="row ">
+                    <div class="col-10 quiz-title mt-1 ">
 
-                        </div>
-                        <div class="col-2 ">
-                            <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
+                        <h5 class="quiz-title-name">{{ quizrooms.subject}}</h5>
+
+                    </div>
+                    <div class="col-2 toggle">
+                        <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                 <path d="M17 9.5C19.3375 9.5 21.25 7.3625 21.25 4.75C21.25 2.1375 19.3375 0 17 0C14.6625 0 12.75 2.1375 12.75 4.75C12.75 7.3625 14.6625 9.5 17 9.5ZM17 14.25C14.6625 14.25 12.75 16.3875 12.75 19C12.75 21.6125 14.6625 23.75 17 23.75C19.3375
                     23.75 21.25 21.6125 21.25 19C21.25 16.3875 19.3375 14.25 17 14.25ZM17 28.5C14.6625 28.5 12.75 30.6375 12.75 33.25C12.75 35.8625 14.6625 38 17 38C19.3375 38 21.25 35.8625 21.25 33.25C21.25 30.6375 19.3375 28.5 17 28.5Z " fill="black "/>
                 </svg>
-                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row ">
+
+                    <div class="col-4 ">
+
                     </div>
 
-                    <div class="row ">
+                    <div class="col-4 text-end progress-word mt-5 ">
 
-                        <div class="col-4 ">
+                        <h5>Progress</h5>
 
-                        </div>
-
-                        <div class="col-4 text-end progress-word mt-5 ">
-
-                            <h5>Progress</h5>
-
-                        </div>
-                        <div class="col-4 " style="margin-top: 4.3vh; ">
-                            <div class="circle ">
+                    </div>
+                    <div class="col-4 " style="margin-top: 4.5vh; ">
+                        <div class="circle ">
 
 
-                                <div class="col ">
-                                    <div class="row " style=" height: 4vh;border-bottom: 1px solid black; ">
-                                        <p class="pt-2 ">{{ quizrooms.total_progress }}</p>
+                            <div class="col ">
+                                <div class="row " style=" height: 4vh;border-bottom: 1px solid black; ">
+                                    <p class="pt-2 ">{{ quizrooms.total_progress }}</p>
 
-
-                                    </div>
-
-                                    <div class="row " style="height: 4vh ">
-                                        <p class="pt-2 ">{{ quizrooms.total_students }}</p>
-                                    </div>
 
                                 </div>
+
+                                <div class="row " style="height: 4vh ">
+                                    <p class="pt-2 ">{{ quizrooms.total_students }}</p>
+                                </div>
+
                             </div>
-
                         </div>
 
                     </div>
+
                 </div>
-                <div class="card-body group-assigned " style="height: 15vh; ">
+            </div>
+            <div class="card-body group-assigned " style="height: 15vh; ">
 
-                    <p class="card-text mt-5 ">Assign to :{{ quizrooms.assigned_to }}</p>
-                </div>
+                <p class="card-text mt-5 group-assigned-name">Assign to :{{ quizrooms.assigned_to }}</p>
+            </div>
 
-                <div class="card-footer bg-transparent border-secondary " style="height:7vh ">
+            <div class="card-footer bg-transparent border-secondary " style="height:7vh ">
 
-                    <div class="row ">
-                        <div class="col-6 mt-2 quiz-code ">
-                            <p class="h5 ">{{ quizrooms.quiz_code }}</p>
-                        </div>
-
-                        <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
-
+                <div class="row ">
+                    <div class="col-6 mt-2 quiz-code ">
+                        <p class="h5 ">{{ quizrooms.quiz_code }}</p>
                     </div>
 
+                    <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
+
                 </div>
-            </a>
+
+            </div>
+
         </div>
 
     </div>
@@ -182,6 +201,8 @@
 </div>
 
 <!--hiden field for update,delete-->
+
+
 <div class="bg-modal ">
     <div class="modal-contents ">
 
@@ -189,33 +210,33 @@
 
         <h1>Edit Quiz Room Details</h1>
 
-        <form>
+        <form method="POST">
             <div class="form-group row" style="background-color: #66B3FF;">
-                <label for="inputPassword3" class="col-sm-2 col-form-label pt-3">Subject</label>
+                <label class="col-sm-2 col-form-label pt-3">Subject</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputPassword3" value="Discrete Mathematic">
+                    <input type="text" name="quiz-room-name" class="form-control" id="hidden-edit-form-subject-name"></input>
                 </div>
             </div>
             <div class="form-group row" style="background-color: yellow;">
                 <label for="inputPassword" class="col-sm-2 col-form-label ">Assign to</label>
-                <div class="col-sm-8">
-                    <select class="custom-select  form-control ">
-                        <option selected>Click to Select Group</option>
+                <div class="col-sm-8 select_class">
+                    <select class="custom-select form-control " id="hidden-edit-form-group-assigned">
+                        <option value="0" selected >Click to Select Group</option>
                         <option value="1">Group 1</option>
                         <option value="2">Group 2</option>
                         <option value="3">Group 3</option>
                       </select>
                 </div>
             </div>
+            <div class="row mx-2 mt-2">
+                <button type="submit" class="btn btn-primary col-2 mx-2" name="submit" value="Edit">Submit</button>
+                <button type="submit" class="btn btn-primary col-2 mx-2">Clear</button>
+                <button type="submit" class="btn btn-primary col-2 mx-2">Delete</button>
+            </div>
         </form>
-        <div class="row mx-2 mt-2">
-            <button type="submit" class="btn btn-primary col-2 mx-2">Submit</button>
-            <button type="submit" class="btn btn-primary col-2 mx-2">Clear</button>
-            <button type="submit" class="btn btn-primary col-2 mx-2">Delete</button>
-        </div>
+
 
 
     </div>
 </div>
-
 {% endblock %}
