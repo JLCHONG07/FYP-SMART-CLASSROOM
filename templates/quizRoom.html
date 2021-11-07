@@ -1,7 +1,7 @@
 {% extends "topTitle.html" %} {% block SmartQuiz %}
 <form method="POST" class="mt-2 mx-5 px-5" style="width: 75vw;">
-    <div class="form-group row ">
-        <label class="col-2 col-form-label ">Selected Quiz Room :</label>
+    <div class="form-group row  justify-content-center">
+        <label class="col-2 col-form-label  ">Selected Quiz Room :</label>
         <div class="col-3">
             <input type="text" name="quiz-room-name" class="form-control" id="subject-name" placeholder="Select Your Quiz Room to Go" disabled> {% with quizroom_invalid_error = get_flashed_messages(category_filter=["quizroom_invalid_error"]) %} {% for
             message in quizroom_invalid_error %}
@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-3">
-            <button type="submit" class="btn btn-primary " name="submit" value="Go">Go</button>
+            <button type="submit" class="btn btn-outline-primary " name="submit" value="Go">Go</button>
         </div>
 
 
@@ -23,77 +23,6 @@
 
 <div class="row quiz-room-scroll pt-2 pb-2 mx-5 " style="height: 85vh">
 
-    <div class="col-4 ">
-
-        <div class="card border-secondary mb-3 mx-5 box-shadow " style="max-width: 20rem; border-radius: 5%; border:2px solid black;  ">
-            <div class="card-header " style="height: 13vh; background-color: #66B3FF;">
-                <div class="row mt-1">
-                    <div class="col-10 quiz-title ">
-                        <h5>Discrete Mathematic</h5>
-                    </div>
-                    <div class="col-2 ">
-                        <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
-                            <path d="M17 9.5C19.3375 9.5 21.25 7.3625 21.25 4.75C21.25 2.1375 19.3375 0 17 0C14.6625 0 12.75 2.1375 12.75 4.75C12.75 7.3625 14.6625 9.5 17 9.5ZM17 14.25C14.6625 14.25 12.75 16.3875 12.75 19C12.75 21.6125 14.6625 23.75
-                    17 23.75C19.3375 23.75 21.25 21.6125 21.25 19C21.25 16.3875 19.3375 14.25 17 14.25ZM17 28.5C14.6625 28.5 12.75 30.6375 12.75 33.25C12.75 35.8625 14.6625 38 17 38C19.3375 38 21.25 35.8625 21.25 33.25C21.25 30.6375 19.3375 28.5 17 28.5Z
-                    " fill="black "/>
-                            </svg>
-                    </div>
-                </div>
-
-                <div class="row ">
-
-                    <div class="col-4 ">
-
-                    </div>
-
-                    <div class="col-4 text-end progress-word pt-5 ">
-
-                        <h5>Progress</h5>
-
-                    </div>
-                    <div class="col-4 " style="margin-top: 4.3vh; ">
-                        <div class="circle ">
-
-
-                            <div class="col ">
-                                <div class="row " style=" height: 4vh;border-bottom: 1px solid black; ">
-                                    <p class="pt-2 ">21</p>
-
-
-                                </div>
-
-                                <div class="row " style="height: 4vh ">
-                                    <p class="pt-2 ">21</p>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="card-body group-assigned " style="height: 15vh; ">
-
-                <p class="card-text mt-5 ">Assign To: Group 6</p>
-            </div>
-
-            <div class="card-footer bg-transparent border-secondary " style="height:7vh ">
-
-                <div class="row ">
-                    <div class="col-6 mt-2 quiz-code ">
-                        <p class="h5 ">000111</p>
-                    </div>
-
-                    <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
     {%if created_quizroom.quizrooms is not none %} {% for quizrooms in created_quizroom.quizrooms %}
     <div class="col-4 ">
 
@@ -214,14 +143,14 @@
         <h1>Edit Quiz Room Details</h1>
 
         <form class="form" method="POST">
-            <div class="form-group row" style="background-color: #66B3FF;">
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label ">Subject</label>
                 <div class="col-sm-8">
                     <input type="text" name="quiz-room-name" class="form-control" id="hidden-edit-form-subject-name" placeholder="Please Enter the subject name"></input>
                     <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Enter Subject Name </p>
                 </div>
             </div>
-            <div class="form-group row" style="background-color: yellow;">
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label ">Assign to</label>
                 <div class="col-sm-8 select_class">
                     <select class="custom-select form-control " id="hidden-edit-form-group-assigned" name="edit-group-assigned">
@@ -235,7 +164,7 @@
             </div>
             <div class="row mx-2 mt-2">
                 <button type="button" id="edit-button" class="btn btn-primary col-2 mx-2" name="submit" value="Edit">Submit</button>
-                <button type="button" class="btn btn-primary col-2 mx-2 delete" name="submit" value="Delete">Delete</button>
+                <button type="button" class="btn btn-danger col-2 mx-2 delete" name="submit" value="Delete">Delete</button>
             </div>
 
             <div class="hidden-delete-confirmation mx-2">
@@ -243,13 +172,13 @@
             </div>
             <div class="hidden-delete-confirmation row mx-2">
                 <input type="text" name="delete-confirmation" class="col-5" class="form-control" id="delete-confirmation" placeholder="Enter Confirm to Delete"></input>
-                <button type="button" id="confirm-button" class="btn btn-primary col-2 mx-2 " name="submit" value="Delete">Confirm</button>
-                <button type="button" class="btn btn-primary col-2 mx-2 cancel" name="submit" value="Cancel">Cancel</button>
+                <button type="button" id="confirm-button" class="btn btn-outline-danger col-2 mx-2 " name="submit" value="Delete">Confirm</button>
+                <button type="button" class="btn btn-secondary col-2 mx-2 cancel" name="submit" value="Cancel">Cancel</button>
                 <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Enter "Confirm" to delete </p>
 
             </div>
 
-            <input type="text" name="edit-quiz-room-id" id="edit-hidden-field-id-input"></input>
+            <input type="hidden" name="edit-quiz-room-id" id="edit-hidden-field-id-input"></input>
         </form>
 
 
