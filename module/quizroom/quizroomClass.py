@@ -33,7 +33,7 @@ class Quizroom(object):
                  "total_students":self.quizrooms[4],
                 "_id":self.quizrooms[5]
                 }
-             }})
+             }},upsert=False,multi=True)
         
 
     def json(self):  
@@ -139,8 +139,20 @@ class Quizroom(object):
     def edit_quiz_room(_id,subject_name,assign_to_group):
         email=session['email']
         data=Database.update(collection="quizrooms",query={"belongs_to":email,"quizrooms._id":_id},
-        update={"$set":{"quizrooms.$.subject":subject_name,"quizrooms.$.assigned_to":assign_to_group }})
+        update={"$set":{"quizrooms.$.subject":subject_name,"quizrooms.$.assigned_to":assign_to_group }},upsert=False,multi=True)
 
+        if data is not None:
+            return True
+        else:
+            return False
+
+    #removing quiz room 
+    @staticmethod
+    def delete_quiz_room(_id):
+        email=session['email']
+        data=Database.update(collection="quizrooms",query={"belongs_to":email},
+        update={"$pull":{"quizrooms":{"_id":_id}}},upsert=False,multi=True)
+        print(data)
         if data is not None:
             return True
         else:

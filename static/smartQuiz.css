@@ -91,3 +91,7 @@ input {
     transform: rotate(45deg);
     cursor: pointer;
 }
+
+.hidden-delete-confirmation {
+    display: none
+}

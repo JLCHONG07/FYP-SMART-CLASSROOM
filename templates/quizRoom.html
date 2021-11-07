@@ -10,9 +10,9 @@
             <button type="submit" class="btn btn-primary " name="submit" value="Go">Go</button>
         </div>
 
-        <div class="col-3">
-            <input type="text" name="quiz-room-id" class="form-control" id="hidden-field-id-input" placeholder="Select Your Quiz Room to Go"></input>
-        </div>
+
+        <input type="hidden" name="quiz-room-id" id="hidden-field-id-input"></input>
+
     </div>
 
 
@@ -230,11 +230,19 @@
             </div>
             <div class="row mx-2 mt-2">
                 <button type="submit" class="btn btn-primary col-2 mx-2" name="submit" value="Edit">Submit</button>
-                <button type="submit" class="btn btn-primary col-2 mx-2">Clear</button>
-                <button type="submit" class="btn btn-primary col-2 mx-2">Delete</button>
+                <button type="button" class="btn btn-primary col-2 mx-2 delete" name="submit" value="Delete">Delete</button>
             </div>
 
-            <input type="text" name="edit-quiz-room-id" class="form-control" id="edit-hidden-field-id-input" placeholder="Select Your Quiz Room to Go"></input>
+            <div class="hidden-delete-confirmation mx-2">
+                <p>Are You Sure Want to Delete this Quizroom?</p>
+            </div>
+            <div class="hidden-delete-confirmation row mx-2">
+                <input type="text" name="delete-confirmation" class="col-5" class="form-control" id="delete-confirmation" placeholder="Enter Confirm to Delete"></input>
+                <button type="submit" class="btn btn-primary col-2 mx-2 " name="submit" value="Delete">Confirm</button>
+                <button type="button" class="btn btn-primary col-2 mx-2 cancel" name="submit" value="Cancel">Cancel</button>
+            </div>
+
+            <input type="text" name="edit-quiz-room-id" id="edit-hidden-field-id-input"></input>
         </form>
 
 

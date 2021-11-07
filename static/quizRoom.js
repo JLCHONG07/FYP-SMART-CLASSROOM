@@ -18,6 +18,18 @@ $(".close").click(function() {
     $('.bg-modal').css('display', 'none')
 })
 
+//show the delete confirm msg when click on toggler of quizroom
+$("button.delete").click(function() {
+        $('.hidden-delete-confirmation').css('display', 'flex')
+
+    })
+    //show the delete confirm msg when click on toggler of quizroom
+$("button.cancel").click(function() {
+    $('.hidden-delete-confirmation').css('display', 'none')
+
+})
+
+
 //Get the id and name of quizroom when onclick
 $(".card").click(function() {
     //Used for get the id and pass to backend

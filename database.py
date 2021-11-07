@@ -24,8 +24,8 @@ class Database(object):
         return Database.DATABASE[collection].find_one(query)
 
     @staticmethod
-    def update(collection,query,update):
-        return Database.DATABASE[collection].update(query,update)
+    def update(collection,query,update,upsert,multi):
+        return Database.DATABASE[collection].update(query,update,upsert,multi)
 
     #@staticmethod
     ##def aggregate_count(collection,query):

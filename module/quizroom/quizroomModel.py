@@ -22,6 +22,7 @@ def quizrooms():
             if request.form.get('submit')=='Go':
                 _id=request.form.get("quiz-room-id")
                 print(_id)
+               
                 return render_template('quizmenu.html',title='Quiz Menu')
             elif request.form.get('submit')=='Edit':
                 _id=request.form.get("edit-quiz-room-id")
@@ -33,6 +34,16 @@ def quizrooms():
                 if Quizroom.edit_quiz_room(_id,subject_name,assign_to_group):
                     #print("Successful updated")
                     return redirect(url_for('smartQuiz'))
+            elif request.form.get('submit')=="Delete":
+                _id=request.form.get("edit-quiz-room-id")
+                confirm_message=request.form.get("delete-confirmation")
+                #print(_id)
+                #print(confirm_message)
+                if confirm_message == "Confirm":
+                    #print(confirm_message)
+                    if Quizroom.delete_quiz_room(_id):
+                        print("Successful delete")
+                        return redirect(url_for('smartQuiz'))
 
 
         return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=create_quizroom)  
