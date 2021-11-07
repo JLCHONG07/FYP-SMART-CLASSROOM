@@ -12,18 +12,23 @@ $(".toggle").click(function() {
 
 })
 
-
 //hide the edit form when click on 'X' of the form
 $(".close").click(function() {
+    //default all texts
     $('.bg-modal').css('display', 'none')
+    $('.form .hidden-delete-confirmation .invalid-input').css("display", "none")
+    $('.hidden-delete-confirmation').css('display', 'none')
+    $('.form .form-group .invalid-input').css('display', 'none')
+    $('.form .form-group .select_class .invalid-input').css('display', 'none')
 })
 
 //show the delete confirm msg when click on toggler of quizroom
 $("button.delete").click(function() {
-        $('.hidden-delete-confirmation').css('display', 'flex')
+    $('.hidden-delete-confirmation').css('display', 'flex')
 
-    })
-    //show the delete confirm msg when click on toggler of quizroom
+})
+
+//show the delete confirm msg when click on toggler of quizroom
 $("button.cancel").click(function() {
     $('.hidden-delete-confirmation').css('display', 'none')
 
@@ -63,8 +68,63 @@ $(".card").click(function() {
     }
     var id = $(this).find('.hidden-id').text()
     $('#edit-hidden-field-id-input').val(id).trigger("change")
-    console.log(subject_name)
-    console.log(assigned_group)
-    console.log(id)
+        //console.log(subject_name)
+        //console.log(assigned_group)
+        //console.log(id)
+})
+
+//Show invalid message when entered not a Confirm message
+$("#delete-confirmation").focus(function() {
+    if ($(this).val() !== "Confirm" || $(this).val().length === 0) {
+        $('.form .hidden-delete-confirmation .invalid-input').css("display", "flex")
+        $('#confirm-button').attr("type", "button")
+    } else {
+        $('.form .hidden-delete-confirmation .invalid-input').css("display", "none")
+        $('#confirm-button').attr("type", "submit")
+    }
+})
+$('#delete-confirmation').keyup(function() {
+    if ($(this).val() !== "Confirm" || $(this).val().length === 0) {
+        $('.form .hidden-delete-confirmation .invalid-input').css("display", "flex")
+        $('#confirm-button').attr("type", "button")
+    } else {
+        $('.form .hidden-delete-confirmation .invalid-input').css("display", "none")
+        $('#confirm-button').attr("type", "submit")
+    }
+})
+
+//invalid the confirm button when "Confirm" word not entered
+$('#confirm-button').click(function() {
+    var button_attr = $('#confirm-button').attr("type")
+        //console.log(button_attr)
+    if (button_attr === "button") {
+        $('.form .hidden-delete-confirmation .invalid-input').css("display", "flex")
+    }
+})
+
+
+//Invalid the submit button to edit when the subject or assign to is blank
+$('#edit-button').click(function() {
+    var subject = $.trim($('#hidden-edit-form-subject-name').val()).length
+    var assign_group = $('#hidden-edit-form-group-assigned').val()
+    console.log(subject)
+    console.log(assign_group)
+        //if subject name and assign_group is entered and selected
+    if (subject > 0 && assign_group !== "0") {
+        $('#edit-button').attr('type', 'submit')
+    }
+    if (subject === 0) {
+        $('.form .form-group .invalid-input').css('display', 'flex')
+    } else {
+        $('.form .form-group .invalid-input').css('display', 'none')
+    }
+
+    if (assign_group === "0") {
+        $('.form .form-group .select_class .invalid-input').css('display', 'flex')
+    } else {
+        $('.form .form-group .select_class .invalid-input').css('display', 'none')
+    }
+
+
 
 })

@@ -76,6 +76,15 @@ class Quizroom(object):
         if data is not None:
             return cls(**data)
 
+    @staticmethod
+    def get_a_quizroom(_id,email):
+        data=Database.find_one(collection="quizrooms",query={'belongs_to':email,'quizrooms._id':_id})
+        print(data)
+        if data is not None:
+            return True
+        else: 
+            return False
+
     
     @staticmethod
     def quizroom_exists(email):
@@ -136,8 +145,8 @@ class Quizroom(object):
             
     #edit quiz room subject name, assigned to
     @staticmethod
-    def edit_quiz_room(_id,subject_name,assign_to_group):
-        email=session['email']
+    def edit_quiz_room(_id,email,subject_name,assign_to_group):
+        #email=session['email']
         data=Database.update(collection="quizrooms",query={"belongs_to":email,"quizrooms._id":_id},
         update={"$set":{"quizrooms.$.subject":subject_name,"quizrooms.$.assigned_to":assign_to_group }},upsert=False,multi=True)
 
@@ -148,11 +157,11 @@ class Quizroom(object):
 
     #removing quiz room 
     @staticmethod
-    def delete_quiz_room(_id):
-        email=session['email']
+    def delete_quiz_room(_id,email):
+        #email=session['email']
         data=Database.update(collection="quizrooms",query={"belongs_to":email},
         update={"$pull":{"quizrooms":{"_id":_id}}},upsert=False,multi=True)
-        print(data)
+        #print(data)
         if data is not None:
             return True
         else:

@@ -1,9 +1,12 @@
 {% extends "topTitle.html" %} {% block SmartQuiz %}
 <form method="POST" class="mt-2 mx-5 px-5" style="width: 75vw;">
-    <div class="form-group row" style="background-color: #66B3FF;">
+    <div class="form-group row ">
         <label class="col-2 col-form-label ">Selected Quiz Room :</label>
         <div class="col-3">
-            <input type="text" name="quiz-room-name" class="form-control" id="subject-name" placeholder="Select Your Quiz Room to Go"></input>
+            <input type="text" name="quiz-room-name" class="form-control" id="subject-name" placeholder="Select Your Quiz Room to Go" disabled> {% with quizroom_invalid_error = get_flashed_messages(category_filter=["quizroom_invalid_error"]) %} {% for
+            message in quizroom_invalid_error %}
+            <p style="color:red;">{{message}} </p>
+            {% endfor %}{% endwith %}
         </div>
 
         <div class="col-3">
@@ -212,13 +215,14 @@
 
         <form class="form" method="POST">
             <div class="form-group row" style="background-color: #66B3FF;">
-                <label class="col-sm-2 col-form-label pt-3">Subject</label>
+                <label class="col-sm-2 col-form-label ">Subject</label>
                 <div class="col-sm-8">
-                    <input type="text" name="quiz-room-name" class="form-control" id="hidden-edit-form-subject-name"></input>
+                    <input type="text" name="quiz-room-name" class="form-control" id="hidden-edit-form-subject-name" placeholder="Please Enter the subject name"></input>
+                    <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Enter Subject Name </p>
                 </div>
             </div>
             <div class="form-group row" style="background-color: yellow;">
-                <label for="inputPassword" class="col-sm-2 col-form-label ">Assign to</label>
+                <label class="col-sm-2 col-form-label ">Assign to</label>
                 <div class="col-sm-8 select_class">
                     <select class="custom-select form-control " id="hidden-edit-form-group-assigned" name="edit-group-assigned">
                         <option value="0" selected >Click to Select Group</option>
@@ -226,10 +230,11 @@
                         <option value="2">Group 2</option>
                         <option value="3">Group 3</option>
                       </select>
+                    <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Select a Group to Assign </p>
                 </div>
             </div>
             <div class="row mx-2 mt-2">
-                <button type="submit" class="btn btn-primary col-2 mx-2" name="submit" value="Edit">Submit</button>
+                <button type="button" id="edit-button" class="btn btn-primary col-2 mx-2" name="submit" value="Edit">Submit</button>
                 <button type="button" class="btn btn-primary col-2 mx-2 delete" name="submit" value="Delete">Delete</button>
             </div>
 
@@ -238,8 +243,10 @@
             </div>
             <div class="hidden-delete-confirmation row mx-2">
                 <input type="text" name="delete-confirmation" class="col-5" class="form-control" id="delete-confirmation" placeholder="Enter Confirm to Delete"></input>
-                <button type="submit" class="btn btn-primary col-2 mx-2 " name="submit" value="Delete">Confirm</button>
+                <button type="button" id="confirm-button" class="btn btn-primary col-2 mx-2 " name="submit" value="Delete">Confirm</button>
                 <button type="button" class="btn btn-primary col-2 mx-2 cancel" name="submit" value="Cancel">Cancel</button>
+                <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Enter "Confirm" to delete </p>
+
             </div>
 
             <input type="text" name="edit-quiz-room-id" id="edit-hidden-field-id-input"></input>

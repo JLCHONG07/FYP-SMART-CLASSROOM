@@ -95,3 +95,7 @@ input {
 .hidden-delete-confirmation {
     display: none
 }
+
+.invalid-input {
+    display: none;
+}
