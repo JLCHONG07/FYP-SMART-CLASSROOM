@@ -102,22 +102,22 @@ def student_quizrooms():
     result=Quizroom.display_all_joined_quizrooms(quizrooms_id)
     if result is not None:
         #print(result)
-        for a in result:
-            for b in a['quizrooms']:
-                print(b['subject'])
+        #for a in result:
+            #for b in a['quizrooms']:
+                #print(b['subject'])
         
         if request.method=="POST":
             if request.form.get('submit')=="Join":
                 quiz_room_code=request.form.get('join-quiz-code')
-                print(quiz_room_code)
+                #print(quiz_room_code)
                 quizroom_id=Quizroom.valid_quiz_room_code(quiz_room_code,quizrooms_id)
 
                 if quizroom_id is not None:
-                    print("joined quiz room")
+                    #print("joined quiz room")
                     User.valid_add_detail(email,type,quizroom_id)
                     return redirect(url_for('studentSmartQuiz'))
                 else:
-                    print("quiz room not exists")
+                    #print("quiz room not exists")
                     return redirect(url_for('studentSmartQuiz'))
         
         return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=result)

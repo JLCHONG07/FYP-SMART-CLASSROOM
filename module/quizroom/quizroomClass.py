@@ -12,16 +12,13 @@ class Quizroom(object):
         self.quizrooms=quizrooms
         self._id=uuid.uuid4().hex if _id is None else _id
         
- 
-    
     def save_to_mongodb(self):
         Database.insert(collection="quizrooms",data=self.json())
 
-
     def update_to_mongodb(self):
-        query="{"+"belongs_to :"+self.belongs_to+"}"
+        #query="{"+"belongs_to :"+self.belongs_to+"}"
         #print(query)
-        update=self.json_update()
+        #update=self.json_update()
         #print(update)
         Database.update(collection="quizrooms",query={"belongs_to":self.belongs_to},update={"$push":{
                 "quizrooms":{
@@ -87,12 +84,9 @@ class Quizroom(object):
     
     @staticmethod
     def quizroom_exists(email):
-
         quizroom_exists=Quizroom.get_quizroom(email)
-
         if quizroom_exists is not None:
            return True
-
         else:
             return False
 
@@ -110,8 +104,7 @@ class Quizroom(object):
         if update_to_exsists:
             update_quizroom=cls(belongs_to,quizrooms,_id)
             update_quizroom.update_to_mongodb()
-        else:
-         
+        else: 
             new_quizroom=cls(belongs_to,quizrooms,_id)
             new_quizroom.save_to_mongodb()
 
@@ -124,7 +117,6 @@ class Quizroom(object):
         while not quiz_code_exists:
             quiz_code=Quizroom.random_quiz_code()
             quiz_code_exists=Quizroom.quiz_code_exists(quiz_code)
-
         return quiz_code
 
     #random 6 digit numbers
@@ -148,7 +140,6 @@ class Quizroom(object):
         #email=session['email']
         data=Database.update(collection="quizrooms",query={"belongs_to":email,"quizrooms._id":_id},
         update={"$set":{"quizrooms.$.subject":subject_name,"quizrooms.$.assigned_to":assign_to_group }},upsert=False,multi=True)
-
         if data is not None:
             return True
         else:
