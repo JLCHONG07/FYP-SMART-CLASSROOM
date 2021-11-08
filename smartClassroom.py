@@ -6,7 +6,7 @@ from pymongo import MongoClient
 from module.account.accountClass import User
 import module.account.model
 import module.quizroom.quizroomModel
-
+import module.answering.hand_detect_mode
 
 app=Flask(__name__)
 #client=MongoClient("mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE")
@@ -60,13 +60,21 @@ def studentSmartQuiz():
   #  return module.quizroom.quizroomModel.quizrooms(editCreated)
   #  */
 
-
-
 @app.route("/mainMenu/smartQuiz/quizMenu")
+@app.route("/mainMenu/studentSmartQuiz/quizMenu")
 def quizMenu():
     return render_template('quizmenu.html',title='Quiz Menu')
 
-@app.route("/mainMenu/smartQuiz/quizMenu/answering")
+
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/")
+def instruction():
+    return module.answering.hand_detect_mode.instruction()
+
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction2/")
+def instruction2():
+    return module.answering.hand_detect_mode.instruction2()
+
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/answering")
 def answering():
     return render_template('answering.html',title='Answer')
 
@@ -83,12 +91,17 @@ def createQuizQuestion():
 def reportSummary():
     return render_template('reportSummary.html',title='Report Summary')
 
-@app.route("/mainMenu/smartQuiz/quizMenu/answering/handRealTime")
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/handRealTime")
 def handRealtime():
-   return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame',title="hand_detect_mode1")
+    session['hand-detect-mode']=1
+    return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction2/handRealTime2")
 def handRealtime2():
-    return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame',title="hand_detect_mode2")
+    session['hand-detect-mode']=2
+    #instruction()
+    return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/logout")
 @app.route("/mainMenu/logout")
