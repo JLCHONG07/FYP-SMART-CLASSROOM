@@ -1,10 +1,8 @@
+//--------------------Admin-------------------------------------//
+//click on create a quizroom will point to create_quizroom url
 $('.create-classroom').click(function() {
-
     window.location = "create_quizroom"
-
 })
-
-
 
 //show the edit form when click on toggler of quizroom
 $(".toggle").click(function() {
@@ -20,6 +18,9 @@ $(".close").click(function() {
     $('.hidden-delete-confirmation').css('display', 'none')
     $('.form .form-group .invalid-input').css('display', 'none')
     $('.form .form-group .select_class .invalid-input').css('display', 'none')
+
+    //----student join room---//
+    $('.join-quizroom-modal').css('display', 'none')
 })
 
 //show the delete confirm msg when click on toggler of quizroom
@@ -125,6 +126,31 @@ $('#edit-button').click(function() {
         $('.form .form-group .select_class .invalid-input').css('display', 'none')
     }
 
-
-
 })
+
+//---------------------------------------------------------------------------------//
+//-------------------------Student------------------------------------------------//
+$(".join-classroom ").click(function() {
+    $('.join-quizroom-modal').css('display', 'flex')
+})
+
+//Invalid the submit button to edit when the subject or assign to is blank
+$('#join-button').click(function() {
+
+    if ($('#join-quiz-code').val() >= 100000 && $('#join-quiz-code').val().length >= 0 && $('#join-quiz-code').val().length <= 6 && $('#join-quiz-code').val() <= 999999) {
+
+        $('#join-button').attr("type", "submit")
+            //window.location = "joinQuizroom"
+
+    } else {
+        $('#join-button').attr("type", "button")
+        $('.form .hidden-join-confirmation .invalid-input').css("display", "flex")
+
+    }
+})
+
+
+/*
+ $("#confirm-join-button").click(function(){
+
+})*/

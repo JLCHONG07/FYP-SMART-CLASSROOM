@@ -1,4 +1,5 @@
 
+from typing import Collection
 from flask.globals import session
 from database import Database
 from passlib.hash import pbkdf2_sha256
@@ -6,12 +7,13 @@ from passlib.hash import pbkdf2_sha256
 class User(object):
 
 
-        def __init__(self,_id,email,psw,icno,type):
+        def __init__(self,_id,email,psw,icno,type,quizroom_joined):
                 self._id=_id
                 self.email=email
                 self.psw=psw
                 self.icno=icno
                 self.type=type
+                self.quizroom_joined=quizroom_joined
 
         
         def save_to_mongodb(self):
@@ -25,7 +27,8 @@ class User(object):
                     "email":self.email,
                     "psw":self.psw,
                     "icno":self.icno,
-                    "type":self.type
+                    "type":self.type,
+                    "quizroom_joined":self.quizroom_joined
                 }
         
         @classmethod
@@ -56,8 +59,9 @@ class User(object):
         @staticmethod
         def login_valid(email,psw,type):
                 #('student1@gmail.com','123456','student')
+                
                 valid_user=User.find_user(type,email)
-
+            
                 if valid_user is not None and pbkdf2_sha256.verify(psw,valid_user.psw):
                         #passing useful information in Session
                         User.login(valid_user.email,valid_user.type)
@@ -76,14 +80,50 @@ class User(object):
 
         @classmethod
         #Check the email is that alrdy exists and store it if not exists
-        def register_valid(cls,id,email,psw,icno,type):
+        def register_valid(cls,id,email,psw,icno,type,quizroom_joined=[]):
                 user=User.get_user_email(email)
 
                 if user is None:    
-                        new_user=cls(id,email,psw,icno,type)
+                        new_user=cls(id,email,psw,icno,type,quizroom_joined=[])
                         new_user.save_to_mongodb()
                         return True
                 else:
                         return False
+
+
+        @staticmethod
+        def add_detail(email,quizroom_id):
+                Database.update(collection="users",query={"email":email},
+                update={"$push":{"quizroom_joined":{"quizroom_id":quizroom_id}}},upsert=False,multi=False)
+                
+
+        @staticmethod
+        #check is this user email valid again
+        #if it is a valid user then add the quizroom_id that joined to the specific user
+        def valid_add_detail(email,type,quizroom_id):
+                valid_user=User.find_user(type,email)
+                if valid_user is not None:
+                        User.add_detail(email,quizroom_id)
+                        
+                        return True
+                else:
+                        return False
+                        #add quizroom_id
+
+        @staticmethod
+        def get_user_joined_room(email):
+                quizrooms_id=Database.distinct(collection="users",value='quizroom_joined.quizroom_id',
+                query={"email":email})
+                #print(quizrooms_id)
+                if quizrooms_id is not None:
+                        return quizrooms_id
+
+       
+
+
+
+
+
+
 
       

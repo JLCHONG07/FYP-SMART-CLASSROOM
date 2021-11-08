@@ -44,7 +44,14 @@ def mainMenu():
 
 @app.route("/mainMenu/smartQuiz",methods=["GET","POST"])
 def smartQuiz():
-    return module.quizroom.quizroomModel.quizrooms()
+    if session['type'] == "admin":
+        return module.quizroom.quizroomModel.quizrooms()
+    else:
+        studentSmartQuiz()
+        
+@app.route("/mainMenu/studentSmartQuiz",methods=["GET","POST"])
+def studentSmartQuiz():
+    return module.quizroom.quizroomModel.student_quizrooms()
 
 
 #@app.route("/mainMenu/smartQuiz/editQuizRoom",methods=["GET","POST"])
@@ -89,9 +96,16 @@ def logout():
     User.logout()
     return redirect(url_for('login'))
 
+#@app.route("/mainMenu/joinQuizroom")
+#def join_quizroom():
+#   return module.quizroom.quizroomModel.join_quiz_room()
+
 @app.route("/mainMenu/create_quizroom")
 def create_quizroom():
    return module.quizroom.quizroomModel.create_quizroom()
+
+
+
 
 
 if __name__=='__main__':

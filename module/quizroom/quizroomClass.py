@@ -1,5 +1,4 @@
 import uuid
-from flask.globals import session
 from database import Database
 from random import randint
 
@@ -166,4 +165,50 @@ class Quizroom(object):
             return True
         else:
             return False
+
+    #student part
+    #join quizroom
+    @staticmethod
+    def get_quiz_room(quiz_room_code):
+        data= Database.find(collection="quizrooms",query={"quizrooms.quiz_code":int(quiz_room_code)},data={"_id":0,"belongs_to":0,"quizrooms":{"$elemMatch":{"quiz_code":int(quiz_room_code)}}})
+        #data=Database.distinct_value()
+        #print(data)
+        quizroom_id=None
+        for x in data:
+           #return the result "d1de51c394834b38959fb68c4686cbda" from quizrooms._id
+           #after this can insert this value to user module 
+           quizroom_id=x.get('quizrooms')[0].get('_id')
+           print(quizroom_id)
+       
+        if quizroom_id is not None:
+            return (quizroom_id)
+
+    @staticmethod
+    def valid_quiz_room_code(quiz_room_code,quizrooms_id):
+        quiz_room_id=Quizroom.get_quiz_room(quiz_room_code)
+        not_joined=True
+        #quizrooms_id is joined id 
+        #if joined will make not_joined to false to make sure it wont join twice in the same quizroom
+        for quizroom_id in quizrooms_id:
+            if quiz_room_id == quizroom_id:
+                not_joined=False
+        if quiz_room_id is not None and not_joined:
+            return quiz_room_id
+
+
+
+    @staticmethod
+    def display_all_joined_quizrooms(quizrooms_id):
+        data=None
+        results=[]
+        for quizroom_id in quizrooms_id:
+            print(quizroom_id)
+            data=Database.find(collection="quizrooms",query={"quizrooms._id":quizroom_id},data={"_id":0,"belongs_to":0,"quizrooms":{"$elemMatch":{"_id":quizroom_id}}})
+            #using array to combine all the data into array [data,data]
+            for x in data:
+                results.append(x)
+                print(results)
+        return results
+
+    
 

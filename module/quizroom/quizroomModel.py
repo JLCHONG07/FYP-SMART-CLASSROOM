@@ -4,6 +4,7 @@ import flask
 from flask.globals import session
 import uuid
 from module.quizroom.quizroomClass import Quizroom
+from module.account.accountClass import User
 
 
 ##things to do:
@@ -16,7 +17,9 @@ def quizrooms():
     email=session['email']
     if Quizroom.quizroom_exists(email):   
         create_quizroom=Quizroom.display_all_quizrooms(email)
-        #print(create_quizroom)
+        print(create_quizroom)
+        #for x in create_quizroom:
+        #    print(x)
         #quizroom=create_quizroom['quizrooms']
         #print(quizroom)
         if request.method=="POST":
@@ -67,10 +70,7 @@ def quizrooms():
     else:
          return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=[])  
 
-    
-
 def create_quizroom():
-
 
     subject="subject(1)"
     _id = uuid.uuid4().hex
@@ -90,6 +90,42 @@ def create_quizroom():
     #classroom=Classroom(_id=_id,subject=subject,total_progress=total_progress,assigned_to=assigned_to,class_code=class_code,belongs_to=belongs_to)
     Quizroom.create_new_quizroom(belongs_to,quizrooms,_id=None)
     return redirect(url_for('smartQuiz'))
+
+def student_quizrooms():
+    
+    email=session['email']
+    type=session['type']
+    quizrooms_id=User.get_user_joined_room(email)
+    #print(quizrooms_id)
+    #results=[]
+    #for quizroom_id in quizrooms_id:
+    result=Quizroom.display_all_joined_quizrooms(quizrooms_id)
+    if result is not None:
+        #print(result)
+        for a in result:
+            for b in a['quizrooms']:
+                print(b['subject'])
+        
+        if request.method=="POST":
+            if request.form.get('submit')=="Join":
+                quiz_room_code=request.form.get('join-quiz-code')
+                print(quiz_room_code)
+                quizroom_id=Quizroom.valid_quiz_room_code(quiz_room_code,quizrooms_id)
+
+                if quizroom_id is not None:
+                    print("joined quiz room")
+                    User.valid_add_detail(email,type,quizroom_id)
+                    return redirect(url_for('studentSmartQuiz'))
+                else:
+                    print("quiz room not exists")
+                    return redirect(url_for('studentSmartQuiz'))
+        
+        return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=result)
+    else:
+        return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=[])
+
+
+    #return render_template('studentQuizRoom.html',title="Smart Quiz",created_quizroom=[])
 
 
      

@@ -1,0 +1,152 @@
+{% extends "topTitle.html" %} {% block SmartQuiz %}
+<form method="POST" class="mt-2 mx-5 px-5" style="width: 75vw;">
+    <div class="form-group row  justify-content-center">
+        <label class="col-2 col-form-label  ">Selected Quiz Room :</label>
+        <div class="col-3">
+            <input type="text" name="quiz-room-name" class="form-control" id="subject-name" placeholder="Select Your Quiz Room to Go" disabled> {% with quizroom_invalid_error = get_flashed_messages(category_filter=["quizroom_invalid_error"]) %} {% for
+            message in quizroom_invalid_error %}
+            <p style="color:red;">{{message}} </p>
+            {% endfor %}{% endwith %}
+        </div>
+
+        <div class="col-3">
+            <button type="submit" class="btn btn-outline-primary " name="submit" value="Go">Go</button>
+        </div>
+
+
+        <input type="hidden" name="quiz-room-id" id="hidden-field-id-input"></input>
+
+    </div>
+
+
+</form>
+
+<div class="row quiz-room-scroll pt-2 pb-2 mx-5 " style="height: 85vh">
+
+    {%if joined_quizroom is not none %} {% for quizrooms in joined_quizroom %} {%for quizroom in quizrooms['quizrooms']%}
+    <div class="col-4 ">
+
+        <div class="card border-secondary mb-5 mx-5 box-shadow " style="max-width: 20rem; border-radius: 5%; border:2px solid black;cursor: pointer; ">
+
+            <div class="card-header " style="height: 13vh; background-color: #66B3FF; ">
+                <p class="hidden-id">{{quizroom._id}}</p>
+                <div class="row ">
+                    <div class="col-10 quiz-title mt-1 ">
+
+                        <h5 class="quiz-title-name">{{ quizroom.subject}}</h5>
+
+                    </div>
+                    <div class="col-2 toggle">
+                        <svg width="34 " height="38 " viewBox="0 0 34 38 " fill="none " xmlns="http://www.w3.org/2000/svg ">
+                <path d="M17 9.5C19.3375 9.5 21.25 7.3625 21.25 4.75C21.25 2.1375 19.3375 0 17 0C14.6625 0 12.75 2.1375 12.75 4.75C12.75 7.3625 14.6625 9.5 17 9.5ZM17 14.25C14.6625 14.25 12.75 16.3875 12.75 19C12.75 21.6125 14.6625 23.75 17 23.75C19.3375
+                    23.75 21.25 21.6125 21.25 19C21.25 16.3875 19.3375 14.25 17 14.25ZM17 28.5C14.6625 28.5 12.75 30.6375 12.75 33.25C12.75 35.8625 14.6625 38 17 38C19.3375 38 21.25 35.8625 21.25 33.25C21.25 30.6375 19.3375 28.5 17 28.5Z " fill="black "/>
+                </svg>
+                    </div>
+                </div>
+
+
+                <div class="row ">
+
+                    <div class="col-4 ">
+
+                    </div>
+
+                    <div class="col-4 text-end progress-word mt-5 ">
+
+                        <h5>Score</h5>
+
+                    </div>
+                    <div class="col-4 " style="margin-top: 4.5vh; ">
+                        <div class="circle ">
+
+
+                            <div class="col ">
+                                <div class="row " style=" height: 4vh;border-bottom: 1px solid black; ">
+                                    <p class="pt-2 ">{{ quizroom.total_progress }}</p>
+
+
+                                </div>
+
+                                <div class="row " style="height: 4vh ">
+                                    <p class="pt-2 ">{{ quizroom.total_students }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body group-assigned " style="height: 15vh; ">
+
+                <p class="card-text mt-5 group-assigned-name">Assign To: Group {{ quizroom.assigned_to }}</p>
+            </div>
+
+            <div class="card-footer bg-transparent border-secondary " style="height:7vh ">
+
+                <div class="row ">
+                    <div class="col-6 mt-2 quiz-code ">
+                        <p class="h5 ">{{ quizroom.quiz_code }}</p>
+                    </div>
+
+                    <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}{% endfor %}{% endif %}
+
+    <div class="col-4 ">
+        <a class="join-classroom ">
+            <div class="card border-secondary mb-3 row mx-5 box-shadow " style="max-width: 20rem; border-radius: 5%;border: 3px dashed #000000; ">
+
+                <div class="card-body " style="height: 35vh; ">
+                    <div class="text-end ">
+                        <svg width="51 " height="50 " viewBox="0 0 51 50 " fill="none " xmlns="http://www.w3.org/2000/svg ">
+                    <path d="M25.5 47.9167C38.4097 47.9167 48.875 37.6566 48.875 25C48.875 12.3435 38.4097 2.08337 25.5 2.08337C12.5903 2.08337 2.125 12.3435 2.125 25C2.125 37.6566 12.5903 47.9167 25.5 47.9167Z " fill="#4DD0E1 "/>
+                    <path d="M25.5 50C39.5611 50 51 38.7854 51 25C51 23.85 50.048 22.9167 48.875 22.9167C47.702 22.9167 46.75 23.85 46.75 25C46.75 36.4875 37.2173 45.8333 25.5 45.8333C13.7828 45.8333 4.25 36.4875 4.25 25C4.25 13.5125 13.7828 4.16667
+                    25.5 4.16667C31.2046 4.16667 36.5585 6.35313 40.5769 10.3219C41.4035 11.1385 42.7486 11.1437 43.5827 10.3333C44.4157 9.52292 44.421 8.20417 43.5933 7.3875C38.7717 2.62396 32.3457 0 25.5 0C11.4389 0 0 11.2146 0 25C0 38.7854 11.4389 50 25.5
+                    50Z " fill="#012E52 "/>
+                    <path d="M25.5 35.4167C26.673 35.4167 27.625 34.4834 27.625 33.3334V27.0834H34C35.173 27.0834 36.125 26.15 36.125 25C36.125 23.85 35.173 22.9167 34 22.9167H27.625V16.6667C27.625 15.5167 26.673 14.5834 25.5 14.5834C24.327 14.5834
+                    23.375 15.5167 23.375 16.6667V22.9167H17C15.827 22.9167 14.875 23.85 14.875 25C14.875 26.15 15.827 27.0834 17 27.0834H23.375V33.3334C23.375 34.4834 24.327 35.4167 25.5 35.4167Z " fill="#012E52 "/>
+                    </svg>
+
+
+                    </div>
+
+                    <div class="text-center mt-5 pt-4 ">
+                        <h5>Join a Quiz Room</h5>
+                    </div>
+                </div>
+
+
+            </div>
+    </div>
+
+    </a>
+
+</div>
+
+<!--hiden field for update,delete-->
+<div class="join-quizroom-modal">
+    <div class="join-quizroom-modal-contents">
+        <div class="close">+</div>
+        <form class="form" method="POST">
+
+            <div class="hidden-join-confirmation row mx-2 justify-content-center mt-5 ">
+                <input type="text" name="join-quiz-code" class="col-8" class="form-control" id="join-quiz-code" placeholder="Enter Quiz Room Code to Join"></input>
+                <button type="button" id="join-button" class="btn btn-outline-primary col-2 mx-2 " name="submit" value="Join">Confirm</button>
+                <p id="invalid-input" class="invalid-input " style="color:red;">**Plese Enter Quiz Room Code </p>
+            </div>
+
+            <input type="hidden" name="edit-quiz-room-id" id="edit-hidden-field-id-input"></input>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

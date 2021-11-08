@@ -16,8 +16,9 @@ class Database(object):
         Database.DATABASE[collection].insert(data)
 
     @staticmethod
-    def find(collection,query):
-        return Database.DATABASE[collection].find(query)
+    def find(collection,query,data):
+        return Database.DATABASE[collection].find(query,data)
+        #return Database.DATABASE["quizrooms"].find({"quizrooms.quiz_code":208660},{"_id":1,"belongs_to":1,"quizrooms._id":1})
 
     @staticmethod
     def find_one(collection,query):
@@ -39,4 +40,27 @@ class Database(object):
     @staticmethod
     def find_total(collection,query):
         return Database.DATABASE[collection].find({},query)
+
+    #@staticmethod
+    #def distinct_value():
+    #    return Database.DATABASE['quizrooms'].distinct("quizrooms._id",
+    #    {"quizrooms":{"$elemMatch":{"quiz_code":208660}}})
+
+    #NEW_OBJECT={
+    #    "quizroom_id":"d1de51c394834b38959fb68c4686cbda"
+    #}
+    #@staticmethod
+    #def update_detail():
+    #    return Database.DATABASE['users'].update({"email":"student1@gmail.com"},
+    #    {"$push":{"quizroom_joined":Database.NEW_OBJECT}})
+
+
+    @staticmethod
+    def distinct(collection,value,query):
+        return Database.DATABASE[collection].distinct(value,query)
+
+    #@staticmethod
+    ##def distinct_test():
+    #    return Database.DATABASE['users'].distinct("quizroom_joined.quizroom_id",{"email":"student1@gmail.com"})
+    
 
