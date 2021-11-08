@@ -1,9 +1,12 @@
-{% extends "topTitle.html" %} {% block title %} {% endblock %} {% block quiz%}
-
-
+{% extends "topTitle.html" %} {% block title %} {% endblock %} {% block quiz%} {% if type =="admin" %}
 <a href="{{url_for('questionSummary')}}">
     <div class="box1" style="top:180px"> <b class="boxdesc">My Question</b></div>
 </a>
+{% else %}
+<a href="{{url_for('instruction')}}">
+    <div class="box1" style="top:180px"> <b class="boxdesc">My Answer</b></div>
+</a>
+{% endif %}
 
 <a href="{{url_for('answering')}}">
     <div class="box1" style="top:420px"> <b class="boxdesc">Ranking</b></div>

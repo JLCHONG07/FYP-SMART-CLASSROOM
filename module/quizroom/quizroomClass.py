@@ -186,20 +186,30 @@ class Quizroom(object):
         if quiz_room_id is not None and not_joined:
             return quiz_room_id
 
-
-
     @staticmethod
     def display_all_joined_quizrooms(quizrooms_id):
         data=None
         results=[]
         for quizroom_id in quizrooms_id:
-            print(quizroom_id)
+            #print(quizroom_id)
             data=Database.find(collection="quizrooms",query={"quizrooms._id":quizroom_id},data={"_id":0,"belongs_to":0,"quizrooms":{"$elemMatch":{"_id":quizroom_id}}})
             #using array to combine all the data into array [data,data]
             for x in data:
                 results.append(x)
-                print(results)
+                #print(results)
         return results
+
+    @staticmethod
+    def joined_a_quizroom(_id,quizrooms_id):
+        joined=False
+        #_id is the selected quiz room id
+        #if selected quizroom is joined then joined will be the true
+        for quizroom_id in quizrooms_id:
+            if _id == quizroom_id:
+                joined=True
+        if _id is not None and joined:
+            return joined
+
 
     
 

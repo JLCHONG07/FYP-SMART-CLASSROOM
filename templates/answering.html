@@ -23,7 +23,7 @@
         </div>
 
     </div>
-
+    {% if session['hand-detect-mode'] == 1%}
     <div class="container col-6 " style=" height:50vh ">
 
 
@@ -35,13 +35,26 @@
 
         </div>
 
+    </div>
 
-        <div class="text-center">
-            <a class="btn btn-outline-primary" href="#">Start</a>
-            <a class="btn btn-outline-primary" href="#">Change to Mode 2</a>
+    {% else %}
+
+    <div class="container col-6 " style=" height:50vh ">
+
+
+        <div class="text-center" style="height: 45vh;">
+            <div class="spinner-grow text-primary " role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <img src="{{ url_for('handRealtime2') }}">
+
         </div>
 
     </div>
+
+    {% endif %}
+
+
 
     <div class="col-3 ">
         <div class="row " style="height: 50vh;">

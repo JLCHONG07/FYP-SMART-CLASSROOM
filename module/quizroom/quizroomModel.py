@@ -6,13 +6,6 @@ import uuid
 from module.quizroom.quizroomClass import Quizroom
 from module.account.accountClass import User
 
-
-##things to do:
-    #add delete feature
-    #hide important field eg _id
-    #remove uncessary background color
-    ###optional: make edit feild to look better
-
 def quizrooms():  
     email=session['email']
     if Quizroom.quizroom_exists(email):   
@@ -31,7 +24,7 @@ def quizrooms():
                 if Quizroom.get_a_quizroom(_id,email):
                   
                     print("Quizroom exists")
-                    return render_template('quizmenu.html',title='Quiz Menu')
+                    return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
                 else:
                     invalid="Please Select a Quizroom Below"
                     flash(invalid,'quizroom_invalid_error')
@@ -107,6 +100,7 @@ def student_quizrooms():
                 #print(b['subject'])
         
         if request.method=="POST":
+            session.pop("_flashes",None)
             if request.form.get('submit')=="Join":
                 quiz_room_code=request.form.get('join-quiz-code')
                 #print(quiz_room_code)
@@ -119,6 +113,14 @@ def student_quizrooms():
                 else:
                     #print("quiz room not exists")
                     return redirect(url_for('studentSmartQuiz'))
+                    
+            elif request.form.get('submit')=='Go':
+                _id=request.form.get("quiz-room-id")
+                print(_id)
+                if Quizroom.joined_a_quizroom(_id,quizrooms_id):
+                    print("Quizroom is joined")
+                   
+                    return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
         
         return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=result)
     else:

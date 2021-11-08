@@ -21,7 +21,7 @@ def hand_detection():
         success, image = cap.read()
         if not success:
          print("Ignoring empty camera frame.")
-         cv2.destroyAllWindows()
+         cap.destroyAllWindows()
          # If loading a video, use 'break' instead of 'continue'.
          continue
         # Flip the image horizontally for a later selfie-view display, and convert
@@ -89,7 +89,7 @@ def hand_detection_mode_2():
         success, image = cap.read()
         if not success:
          print("Ignoring empty camera frame.")
-         cv2.destroyAllWindows()
+         cap.destroyAllWindows()
          # If loading a video, use 'break' instead of 'continue'.
          continue
         # Flip the image horizontally for a later selfie-view display, and convert

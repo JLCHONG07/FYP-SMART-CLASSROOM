@@ -1,8 +1,6 @@
 
 from flask import Flask,render_template,Response,request,redirect,url_for,flash
 from flask.globals import session
-
- 
 from passlib.hash import pbkdf2_sha256
 import uuid
 from appForm import loginForm,registerForm
