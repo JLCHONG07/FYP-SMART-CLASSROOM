@@ -65,7 +65,7 @@ def quizrooms():
 
 def create_quizroom():
 
-    subject="subject(1)"
+    subject="subject"
     _id = uuid.uuid4().hex
     total_progress=0
     total_student=0
