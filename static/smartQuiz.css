@@ -27,6 +27,10 @@ div.box-shadow {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
 }
 
+div.box-shadow:hover {
+    box-shadow: none;
+}
+
 div.quiz-room-scroll {
     overflow-y: auto;
     height: 100vh;

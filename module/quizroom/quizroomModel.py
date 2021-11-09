@@ -10,7 +10,7 @@ def quizrooms():
     email=session['email']
     if Quizroom.quizroom_exists(email):   
         create_quizroom=Quizroom.display_all_quizrooms(email)
-        print(create_quizroom)
+        #print(create_quizroom)
         #for x in create_quizroom:
         #    print(x)
         #quizroom=create_quizroom['quizrooms']
@@ -20,15 +20,15 @@ def quizrooms():
             if request.form.get('submit')=='Go':
                 _id=request.form.get("quiz-room-id")
                 
-                print(_id)
+                #print(_id)
                 if Quizroom.get_a_quizroom(_id,email):
                   
-                    print("Quizroom exists")
+                    #print("Quizroom exists")
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
                 else:
                     invalid="Please Select a Quizroom Below"
                     flash(invalid,'quizroom_invalid_error')
-                    print("No select Quizroom")
+                    #print("No select Quizroom")
                     return redirect(url_for('smartQuiz'))
                 
             elif request.form.get('submit')=='Edit':
@@ -50,7 +50,7 @@ def quizrooms():
                 if confirm_message == "Confirm":
                     #print(confirm_message)
                     if Quizroom.delete_quiz_room(_id,email):
-                        print("Successful delete")
+                        #print("Successful delete")
                         return redirect(url_for('smartQuiz'))
                 else:
                    # invalid_confirm="Confirm"
@@ -116,7 +116,7 @@ def student_quizrooms():
                     
             elif request.form.get('submit')=='Go':
                 _id=request.form.get("quiz-room-id")
-                print(_id)
+                #print(_id)
                 if Quizroom.joined_a_quizroom(_id,quizrooms_id):
                     print("Quizroom is joined")
                    

@@ -4,6 +4,15 @@ $('.create-classroom').click(function() {
     window.location = "create_quizroom"
 })
 
+//change color of edit toggler of quizroom
+$(".toggle").hover(function() {
+    $(this).find("path").attr("fill", "#FFFFFF");
+    $(".toggle").mouseleave(function() {
+        $(this).find("path").attr("fill", "#000000");
+    })
+
+})
+
 //show the edit form when click on toggler of quizroom
 $(".toggle").click(function() {
     $('.bg-modal').css('display', 'flex')
