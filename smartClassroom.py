@@ -20,6 +20,7 @@ def database_initialize():
     Database.initialize()
 
 @app.route("/")
+@app.route("/homePage")
 def home():
     return render_template('homePage.html',title='Home')
 
