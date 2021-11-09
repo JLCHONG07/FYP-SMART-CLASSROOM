@@ -7,6 +7,7 @@ from module.account.accountClass import User
 import module.account.model
 import module.quizroom.quizroomModel
 import module.answering.hand_detect_mode
+import module.questions.questionsModel
 
 app=Flask(__name__)
 #client=MongoClient("mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE")
@@ -26,7 +27,6 @@ def home():
 
 @app.route("/login",methods=["GET","POST"])
 def login():
-  
     return module.account.model.login()
 
 
@@ -81,12 +81,11 @@ def answering():
 
 @app.route("/mainMenu/smartQuiz/quizMenu/questionSummary")    
 def questionSummary():
-    return render_template('questionSummary.html',title='Question Summary')
+    return module.questions.questionsModel.questionSummary()
 
-@app.route("/mainMenu/smartQuiz/quizMenu/questionSummary/createQuetion")
+@app.route("/mainMenu/smartQuiz/quizMenu/questionSummary/createQuetion",methods=["GET","POST"])
 def createQuizQuestion():
-      
-    return render_template('createQuestion.html',title='Create Quiz Question')
+     return module.questions.questionsModel.createQuestion()
 
 @app.route("/mainMenu/smartQuiz/quizMenu/reportSummary/")
 def reportSummary():

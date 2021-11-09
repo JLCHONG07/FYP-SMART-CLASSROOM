@@ -1,21 +1,13 @@
 {% extends "topTitle.html" %} {% block title %} {% endblock %} {% block createQuestion %}
 
+
 <div class="questionForm">
     <div>
         <b class="questionDesc">Question: </b>
     </div>
-    <div class="formInputs">
-        <input type="text" class="inputsizing" placeholder="  Type Question" name="email" id="question" required>
+    <form class="formInputs" method="POST">
+        {{form.csrf_token}} {{form.question(class_="inputsizing")}} {{form.answer1(class_="inputs")}} {{form.answer2(class_="inputs")}} {{form.answer3(class_="inputs")}} {{form.answer4(class_="inputs")}} {{ form.correct_answer(class_="inputs") }}
 
-        <input type="text" class="inputs" placeholder="  Question ID" name="email" id="qID" required>
-
-        <input type="text" class="inputs" placeholder="  Option 1" name="email" id="opt1" required>
-
-        <input type="text" class="inputs" placeholder="  Option 2" name="email" id="opt2" required>
-
-        <input type="text" class="inputs" placeholder="  Option 3" name="email" id="opt3" required>
-
-        <input type="text" class="correctInput" placeholder="  Correct Option" name="email" id="optCorrect" required>
 
         <div class="endBar" style="width:95%; height:80px;margin-top:30px;">
 
@@ -24,7 +16,7 @@
             <a href="{{url_for('questionSummary')}}"> <button class="button btnDesc"> Cancel</button>
 
         </div>
-    </div>
+    </form>
 
 </div>
 
