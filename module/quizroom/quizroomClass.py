@@ -75,7 +75,7 @@ class Quizroom(object):
     @staticmethod
     def get_a_quizroom(_id,email):
         data=Database.find_one(collection="quizrooms",query={'belongs_to':email,'quizrooms._id':_id})
-        print(data)
+        #print(data)
         if data is not None:
             return True
         else: 
@@ -98,8 +98,9 @@ class Quizroom(object):
     def create_new_quizroom(cls,belongs_to,quizrooms,_id):
         #new_classroom=Classroom.get_classroom(email)
         update_to_exsists=cls.quizroom_exists(belongs_to)
+        #quizrooms is a array, quizrooms[3] is the quiz_code
         quizrooms[3]=Quizroom.create_new_quiz_code()
-        print(quizrooms[3])
+        #print(quizrooms[3])
 
         if update_to_exsists:
             update_quizroom=cls(belongs_to,quizrooms,_id)
@@ -174,6 +175,7 @@ class Quizroom(object):
         if quizroom_id is not None:
             return (quizroom_id)
 
+    #validation for the quizroom code
     @staticmethod
     def valid_quiz_room_code(quiz_room_code,quizrooms_id):
         quiz_room_id=Quizroom.get_quiz_room(quiz_room_code)
@@ -186,6 +188,7 @@ class Quizroom(object):
         if quiz_room_id is not None and not_joined:
             return quiz_room_id
 
+    #get and show all the quizrooms that joined
     @staticmethod
     def display_all_joined_quizrooms(quizrooms_id):
         data=None
@@ -199,6 +202,7 @@ class Quizroom(object):
                 #print(results)
         return results
 
+    #this is check for when click on the "Go" button validation
     @staticmethod
     def joined_a_quizroom(_id,quizrooms_id):
         joined=False

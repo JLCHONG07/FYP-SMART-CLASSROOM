@@ -28,4 +28,6 @@ class questionForm(FlaskForm):
     answer4=StringField('answer4',validators=[DataRequired()],render_kw={"placeholder": "Option 4"})
     correct_answer=SelectField("correct_answer",validators=[DataRequired()],
     choices=[('a0','Correct Answer'),('a1','Option 1'),('a2','Option 2'),('a3','Option 3'),('a4','Option 4')])
-
+    submit=SubmitField(label="Submit")
+    delete=SubmitField(label="Delete")
+    cancel=SubmitField(label="Cancel")

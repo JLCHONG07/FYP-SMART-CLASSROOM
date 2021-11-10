@@ -17,13 +17,17 @@ def quizrooms():
         #print(quizroom)
         if request.method=="POST":
             session.pop("_flashes",None)
+            #subject_name=request.form.get("quiz-room-name")
             if request.form.get('submit')=='Go':
                 _id=request.form.get("quiz-room-id")
                 
+                print(_id)
+                #print(subject_name)
                 #print(_id)
                 if Quizroom.get_a_quizroom(_id,email):
-                  
+                    session['quizroom_id']=_id
                     #print("Quizroom exists")
+                    
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
                 else:
                     invalid="Please Select a Quizroom Below"

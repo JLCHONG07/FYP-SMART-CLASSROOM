@@ -79,7 +79,7 @@ def instruction2():
 def answering():
     return render_template('answering.html',title='Answer')
 
-@app.route("/mainMenu/smartQuiz/quizMenu/questionSummary")    
+@app.route("/mainMenu/smartQuiz/quizMenu/questionSummary",methods=["GET","POST"])    
 def questionSummary():
     return module.questions.questionsModel.questionSummary()
 

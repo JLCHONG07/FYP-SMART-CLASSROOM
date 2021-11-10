@@ -1,11 +1,8 @@
 /* This css file is responsible for all reports css. (Report Summary, Question Summary)*/
 
 .titleCtnr {
-    position: absolute;
     width: 724px;
     height: 143px;
-    left: 740px;
-    top: 120px;
     border-width: 1px;
     text-align: center;
     padding-top: 60px;
@@ -13,17 +10,14 @@
     color: black;
     box-shadow: 5px 5px 10px #2b2b2b;
     background-color: white;
-    z-index: 1;
 }
 
 .titleBox {
+    width: 82vw;
+    height: 70vh;
     position: absolute;
-    width: 1500px;
-    margin-left: 19%;
-    padding-left: 4%;
-    padding-right: 4%;
-    height: 700px;
-    top: 200px;
+    top: 280px;
+    margin-left: 100px;
     border-width: 1px;
     text-align: center;
     padding-top: 60px;
@@ -34,8 +28,20 @@
 
 .titleBoxContent {
     max-width: 100%;
-    margin-top: 50px;
     font-size: 25px;
     color: black;
     text-align: left;
+}
+
+b {
+    color: black;
+}
+
+td.question-id {
+    display: none;
+}
+
+th.change-question-color:hover {
+    text-decoration: underline;
+    color: red;
 }

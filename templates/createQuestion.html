@@ -11,10 +11,7 @@
 
         <div class="endBar" style="width:95%; height:80px;margin-top:30px;">
 
-            <button class="button btnSubmit"> Submit</button>
-            <button class="button btnDesc"> Clear</button>
-            <a href="{{url_for('questionSummary')}}"> <button class="button btnDesc"> Cancel</button>
-
+            {{form.submit(class_="button btnSubmit")}} {{form.delete(class_="button btnDesc",formnovalidate=True)}} {{form.cancel(class_="button btnDesc",formnovalidate=True)}}
         </div>
     </form>
 

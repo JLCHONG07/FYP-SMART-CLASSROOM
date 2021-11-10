@@ -59,12 +59,15 @@
 
 {% else %}
 
-<div class="topleftbar col-10 ">
-    <div>
-        <!-- This h2 will shows the Page Title according to what the page is currently in.-->
-        <h3>{{title}} </h3>
+
+<div class=" col-10 " style="z-index: 1;">
+    <div class="row topleftbar">
+        <div class="pt-4">
+            <!-- This h2 will shows the Page Title according to what the page is currently in.-->
+            <h3>{{title}}</h3>
+        </div>
     </div>
+    {% block quiz %} {% endblock %} {% block createQuestion %} {% endblock %} {% block questionSummary %} {% endblock %} {% block reportSummary %} {% endblock %} {% endif %}
 
 </div>
-<!-- Above part is necessary for all pages with sidebar and topleftbar-->
-{% block quiz %} {% endblock %} {% block createQuestion %} {% endblock %} {% block questionSummary %} {% endblock %} {% block reportSummary %} {% endblock %} {% endif %} {% endblock %}
+{% endblock %}
