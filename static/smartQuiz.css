@@ -89,6 +89,8 @@ input {
 }
 */
 
+
+/*
 .close {
     position: absolute;
     top: 0;
@@ -97,6 +99,16 @@ input {
     color: #333;
     transform: rotate(45deg);
     cursor: pointer;
+}
+*/
+
+.gray-bar,
+.delete-gray-bar {
+    background-color: #393838;
+    width: 26.5vw;
+    height: 3vh;
+    padding-top: 2%;
+    padding-bottom: 1%;
 }
 
 .hidden-delete-confirmation {
@@ -113,7 +125,8 @@ input {
 
 /*--------student*-----------------------------*/
 
-.join-quizroom-modal {
+.join-quizroom-modal,
+.delete-quizroom-modal {
     background-color: rgba(0, 0, 0, 0.8);
     width: 100vw;
     height: 100vh;
@@ -127,11 +140,16 @@ input {
     align-items: center;
 }
 
-.join-quizroom-modal-contents {
-    height: 15vh;
+.join-quizroom-modal-contents,
+.delete-quizroom-modal-contents {
+    height: 20vh;
     width: 25vw;
     background-color: white;
     text-align: center;
     position: relative;
-    border-radius: 4px;
+    border-radius: 10px;
+}
+
+svg.close {
+    cursor: pointer;
 }

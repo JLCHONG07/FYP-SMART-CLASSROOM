@@ -133,7 +133,7 @@ class Quizroom(object):
     @staticmethod
     def quiz_code_exists(quiz_code):
         data=Database.find_one(collection="quizrooms",query={"quizrooms.quiz_code":quiz_code})
-        print(data)
+        #print(data)
         if data is None :
             return True
         else:
@@ -174,7 +174,7 @@ class Quizroom(object):
            #return the result "d1de51c394834b38959fb68c4686cbda" from quizrooms._id
            #after this can insert this value to user module 
            quizroom_id=x.get('quizrooms')[0].get('_id')
-           print(quizroom_id)
+           #print(quizroom_id)
        
         if quizroom_id is not None:
             return (quizroom_id)
@@ -219,9 +219,9 @@ class Quizroom(object):
             return joined
 
     @staticmethod
-    def update_total_student(quizroom_id):
+    def update_total_student(quizroom_id,total_update_student):
         print(quizroom_id)
-        Database.update(collection="quizrooms",query={"quizrooms._id":quizroom_id},update={"$inc":{"quizrooms.$.total_students":1}},upsert=False,multi=True)
+        Database.update(collection="quizrooms",query={"quizrooms._id":quizroom_id},update={"$inc":{"quizrooms.$.total_students":total_update_student}},upsert=False,multi=True)
         #print("total_student",data)
 
     @staticmethod

@@ -16,11 +16,12 @@ $(".toggle").hover(function() {
 //show the edit form when click on toggler of quizroom
 $(".toggle").click(function() {
     $('.bg-modal').css('display', 'flex')
+    $('.delete-quizroom-modal').css('display', 'flex')
 
 })
 
 //hide the edit form when click on 'X' of the form
-$(".close").click(function() {
+$("svg.close").click(function() {
     //default all texts
     $('.bg-modal').css('display', 'none')
     $('.form .hidden-delete-confirmation .invalid-input').css("display", "none")
@@ -30,7 +31,11 @@ $(".close").click(function() {
 
     //----student join room---//
     $('.join-quizroom-modal').css('display', 'none')
+    $('.delete-quizroom-modal').css('display', 'none')
+
 })
+
+
 
 //show the delete confirm msg when click on toggler of quizroom
 $("button.delete").click(function() {
@@ -78,9 +83,10 @@ $(".card").click(function() {
     }
     var id = $(this).find('.hidden-id').text()
     $('#edit-hidden-field-id-input').val(id).trigger("change")
-        //console.log(subject_name)
-        //console.log(assigned_group)
-        //console.log(id)
+
+    //console.log(subject_name)
+    //console.log(assigned_group)
+    //console.log(id)
 })
 
 //Show invalid message when entered not a Confirm message
@@ -142,6 +148,8 @@ $('#edit-button').click(function() {
 $(".join-classroom ").click(function() {
     $('.join-quizroom-modal').css('display', 'flex')
 })
+
+
 
 //Invalid the submit button to edit when the subject or assign to is blank
 $('#join-button').click(function() {

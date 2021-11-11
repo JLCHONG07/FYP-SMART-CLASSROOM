@@ -117,6 +117,15 @@ class User(object):
                 #print(quizrooms_id)
                 if quizrooms_id is not None:
                         return quizrooms_id
+        
+        @staticmethod
+        def quit_quizroom(quizroom_id,email):
+                Database.update(collection="users",query={"email":email},update=
+                {"$pull":{"quizroom_joined":{"quizroom_id":quizroom_id}}},upsert=False,multi=True)
+             
+
+
+        
 
        
 

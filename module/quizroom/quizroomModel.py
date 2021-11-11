@@ -113,7 +113,7 @@ def student_quizrooms():
                 #print(quiz_room_code)
                 quizroom_id=Quizroom.valid_quiz_room_code(quiz_room_code,quizrooms_id)
                 print("quizroom_id:",quizroom_id)
-                Quizroom.update_total_student(quizroom_id)
+                Quizroom.update_total_student(quizroom_id,total_update_student=1)
 
                 if quizroom_id is not None:
                     #print("joined quiz room")
@@ -130,7 +130,13 @@ def student_quizrooms():
                     print("Quizroom is joined")
                    
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
-
+            
+            elif request.form.get('submit')=='Delete':
+                _id=request.form.get("delete-quiz-room-id")
+                print(_id,email)
+                User.quit_quizroom(_id,email)
+                Quizroom.update_total_student(_id,total_update_student=-1)
+                return redirect(url_for('studentSmartQuiz'))
         
         return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=result)
     else:
