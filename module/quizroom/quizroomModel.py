@@ -10,6 +10,7 @@ def quizrooms():
     email=session['email']
     if Quizroom.quizroom_exists(email):   
         create_quizroom=Quizroom.display_all_quizrooms(email)
+        
         #print(create_quizroom)
         #for x in create_quizroom:
         #    print(x)
@@ -76,6 +77,7 @@ def create_quizroom():
     assigned_to="Edit to select group to assign"
     quiz_code=None
     belongs_to=session["email"]
+    total_scores=0
     #print(_id)
     quizrooms=[
         subject,
@@ -83,6 +85,7 @@ def create_quizroom():
         assigned_to,
         quiz_code,
         total_student,
+        total_scores,
         _id]
     #classroom=Classroom(_id=_id,subject=subject,total_progress=total_progress,assigned_to=assigned_to,class_code=class_code,belongs_to=belongs_to)
     Quizroom.create_new_quizroom(belongs_to,quizrooms,_id=None)
@@ -109,6 +112,8 @@ def student_quizrooms():
                 quiz_room_code=request.form.get('join-quiz-code')
                 #print(quiz_room_code)
                 quizroom_id=Quizroom.valid_quiz_room_code(quiz_room_code,quizrooms_id)
+                print("quizroom_id:",quizroom_id)
+                Quizroom.update_total_student(quizroom_id)
 
                 if quizroom_id is not None:
                     #print("joined quiz room")
@@ -125,6 +130,7 @@ def student_quizrooms():
                     print("Quizroom is joined")
                    
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
+
         
         return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=result)
     else:

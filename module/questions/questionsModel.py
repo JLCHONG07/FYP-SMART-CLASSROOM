@@ -3,6 +3,7 @@ from flask import Flask,render_template,Response,request,redirect,url_for,flash
 import flask
 from flask.globals import session
 from module.questions.questionsClass import Question
+from module.quizroom.quizroomClass import Quizroom
 from appForm import questionForm
 
 def questionSummary():
@@ -20,6 +21,7 @@ def questionSummary():
 
         else:
             #session.pop('question_id',None)
+            session['question_id']=None
             return redirect(url_for('createQuizQuestion'))
 
     return render_template('questionSummary.html',title='Question Summary',questions=questions)
@@ -60,6 +62,7 @@ def createQuestion():
                     #print(question,answer1,answer2,answer3,answer4,correct_ans)
                     question_set=[question_id,question,answer1,answer2,answer3,answer4,correct_ans]
                     Question.get_created_question(quizroom_id,question_set,_id=None)
+                    Quizroom.update_total_quizroom_score(quizroom_id,total_update_scores=10)
                     return redirect(url_for("questionSummary"))
                 else:
                     question_id=edit_id
@@ -70,6 +73,7 @@ def createQuestion():
             elif form.delete.data:
                     session['question_id']=None
                     Question.delete_question(edit_id)
+                    Quizroom.update_total_quizroom_score(quizroom_id,total_update_scores=-10)
                     return redirect(url_for("questionSummary"))
             else:
                     session['question_id']=None

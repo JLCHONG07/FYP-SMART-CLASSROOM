@@ -78,6 +78,7 @@ def instruction2():
 @app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/answering")
 def answering():
     return render_template('answering.html',title='Answer')
+    
 
 @app.route("/mainMenu/smartQuiz/quizMenu/questionSummary",methods=["GET","POST"])    
 def questionSummary():
@@ -105,6 +106,7 @@ def handRealtime2():
 
 @app.route("/logout")
 @app.route("/mainMenu/logout")
+@app.route("/mainMenu/smartQuiz/quizMenu/logout")
 def logout():
     User.logout()
     return redirect(url_for('login'))

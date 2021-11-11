@@ -1,4 +1,6 @@
 import uuid
+
+from werkzeug.datastructures import cache_property
 from database import Database
 from random import randint
 
@@ -27,7 +29,8 @@ class Quizroom(object):
                 "assigned_to":self.quizrooms[2],
                 "quiz_code":self.quizrooms[3],
                  "total_students":self.quizrooms[4],
-                "_id":self.quizrooms[5]
+                 "total_scores":self.quizrooms[5],
+                "_id":self.quizrooms[6]
                 }
              }},upsert=False,multi=True)
         
@@ -44,7 +47,8 @@ class Quizroom(object):
              "assigned_to":self.quizrooms[2],
              "quiz_code":self.quizrooms[3],
              "total_students":self.quizrooms[4],
-             "_id":self.quizrooms[5],
+             "total_scores":self.quizrooms[5],
+             "_id":self.quizrooms[6],
             }]
 
         }
@@ -213,6 +217,16 @@ class Quizroom(object):
                 joined=True
         if _id is not None and joined:
             return joined
+
+    @staticmethod
+    def update_total_student(quizroom_id):
+        print(quizroom_id)
+        Database.update(collection="quizrooms",query={"quizrooms._id":quizroom_id},update={"$inc":{"quizrooms.$.total_students":1}},upsert=False,multi=True)
+        #print("total_student",data)
+
+    @staticmethod
+    def update_total_quizroom_score(quizroom_id,total_update_scores):
+         Database.update(collection="quizrooms",query={"quizrooms._id":quizroom_id},update={"$inc":{"quizrooms.$.total_scores":total_update_scores}},upsert=False,multi=True)
 
 
     

@@ -1,3 +1,4 @@
+from typing import Collection
 import pymongo
 
 
@@ -58,6 +59,11 @@ class Database(object):
     @staticmethod
     def distinct(collection,value,query):
         return Database.DATABASE[collection].distinct(value,query)
+
+    #@staticmethod
+    #def count_total():
+     #   return Database.DATABASE["users"].find({"quizroom_joined.quizroom_id": "d1de51c394834b38959fb68c4686cbda"},
+      #  {"quizrom_joined":{"$elemMatch":{"quizroom_id":"d1de51c394834b38959fb68c4686cbda"}}}).count()
 
     #@staticmethod
     ##def distinct_test():

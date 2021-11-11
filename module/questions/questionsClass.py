@@ -24,7 +24,7 @@ class Question(object):
         Database.insert(collection="questions",data=self.json())
 
     def update_to_mongodb(self):
-        print("update")
+        #print("update")
         Database.update(collection="questions",query={"quizroom_id":self.quizroom_id},update={"$push":{
               "question_set":{
                 "_id":self.question_set[0],
@@ -58,6 +58,7 @@ class Question(object):
         if data is not None:
             #print(cls(**data))
             return cls(**data)
+
     @staticmethod
     def get_question_with_question_id(question_id):
         data= Database.find(collection="questions",query={"question_set._id":question_id}
