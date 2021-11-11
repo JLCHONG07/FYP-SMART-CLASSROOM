@@ -71,10 +71,6 @@ def quizMenu():
 def instruction():
     return module.answering.hand_detect_mode.instruction()
 
-@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction2/")
-def instruction2():
-    return module.answering.hand_detect_mode.instruction2()
-
 @app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/answering")
 def answering():
     return render_template('answering.html',title='Answer')
@@ -94,15 +90,15 @@ def reportSummary():
 
 @app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/handRealTime")
 def handRealtime():
-    session['hand-detect-mode']=1
+    #session['hand-detect-mode']=1
     return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction2/handRealTime2")
-def handRealtime2():
-    session['hand-detect-mode']=2
-    #instruction()
-    return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame')
+#@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction2/handRealTime2")
+#def handRealtime2():
+ #   session['hand-detect-mode']=2
+ #   #instruction()
+ #   return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/logout")
 @app.route("/mainMenu/logout")

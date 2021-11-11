@@ -43,13 +43,49 @@ def hand_detection():
         # Draw the hand annotations on the image.
         image.flags.writeable = True
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-        image= cv2.putText(image, f'FPS:{int(fps)}', (7, 70), font, 3, (100, 255, 0), 3, cv2.LINE_AA)
         image = ResizeWithAspectRatio(image, width=571) # Resize by width OR
         # resize = ResizeWithAspectRatio(image, height=1280) # Resize by height 
+
+        #add sqaure bracket and left and right words
+        image= cv2.putText(image, f'FPS:{int(fps)}', (10, 30), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
         if results.multi_hand_landmarks:
-            for hand_landmarks in results.multi_hand_landmarks:
-              mp_drawing.draw_landmarks(
+            for hand_landmarks,handedness in zip(results.multi_hand_landmarks,results.multi_handedness):
+                #Loop for landmarks of the hand which able to adding the landmarks on the default lamdmarks
+                #for id, lm in enumerate(hand_landmarks.landmark):
+                    #print(id,lm)
+                    #h,w,c=image.shape
+                    #cx,cy=int(lm.x*w),int(lm.y*h)
+                    #print(id,cx,cy)
+                    #cv2.circle(image,(cx,cy),10,(255,0,255),cv2.FILLED)
+                                # Calculate the circumscribed rectangle
+                #left hand coordinate
+                cx,cy=hand_coordinate(image,hand_landmarks,handedness)
+                #right hand coordinate
+                cx2,cy2=hand_coordinate2(image,hand_landmarks,handedness)
+                image=cv2.putText(image, f'Left : {str(cx)}  {str(cy)}', (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
+                image=cv2.putText(image, f'Right : {str(cx2)}  {str(cy2)}', (10, 110), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
+                #image=cv2.putText(image, f'{str(cy)}', (50, 80), font, 3, (100, 255, 0), 3)
+                #calculation of box surrounded hand
+                brect = calc_bounding_rect(image, hand_landmarks)
+                #draw box surrounded hand
+                image = draw_bounding_rect(True, image, brect)
+                #words of left and right
+                image = draw_info_text(
+                    image,
+                    brect,
+                    handedness
+                )
+                mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+        #cv2.imshow('MediaPipe Hands', image)
+        #return image
+        #self.frameOnWeb(image)    
+        #if cv2.waitKey(5) & 0xFF == 27:
+            #break
+
+        #build frame/cam on web
+        frame = cv2.imencode('.jpg', image)[1].tobytes()
+        yield b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
         #cv2.imshow('MediaPipe Hands', image)
         #return image
         #self.frameOnWeb(image)    
@@ -75,6 +111,7 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
 
     return cv2.resize(image, dim, interpolation=inter)
 
+#mode 2 code is not used but combined to mode 1
 def hand_detection_mode_2():
     prev_frame_time=0
     
@@ -155,7 +192,7 @@ def hand_detection_mode_2():
         frame = cv2.imencode('.jpg', image)[1].tobytes()
         yield b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
 
-     
+
 def calc_bounding_rect(image, landmarks):
     image_width, image_height = image.shape[1], image.shape[0]
 

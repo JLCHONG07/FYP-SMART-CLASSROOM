@@ -137,21 +137,23 @@
 
 <div class="bg-modal ">
     <div class="modal-contents ">
+        <div class="text-end gray-bar">
+            <svg height="50" width="50" class="close">
+             <circle cx="6" cy="6" r="6" fill="red" />
+            </svg>
+        </div>
 
-        <div class="close ">+</div>
 
-        <h1>Edit Quiz Room Details</h1>
-
-        <form class="form" method="POST">
+        <form class="form container mt-3" method="POST">
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label ">Subject</label>
+                <label class="col-sm-3 col-form-label ">Subject</label>
                 <div class="col-sm-8">
                     <input type="text" name="quiz-room-name" class="form-control" id="hidden-edit-form-subject-name" placeholder="Please Enter the subject name"></input>
                     <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Enter Subject Name </p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label ">Assign to</label>
+                <label class="col-sm-3 col-form-label ">Assign to</label>
                 <div class="col-sm-8 select_class">
                     <select class="custom-select form-control " id="hidden-edit-form-group-assigned" name="edit-group-assigned">
                         <option value="0" selected >Click to Select Group</option>
@@ -162,25 +164,27 @@
                     <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Select a Group to Assign </p>
                 </div>
             </div>
-            <div class="row mx-2 mt-2">
-                <button type="button" id="edit-button" class="btn btn-primary col-2 mx-2" name="submit" value="Edit">Submit</button>
+            <div class="row justify-content-end  mt-2 mb-2">
+
                 <button type="button" class="btn btn-danger col-2 mx-2 delete" name="submit" value="Delete">Delete</button>
+                <button type="button" id="edit-button" class="btn btn-primary col-2 mx-2" name="submit" value="Edit">Submit</button>
             </div>
 
-            <div class="hidden-delete-confirmation mx-2">
+            <div class="hidden-delete-confirmation mx-3">
                 <p>Are You Sure Want to Delete this Quizroom?</p>
             </div>
-            <div class="hidden-delete-confirmation row mx-2">
-                <input type="text" name="delete-confirmation" class="col-5" class="form-control" id="delete-confirmation" placeholder="Enter Confirm to Delete"></input>
-                <button type="button" id="confirm-button" class="btn btn-outline-danger col-2 mx-2 " name="submit" value="Delete">Confirm</button>
-                <button type="button" class="btn btn-secondary col-2 mx-2 cancel" name="submit" value="Cancel">Cancel</button>
+            <div class="hidden-delete-confirmation row mb-2">
+                <input type="text" name="delete-confirmation" class="col-6 mx-2" class="form-control" id="delete-confirmation" placeholder="Enter Confirm to Delete"></input>
+
+                <button type="button" id="confirm-button" class="btn btn-outline-danger col-2 mx-2" name="submit" value="Delete">Confirm</button>
+                <button type="button" class="btn btn-secondary cancel col-2" name="submit" value="Cancel">Cancel</button>
+
                 <p id="invalid-input" class="invalid-input" style="color:red;">**Plese Enter "Confirm" to delete </p>
 
             </div>
 
             <input type="hidden" name="edit-quiz-room-id" id="edit-hidden-field-id-input"></input>
         </form>
-
 
 
     </div>
