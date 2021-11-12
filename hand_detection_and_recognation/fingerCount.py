@@ -1,7 +1,8 @@
 from cv2 import cv2
 import time
 import os
-import handTrackMod as htm
+from hand_detection_and_recognation import handTrackMod as htm
+#import handTrackMod as htm
 
 widthCam, heightCam = 640, 480
 
@@ -36,6 +37,7 @@ def rmStartMode2():
     while True:
         success, img = cap.read()
         img = detector.findHands(img)
+       
         lmList = detector.findPosition(img, draw=False)
         #print(lmList)
 
@@ -97,8 +99,10 @@ def rmStartMode2():
         fps = 1/(cTime-pTime)
         pTime = cTime
 
-        cv2.putText(img, f'FPS:{int(fps)}', (7, 70),
+        cv2.putText(img, f'FPS:{int(fps)}', (10, 30),
                     cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3, cv2.LINE_AA)
+
+
         # cv2.putText(img,f'FPS:{int(fps)}',(50,50),
         # cv2.FONT_HERSHEY_PLAIN,3,(255,0,0),3)
         webFrame=  cv2.imencode('.jpg', img)[1].tobytes()

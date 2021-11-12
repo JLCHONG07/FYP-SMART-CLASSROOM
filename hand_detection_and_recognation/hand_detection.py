@@ -96,6 +96,7 @@ def hand_detection():
         frame = cv2.imencode('.jpg', image)[1].tobytes()
         yield b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
 
+
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
@@ -182,6 +183,7 @@ def hand_detection_mode_2():
                 )
                 mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+                
         #cv2.imshow('MediaPipe Hands', image)
         #return image
         #self.frameOnWeb(image)    
@@ -191,6 +193,8 @@ def hand_detection_mode_2():
         #build frame/cam on web
         frame = cv2.imencode('.jpg', image)[1].tobytes()
         yield b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
+
+
 
 
 def calc_bounding_rect(image, landmarks):
@@ -210,6 +214,7 @@ def calc_bounding_rect(image, landmarks):
 
     return [x, y, x + w, y + h]
 
+
 def draw_bounding_rect(use_brect, image, brect):
     if use_brect:
          # External Rectangle
@@ -217,6 +222,7 @@ def draw_bounding_rect(use_brect, image, brect):
                      (255,0,255), 2)
 
     return image
+
 
 def draw_info_text(image, brect, handedness):
     cv2.rectangle(image, (brect[0], brect[1]), (brect[2], brect[1] - 22),
@@ -257,6 +263,7 @@ def hand_coordinate(image,hand_landmarks,handedness):
 
     else:
         return "",""
+
 
 def hand_coordinate2(image,hand_landmarks,handedness):
     cxID0=0

@@ -1,6 +1,7 @@
 from cv2 import cv2
 import mediapipe as mp
 import time
+from hand_detection_and_recognation import hand_detection
 
 
 class handDetector():
@@ -17,14 +18,42 @@ class handDetector():
 
     
     def findHands(self, img, draw=True):
-        imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        # Flip the image horizontally for a later selfie-view display, and convert
+        # the BGR image to RGB.
+        imgRGB = cv2.cvtColor(cv2.flip(img, 1), cv2.COLOR_BGR2RGB)
+        # To improve performance, optionally mark the image as not writeable to
+        # pass by reference.
+        imgRGB.flags.writeable = False
+        #imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.hands.process(imgRGB)
+
+        # Draw the hand annotations on the image.
+        imgRGB.flags.writeable = True
+        img = cv2.cvtColor(imgRGB, cv2.COLOR_RGB2BGR)
         #print(results.multi_hand_landmarks)
 
         if self.results.multi_hand_landmarks:
-            for handLms in self.results.multi_hand_landmarks:               
+            for handLms,handedness in zip(self.results.multi_hand_landmarks,self.results.multi_handedness):               
                 if draw:
-                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
+                    #left hand coordinate
+                    cx,cy=hand_detection.hand_coordinate(img,handLms,handedness)
+                    #right hand coordinate
+                    cx2,cy2=hand_detection.hand_coordinate2(img,handLms,handedness)
+                    img=cv2.putText(img, f'Right : {str(cx)}  {str(cy)}', (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
+                    img=cv2.putText(img, f'Left : {str(cx2)}  {str(cy2)}', (10, 110), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
+                    #image=cv2.putText(image, f'{str(cy)}', (50, 80), font, 3, (100, 255, 0), 3)
+                    #calculation of box surrounded hand
+                    brect = hand_detection.calc_bounding_rect(img, handLms)
+                    #draw box surrounded hand
+                    img = hand_detection.draw_bounding_rect(True, img, brect)
+                    #words of left and right
+                    img = hand_detection.draw_info_text(
+                        img,
+                        brect,
+                        handedness
+                    )
+                    self.mpDraw.draw_landmarks(
+                    img, handLms,self.mpHands.HAND_CONNECTIONS)
         return img        
                 #for id, lm in enumerate(handLms.landmark):
                     #print(id, lm)

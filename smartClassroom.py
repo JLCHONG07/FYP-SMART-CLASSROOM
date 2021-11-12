@@ -1,6 +1,7 @@
 from flask import Flask,render_template,Response,request,redirect,url_for,flash
 from flask.globals import session
 from database import Database
+from hand_detection_and_recognation.fingerCount import rmStartMode2
 from hand_detection_and_recognation.hand_detection import hand_detection,hand_detection_mode_2
 from pymongo import MongoClient
 from module.account.accountClass import User
@@ -92,6 +93,12 @@ def reportSummary():
 def handRealtime():
     #session['hand-detect-mode']=1
     return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/handRealTimeAndRecognize")
+def handRealTimeAndRecognize():
+    #session['hand-detect-mode']=1
+    return Response(rmStartMode2(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 
 #@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction2/handRealTime2")
