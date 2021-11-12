@@ -2,6 +2,7 @@ from cv2 import cv2
 import time
 import os
 from hand_detection_and_recognation import handTrackMod as htm
+#from module.answering.answeringModel import myFinalAnswer
 #import handTrackMod as htm
 
 widthCam, heightCam = 640, 480
@@ -67,25 +68,25 @@ def rmStartMode2():
 
             #name = str(totalFingers)
             if (totalFingers >= 1 and totalFingers <= 4):
-                print(totalFingers)
+                #print(totalFingers)
                 if (totalFingers == 1):
                     aCount +=1
-                    print("A counter: ", aCount)
+                    #print("A counter: ", aCount)
                     calOccurence(aCount, img, totalFingers)
                     
                 elif (totalFingers == 2):
                     bCount +=1
-                    print("B counter: ", bCount)
+                    #print("B counter: ", bCount)
                     calOccurence(bCount, img, totalFingers)
                     
                 elif (totalFingers == 3):
                     cCount+=1
-                    print("C counter: ", cCount)
+                    #print("C counter: ", cCount)
                     calOccurence(cCount, img, totalFingers)
                     
                 elif (totalFingers == 4):
                     dCount+=1
-                    print("D counter: ", dCount)
+                    #print("D counter: ", dCount)
                     calOccurence(dCount, img, totalFingers)
                    
                 print(totalFingers)
@@ -111,14 +112,19 @@ def rmStartMode2():
         #cv2.waitKey(1)
         
 def calOccurence(counter,img, totalFingers):
+    #ans=None
     if (counter > 50):
         cv2.putText(img,"Selected Option: "+ str(totalFingers)+".", (45, 375),
                     cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
-                       
+        
+        sendConfirmedOption(answer=totalFingers)               
     else:
         cv2.putText(img,"Detecting... ", (45, 375),
                     cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
+        #sendConfirmedOption(ans=totalFingers)    
+
 
 def sendConfirmedOption(answer):
     #TODO send the selected answer
+    #myFinalAnswer(answer)
     print("this will send the answer to the server to be saved")

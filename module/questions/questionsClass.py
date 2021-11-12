@@ -54,7 +54,7 @@ class Question(object):
     @classmethod
     def get_question(cls,quizroom_id):
         data=Database.find_one(collection="questions",query={"quizroom_id":quizroom_id})
-      
+        
         if data is not None:
             #print(cls(**data))
             return cls(**data)
