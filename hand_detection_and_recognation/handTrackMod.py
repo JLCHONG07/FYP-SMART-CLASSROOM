@@ -5,7 +5,7 @@ from hand_detection_and_recognation import hand_detection
 
 
 class handDetector():
-    def __init__(self, mode=False, maxHands=2, detectionCon=0.8, trackCon=0.95):
+    def __init__(self, mode=False, maxHands=1, detectionCon=0.75, trackCon=0.75):
         self.mode = mode
         self.maxHands=maxHands
         self.detectionCon=detectionCon
@@ -39,8 +39,8 @@ class handDetector():
                     cx,cy=hand_detection.hand_coordinate(img,handLms,handedness)
                     #right hand coordinate
                     cx2,cy2=hand_detection.hand_coordinate2(img,handLms,handedness)
-                    img=cv2.putText(img, f'Right : {str(cx)}  {str(cy)}', (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
-                    img=cv2.putText(img, f'Left : {str(cx2)}  {str(cy2)}', (10, 110), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
+                    img=cv2.putText(img, f'Left : {str(cx)}  {str(cy)}', (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
+                    img=cv2.putText(img, f'Right : {str(cx2)}  {str(cy2)}', (10, 110), cv2.FONT_HERSHEY_PLAIN, 3, (100, 255, 0), 3)
                     #image=cv2.putText(image, f'{str(cy)}', (50, 80), font, 3, (100, 255, 0), 3)
                     #calculation of box surrounded hand
                     brect = hand_detection.calc_bounding_rect(img, handLms)
@@ -79,6 +79,18 @@ class handDetector():
                     #cv2.circle(img, (cx, cy), 10, (255, 0, 255), cv2.FILLED)
 
         return lmList
+    
+    def findLeftOrRight(self):
+
+        if self.results.multi_hand_landmarks:
+            for handness in self.results.multi_handedness:
+                leftOrRight= handness.classification[0].label[0:]
+            return leftOrRight
+            
+
+
+
+
 
 
 def main():

@@ -34,12 +34,15 @@ def rmStartMode2():
     bCount = 0
     cCount = 0
     dCount = 0
+    #highestCount=0
 
     while True:
         success, img = cap.read()
         img = detector.findHands(img)
        
         lmList = detector.findPosition(img, draw=False)
+        leftOrRight=detector.findLeftOrRight()
+        print("LeftOrRight:",leftOrRight)
         #print(lmList)
 
         if len(lmList) != 0:
@@ -62,39 +65,111 @@ def rmStartMode2():
             #print(fingers)
             totalFingers = fingers.count(1)
             #TODO: detect fingers, if counter more than 30 times then indicate that as answer, if change finger then restart the counter
-            counter=0 #count the occurence times of the same number of fingers
-   
+           # counter=0 #count the occurence times of the same number of fingers
+            #currentSelection(img,totalFingers)
+            current_select=None
+            selected_option=None
+            #if leftOrRight =="Left":
+            if leftOrRight =="Left" and fingers==[0,1,0,0,0]:
+                    aCount+=1
+                    current_select="A"
+                    print("A counter: ", aCount)
+                    #currentSelection(img,current_select)
+            elif leftOrRight =="Left" and fingers==[0,1,1,0,0]:
+                    bCount+=1
+                    current_select = "B"
+                    print("B counter: ", bCount)
+                    #currentSelection(img,current_select)
+            elif leftOrRight =="Left" and fingers==[0,0,1,1,1]:
+                    cCount+=1
+                    current_select="C"
+                    print("C counter: ", cCount)
+                    #currentSelection(img,current_select)
+            elif leftOrRight =="Left"  and  fingers==[0,1,1,1,1]:
+                    dCount+=1
+                    current_select="D"
+                    print("D counter: ", dCount)
+                    #currentSelection(img,current_select)
+            currentSelection(img,current_select)
+
+            #if current_select is None:
+                    #if aCount > bCount and aCount > cCount and aCount> dCount:
+                        #current_select="A"
+                        #calOccurence(img,selected_option)
+                    #elif bCount > aCount and bCount > cCount and bCount > dCount:
+                        #current_select="B"
+                        #calOccurence(img,selected_option)
+                    #elif cCount > aCount and cCount >bCount and cCount>dCount:
+                        #current_select="C"
+                        #calOccurence(img,selected_option)
+                    #lif dCount > aCount and dCount >bCount and dCount>cCount:
+                        #current_select="D"
+                        #calOccurence(img,selected_option)
+            #currentSelection(img,current_select)               
+
+            
+            if leftOrRight =="Right" and totalFingers==0:
+                    if aCount > bCount and aCount > cCount and aCount> dCount:
+                        selected_option="A"
+                        #calOccurence(img,selected_option)
+                    elif bCount > aCount and bCount > cCount and bCount > dCount:
+                        selected_option="B"
+                        #calOccurence(img,selected_option)
+                    elif cCount > aCount and cCount >bCount and cCount>dCount:
+                        selected_option="C"
+                        #calOccurence(img,selected_option)
+                    elif dCount > aCount and dCount >bCount and dCount>cCount:
+                        selected_option="D"
+                        #calOccurence(img,selected_option)
+            calOccurence(img,selected_option)
+
+                    #print("selected_option is:",selected_option)
+            #calOccurence(img,selected_option)
+            #print(totalFingers)
+            if leftOrRight =="Right" and fingers==[1,1,1,1,1]:
+                    aCount = 0
+                    bCount = 0
+                    cCount = 0
+                    dCount = 0
+                    #highestCount=0                    
+                    #current_select="Pending"
+                    #selected_option ="Pending"
+                    print("reseted All")
+                    calOccurence(img,selected_option)
             
 
+
+
+
             #name = str(totalFingers)
-            if (totalFingers >= 1 and totalFingers <= 4):
+            #if (totalFingers >= 1 and totalFingers <= 4):
                 #print(totalFingers)
-                if (totalFingers == 1):
-                    aCount +=1
-                    #print("A counter: ", aCount)
-                    calOccurence(aCount, img, totalFingers)
+               # if (totalFingers == 1):
+                   # aCount +=1
+                   # print("A counter: ", aCount)
+                    #calOccurence(aCount, img, totalFingers)
                     
-                elif (totalFingers == 2):
-                    bCount +=1
-                    #print("B counter: ", bCount)
-                    calOccurence(bCount, img, totalFingers)
+                #elif (totalFingers == 2):
+                   # bCount +=1
+                   # print("B counter: ", bCount)
+                    #calOccurence(bCount, img, totalFingers)
                     
-                elif (totalFingers == 3):
-                    cCount+=1
+                #elif (totalFingers == 3):
+                    #cCount+=1
                     #print("C counter: ", cCount)
-                    calOccurence(cCount, img, totalFingers)
+                    #calOccurence(cCount, img, totalFingers)
                     
-                elif (totalFingers == 4):
-                    dCount+=1
-                    #print("D counter: ", dCount)
-                    calOccurence(dCount, img, totalFingers)
+                #elif (totalFingers == 4):
+                    #dCount+=1
+                   # print("D counter: ", dCount)
+                    #calOccurence(dCount, img, totalFingers)
                    
-                print(totalFingers)
+                #print(totalFingers)
             
-            elif(totalFingers > 4 ):
-                print("Too many fingers.")
-            else:
-                print("Undetected.")
+            #elif(totalFingers > 4 ):
+               # print("Too many fingers.")
+            #else:
+               # print("Undetected.")
 
         cTime = time.time()
         fps = 1/(cTime-pTime)
@@ -110,17 +185,24 @@ def rmStartMode2():
         yield b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + webFrame + b'\r\n'
         #cv2.imshow("Image", img)
         #cv2.waitKey(1)
+
+
+def currentSelection(img,totalFingers):
+     cv2.putText(img,"Current Selection: "+ str(totalFingers)+".", (45, 345),
+                    cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
+
+
         
-def calOccurence(counter,img, totalFingers):
+def calOccurence(img, totalFingers):
     #ans=None
-    if (counter > 50):
+    #if (counter > 50):
         cv2.putText(img,"Selected Option: "+ str(totalFingers)+".", (45, 375),
                     cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
         
-        sendConfirmedOption(answer=totalFingers)               
-    else:
-        cv2.putText(img,"Detecting... ", (45, 375),
-                    cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
+        #sendConfirmedOption(answer=totalFingers)               
+    #else:
+        #cv2.putText(img,"Detecting... ", (45, 375),
+        #            #cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
         #sendConfirmedOption(ans=totalFingers)    
 
 

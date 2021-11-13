@@ -128,7 +128,7 @@ def student_quizrooms():
                 #print(_id)
                 if Quizroom.joined_a_quizroom(_id,quizrooms_id):
                     print("Quizroom is joined")
-                   
+                    session['quizroom_id']=quizrooms_id
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
             
             elif request.form.get('submit')=='Delete':
