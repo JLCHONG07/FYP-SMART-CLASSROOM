@@ -155,11 +155,12 @@ function CopyToClipboard(text) {
     $(this).find('.code').text()
     copiedMsg = 'Copied Code ' + '"' + code + '"' + ' !'
     $('.code-alert').text(copiedMsg).trigger("change")
+        // alertbar will hide after 5 seconds
+    setTimeout(function() { $(".code-alert").hide(); }, 3000);
 
 }
 
-// alertbar will hide after 5 seconds
-setTimeout(function() { $(".code-alert").hide(); }, 5000);
+
 
 
 //---------------------------------------------------------------------------------//

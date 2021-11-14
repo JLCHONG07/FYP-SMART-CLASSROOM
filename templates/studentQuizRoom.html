@@ -129,57 +129,58 @@
     </div>
 
     </a>
-
-</div>
-
-<!--hiden field for student join-->
-<div class="join-quizroom-modal">
-    <div class="join-quizroom-modal-contents" style="background-color: #F3F2F2;">
-        <div class="text-end gray-bar">
-            <svg height="50" width="50" class="close">
-             <circle cx="6" cy="6" r="6" fill="red" />
-            </svg>
-        </div>
-
-        <form class="form" method="POST">
-
-            <div class="hidden-join-confirmation row mx-2 justify-content-center mt-5 ">
-                <input type="text" name="join-quiz-code" class="col-8" class="form-control" id="join-quiz-code" placeholder="Enter Quiz Room Code to Join"></input>
-                <button type="button" id="join-button" class="btn btn-outline-primary col-2 mx-2 " name="submit" value="Join">Confirm</button>
-                <p id="invalid-input" class="invalid-input " style="color:red;">**Plese Enter Quiz Room Code </p>
-            </div>
-
-
-        </form>
-
+    <div class="alert alert-dark text-center " style="position:absolute;height:5vh;width: 50vw; margin-left: 10%;" role="alert">
 
     </div>
-</div>
 
-
-<!--hiden field for student delete-->
-<div class="delete-quizroom-modal">
-    <div class="delete-quizroom-modal-contents" style="background-color: #F3F2F2;">
-        <div class="text-end gray-bar">
-            <svg height="50" width="50" class="close">
-             <circle cx="6" cy="6" r="6"  fill="red" />
+    <!--hiden field for student join-->
+    <div class="join-quizroom-modal">
+        <div class="join-quizroom-modal-contents" style="background-color: #F3F2F2;">
+            <div class="text-end gray-bar">
+                <svg height="50" width="50" class="close">
+             <circle cx="6" cy="6" r="6" fill="red" />
             </svg>
-        </div>
-
-        <form class="form" method="POST">
-
-            <div class="row mx-2 justify-content-center mt-5 ">
-                <h5>Are You Sure Want To Quit this Quizroom?</h5>
             </div>
 
-            <button type="submit" name="submit" value="Close" style="border: none;" class="mx-3"> 
+            <form class="form" method="POST">
+
+                <div class="hidden-join-confirmation row mx-2 justify-content-center mt-5 ">
+                    <input type="text" name="join-quiz-code" class="col-8" class="form-control" id="join-quiz-code" placeholder="Enter Quiz Room Code to Join"></input>
+                    <button type="button" id="join-button" class="btn btn-outline-primary col-2 mx-2 " name="submit" value="Join">Confirm</button>
+                    <p id="invalid-input" class="invalid-input " style="color:red;">**Plese Enter Quiz Room Code </p>
+                </div>
+
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <!--hiden field for student delete-->
+    <div class="delete-quizroom-modal">
+        <div class="delete-quizroom-modal-contents" style="background-color: #F3F2F2;">
+            <div class="text-end gray-bar">
+                <svg height="50" width="50" class="close">
+             <circle cx="6" cy="6" r="6"  fill="red" />
+            </svg>
+            </div>
+
+            <form class="form" method="POST">
+
+                <div class="row mx-2 justify-content-center mt-5 ">
+                    <h5>Are You Sure Want To Quit this Quizroom?</h5>
+                </div>
+
+                <button type="submit" name="submit" value="Close" style="border: none;" class="mx-3"> 
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="24" cy="24" r="24" fill="#FF0000"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M24.0016 28.4456L32.3897 37.0667C33.2312 37.9383 33.7787 37.9472 34.6356 37.0667L36.3185 35.3366C37.143 34.4895 37.1989 33.9334 36.3185 33.0285L27.438 23.9025L36.3193 14.7765C37.1511 13.9188 37.1673 13.3399 36.3193 12.4675L34.6364 10.7383C33.7633 9.84072 33.2239 9.88218 32.3905 10.7383L24.0016 19.3594L15.6135 10.7391C14.7801 9.883 14.2407 9.84153 13.3676 10.7391L11.6846 12.4684C10.8359 13.3407 10.8513 13.9196 11.6846 14.7773L20.5652 23.9025L11.6846 33.0285C10.8043 33.9334 10.8513 34.4895 11.6846 35.3366L13.3668 37.0667C14.2164 37.9472 14.7639 37.9383 15.6127 37.0667L24.0016 28.4456V28.4456Z" fill="white"/>
                     </svg>                    
                 </button>
 
-            <button type="submit" name="submit" value="Delete" style="border: none;" class="mx-3"> 
+                <button type="submit" name="submit" value="Delete" style="border: none;" class="mx-3"> 
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="24" cy="24" r="24" fill="#0FC50B"/>
                         <g clip-path="url(#clip0_572_2)">
@@ -194,10 +195,10 @@
                                     
                     </button>
 
-            <input type="hidden" name="delete-quiz-room-id" id="edit-hidden-field-id-input"></input>
-        </form>
+                <input type="hidden" name="delete-quiz-room-id" id="edit-hidden-field-id-input"></input>
+            </form>
 
 
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
