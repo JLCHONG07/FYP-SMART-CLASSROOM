@@ -88,10 +88,10 @@
                 <div class="row ">
                     <div class="col-6 mt-2 quiz-code ">
 
-                        <p class="h5" id="{{quizrooms.quiz_code}}">{{ quizrooms.quiz_code}}</p>
+                        <p class="h5 code" id="{{quizrooms.quiz_code}}">{{ quizrooms.quiz_code}}</p>
                     </div>
 
-                    <button class="col-6 text-center  third-button" id="copy-button" onclick="CopyToClipboard('{{quizrooms.quiz_code}}')" style="border: none;">Copy Code</button>
+                    <button class="col-6 text-center  third-button" id="liveAlertBtn" onclick="CopyToClipboard('{{quizrooms.quiz_code}}')" style="border: none;">Copy Code</button>
 
                 </div>
 
@@ -131,7 +131,15 @@
 
     </a>
 
+    <div class="alert alert-dark text-center code-alert" style="position:absolute;height:5vh;width: 50vw; margin-left: 10%;" role="alert">
+
+    </div>
+
+
+
 </div>
+
+
 
 <!--hiden field for update,delete-->
 
@@ -189,5 +197,8 @@
 
 
     </div>
+
+
+
 </div>
 {% endblock %}

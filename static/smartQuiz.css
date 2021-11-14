@@ -118,6 +118,12 @@ input {
     display: none;
 }
 
+.code-alert {
+    display: none;
+    justify-content: center;
+    bottom: 0
+}
+
 
 /*-------------------------------------------*/
 

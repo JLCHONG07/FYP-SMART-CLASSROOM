@@ -145,10 +145,22 @@ $('#edit-button').click(function() {
 })
 
 
+//copy quizroom code after click on "Copy code" button
 function CopyToClipboard(text) {
+
+    var code = text
     $('<input>').val(text).appendTo('body').select()
     document.execCommand('copy')
+    $('.code-alert').css('display', 'flex')
+    $(this).find('.code').text()
+    copiedMsg = 'Copied Code ' + '"' + code + '"' + ' !'
+    $('.code-alert').text(copiedMsg).trigger("change")
+
 }
+
+// alertbar will hide after 5 seconds
+setTimeout(function() { $(".code-alert").hide(); }, 5000);
+
 
 //---------------------------------------------------------------------------------//
 //-------------------------Student------------------------------------------------//
