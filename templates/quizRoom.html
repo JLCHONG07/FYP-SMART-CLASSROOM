@@ -87,10 +87,11 @@
 
                 <div class="row ">
                     <div class="col-6 mt-2 quiz-code ">
-                        <p class="h5 ">{{ quizrooms.quiz_code }}</p>
+
+                        <p class="h5" id="{{quizrooms.quiz_code}}">{{ quizrooms.quiz_code}}</p>
                     </div>
 
-                    <div class="col-6 text-center pt-2 third-button ">Copy Code</div>
+                    <button class="col-6 text-center  third-button" id="copy-button" onclick="CopyToClipboard('{{quizrooms.quiz_code}}')" style="border: none;">Copy Code</button>
 
                 </div>
 

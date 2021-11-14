@@ -4,6 +4,7 @@ $('.create-classroom').click(function() {
     window.location = "create_quizroom"
 })
 
+
 //change color of edit toggler of quizroom
 $(".toggle").hover(function() {
     $(this).find("path").attr("fill", "#FFFFFF");
@@ -142,6 +143,12 @@ $('#edit-button').click(function() {
     }
 
 })
+
+
+function CopyToClipboard(text) {
+    $('<input>').val(text).appendTo('body').select()
+    document.execCommand('copy')
+}
 
 //---------------------------------------------------------------------------------//
 //-------------------------Student------------------------------------------------//
