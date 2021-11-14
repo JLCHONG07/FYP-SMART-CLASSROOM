@@ -74,7 +74,7 @@ def quizMenu():
 def instruction():
     return module.answering.hand_detect_mode.instruction()
 
-@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/answering")
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/answering",methods=["GET","POST"])
 def answering():
     return module.answering.answeringModel.answering()
     

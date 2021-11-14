@@ -5,7 +5,7 @@ document.onreadystatechange = function() {
         document.querySelector(
             ".spinner-grow").style.visibility = "visible";
     } else {
-        startCount=TRUE;
+
         document.querySelector(
             ".spinner-grow").style.display = "none";
         document.querySelector(
@@ -14,19 +14,18 @@ document.onreadystatechange = function() {
 };
 
 
-        var counter = 10;
-        var startCount = FALSE
+var counter = 20;
 
-        if (startCount === TRUE) {
-        setInterval(function(){ 
-            counter--;
-            if (counter >=0){
-                id = document.getElementById("count");
-                id.innerHTML = counter;
-            }
-            if(counter ==0){
-                alert("Time is up!");
-            }
-        
-        },1000);
+
+
+setInterval(function() {
+    counter--;
+    if (counter >= 0) {
+        id = document.getElementById("count");
+        id.innerHTML = counter;
     }
+    if (counter == 0) {
+        alert("Time is up!");
+    }
+
+}, 1000);

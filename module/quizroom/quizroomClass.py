@@ -220,7 +220,7 @@ class Quizroom(object):
 
     @staticmethod
     def update_total_student(quizroom_id,total_update_student):
-        print(quizroom_id)
+        #print(quizroom_id)
         Database.update(collection="quizrooms",query={"quizrooms._id":quizroom_id},update={"$inc":{"quizrooms.$.total_students":total_update_student}},upsert=False,multi=True)
         #print("total_student",data)
 

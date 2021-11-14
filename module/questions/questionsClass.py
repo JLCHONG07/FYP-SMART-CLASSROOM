@@ -54,7 +54,7 @@ class Question(object):
     @classmethod
     def get_question(cls,quizroom_id):
         data=Database.find_one(collection="questions",query={"quizroom_id":quizroom_id})
-        
+        #print(data)
         if data is not None:
             #print(cls(**data))
             return cls(**data)
@@ -89,8 +89,9 @@ class Question(object):
 
     @staticmethod
     def display_all_question(quizroom_id):
+         #print("display all question _id:",quizroom_id)
          question_exists=Question.get_question(quizroom_id)
-         #print(vars(question_exists))
+         #print(question_exists)
          if question_exists is not None:
              return Question.get_all_questions(quizroom_id)
 
@@ -109,7 +110,7 @@ class Question(object):
        # question_id=question_set[0]
         exists_question=Question.get_question_with_question_id(question_id)
         if exists_question is not None:
-            print(question_id,question,answer1,answer2,answer3,answer4,correct_ans)
+            #print(question_id,question,answer1,answer2,answer3,answer4,correct_ans)
             data=Database.update(collection="questions",query={"question_set._id":question_id},
             update={"$set":
             {"question_set.$.question":question,

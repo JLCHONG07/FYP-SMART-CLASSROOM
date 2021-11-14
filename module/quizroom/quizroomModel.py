@@ -125,10 +125,11 @@ def student_quizrooms():
                     
             elif request.form.get('submit')=='Go':
                 _id=request.form.get("quiz-room-id")
-                #print(_id)
+                print(_id)
                 if Quizroom.joined_a_quizroom(_id,quizrooms_id):
                     print("Quizroom is joined")
-                    session['quizroom_id']=quizrooms_id
+                    session['quizroom_id']=_id
+                    session['Question_No']=1
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
             
             elif request.form.get('submit')=='Delete':
