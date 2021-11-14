@@ -186,6 +186,8 @@ $('#join-button').click(function() {
     }
 })
 
+setTimeout(function() { $(".joined-alert").hide(); }, 3000);
+
 
 /*
  $("#confirm-join-button").click(function(){

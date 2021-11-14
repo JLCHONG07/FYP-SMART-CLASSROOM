@@ -120,8 +120,12 @@ input {
 
 .code-alert {
     display: none;
+    bottom: 0;
+    position: absolute;
+    height: 5vh;
+    width: 50vw;
+    margin-left: 10%;
     justify-content: center;
-    bottom: 0
 }
 
 

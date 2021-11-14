@@ -120,7 +120,9 @@ def student_quizrooms():
                     User.valid_add_detail(email,type,quizroom_id)
                     return redirect(url_for('studentSmartQuiz'))
                 else:
-                    #print("quiz room not exists")
+                    joined_quizroom="You have joined the quizroom !"
+                    flash(joined_quizroom,"joined_quizroom_warning")
+                    
                     return redirect(url_for('studentSmartQuiz'))
                     
             elif request.form.get('submit')=='Go':
@@ -131,6 +133,12 @@ def student_quizrooms():
                     session['quizroom_id']=_id
                     session['Question_No']=1
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
+                else:
+                    invalid="Please Select a Quizroom Below"
+                    flash(invalid,'quizroom_invalid_error')
+                    #print("No select Quizroom")
+                    return redirect(url_for('studentSmartQuiz'))
+                
             
             elif request.form.get('submit')=='Delete':
                 _id=request.form.get("delete-quiz-room-id")
