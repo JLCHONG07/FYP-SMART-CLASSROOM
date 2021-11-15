@@ -3,6 +3,7 @@ from flask import Flask,render_template,Response,request,redirect,url_for,flash
 import flask
 from flask.globals import session
 import uuid
+from module.answering.answeringClass import Answer
 from module.quizroom.quizroomClass import Quizroom
 from module.account.accountClass import User
 
@@ -100,12 +101,12 @@ def student_quizrooms():
     #results=[]
     #for quizroom_id in quizrooms_id:
     result=Quizroom.display_all_joined_quizrooms(quizrooms_id)
+  
     if result is not None:
         #print(result)
         #for a in result:
-            #for b in a['quizrooms']:
-                #print(b['subject'])
-        
+           # for b in a['quizrooms']:
+
         if request.method=="POST":
             session.pop("_flashes",None)
             if request.form.get('submit')=="Join":

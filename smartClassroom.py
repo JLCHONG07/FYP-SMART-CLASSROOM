@@ -112,6 +112,7 @@ def handRealTimeAndRecognize():
 @app.route("/logout")
 @app.route("/mainMenu/logout")
 @app.route("/mainMenu/smartQuiz/quizMenu/logout")
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/logout")
 def logout():
     User.logout()
     return redirect(url_for('login'))

@@ -5,6 +5,7 @@ from flask.globals import session
 import uuid
 from module.answering.answeringClass import Answer
 from module.questions.questionsClass import Question
+from module.quizroom.quizroomClass import Quizroom
 import pyautogui
 
 
@@ -68,6 +69,7 @@ def answering():
                 #session['Question_No']=1
                 print("ending")
                 session['ending']=True
+                Quizroom.update_student_progress(quizroom_id)
                 #submitOrNext="Ending"
 
             return redirect(url_for('answering'))

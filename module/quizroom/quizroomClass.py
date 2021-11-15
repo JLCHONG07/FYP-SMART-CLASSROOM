@@ -228,6 +228,11 @@ class Quizroom(object):
     def update_total_quizroom_score(quizroom_id,total_update_scores):
          Database.update(collection="quizrooms",query={"quizrooms._id":quizroom_id},update={"$inc":{"quizrooms.$.total_scores":total_update_scores}},upsert=False,multi=True)
 
+    @staticmethod
+    def update_student_progress(quizroom_id):
+        Database.update(collection="quizrooms",query={"quizrooms._id":quizroom_id},
+        update={"$inc":{"quizrooms.$.total_progress":1 }},upsert=False,multi=True)
+
 
     
 
