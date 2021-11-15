@@ -14,7 +14,7 @@ document.onreadystatechange = function() {
 };
 
 
-var counter = 20;
+var counter = 60;
 
 
 

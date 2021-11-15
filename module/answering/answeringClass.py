@@ -6,10 +6,12 @@ from database import Database
 
 class Answer(object):
     
-    def __init__(self,answer_set,quizroom_id,_id):  
+    _answered=0
+    def __init__(self,quizroom_id,email,points,answered_set):  
         self.quizroom_id=quizroom_id
-        self.answer_set = answer_set
-        self._id =uuid.uuid4().hex if _id is None else _id
+        self.email=email
+        self.points=points
+        self.answered_set=answered_set
 
 
     def save_to_mongodb(self):
@@ -18,42 +20,104 @@ class Answer(object):
 
     def update_to_mongodb(self):
         #print("update")
-        Database.update(collection="answers",query={"quizroom_id":self.quizroom_id},update={"$push":{
-              "answer_set":{
-                "_id":self.answer_set[0],
-                "curr_ques":self.answer_set[1],
-                "curr_ques_ans":self.answer_set[2],
-                "selected_answer":self.answer_set[3],
+        Database.update(collection="answers",query={"quizroom_id":self.quizroom_id},update={"$push":
+        {
+                "answered_set":{
+                "question_id":self.answered_set[0],
+                "selected_answer":self.answered_set[1],
+                "correct_answer":self.answered_set[2],
+                "remark":self.answered_set[3]
             }
         }},upsert=False,multi=True)
     
     def json(self):
         return {
             "quizroom_id":self.quizroom_id,
-            "answer_set":[{
-                "_id":self.answer_set[0],
-                "curr_ques":self.answer_set[1],
-                "curr_ques_ans":self.answer_set[2],
-                "selected_answer":self.answer_set[3]
+            "email":self.email,
+            "points":self.points,
+            "answered_set":[{
+                "question_id":self.answered_set[0],
+                "selected_answer":self.answered_set[1],
+                "correct_answer":self.answered_set[2],
+                "remark":self.answered_set[3]
             }]
         }
 
     @classmethod
-    def get_answer(cls,quizroom_id):
-        data=Database.find_one(collection="answers",query={"quizroom_id":quizroom_id})
+    def get_answer(cls,email):
+        data=Database.find_one(collection="answers",query={"email":email})
         #print(data)
         if data is not None:
             #print(cls(**data))
             return cls(**data)
 
     @staticmethod
-    def get_all_answers(quizroom_id):
-        return Database.find_one(collection="answers",query={"quizroom_id":quizroom_id})
+    def get_all_answers(email):
+        return Database.find_one(collection="answers",query={"email":email})
 
     @staticmethod
     def display_all_answers(quizroom_id):
          #print("display all question _id:",quizroom_id)
          answer_exists=Answer.get_answer(quizroom_id)
          #print(question_exists)
-         if question_exists is not None:
+         if answer_exists is not None:
              return Answer.get_all_answers(quizroom_id)
+
+
+    @classmethod
+    def save_with_check(cls,quizroom_id,email,points,answered_set):
+        #check is that new answer for this user?
+        #convert selected answer from 1,2,3,4 to a1,a2,a3,a4
+        #compare is that selected answer == correct answer
+        #assign remark to "true" if the answer is correct, else to "false"
+        #if it is new user, save_to_mongodb
+        #else update_to_mongodb
+        new_answer=Answer.get_answer(email)
+        selected_answer=Answer.reassign_answer(answered_set[1])
+        print("selected_answer",selected_answer)
+        check_answer,points=Answer.check_answer(selected_answer,answered_set[2],points)
+        answered_set[3]=Answer.checked_answer(check_answer)
+        if new_answer is None:
+            new_answer=cls(quizroom_id,email,points,answered_set)
+            new_answer.save_to_mongodb()
+    
+
+            
+    @staticmethod
+    def reassign_answer(selected_answer):
+        convert_result=None
+        if selected_answer == "1":
+            convert_result="a1"
+        elif selected_answer == "2":
+            convert_result="a2"
+        elif selected_answer == "3":
+            convert_result="a3"
+        elif selected_answer == "4":
+            convert_result="a4"
+
+        return convert_result
+
+    @staticmethod
+    def check_answer(selected_answer,correct_answer,points):
+        result=False
+
+        if selected_answer == correct_answer:
+            result=True
+            points+=10
+
+        return result,points
+
+    @staticmethod
+    def checked_answer(check_answer):
+
+        if check_answer:
+            return "true"
+        else:
+            return "false"
+
+    @staticmethod
+    def get_answered_details(quizroom_id,email):
+        data=Database.find(collection="answers",query={"quizroom_id":quizroom_id,"email":email},data={"answered_set":1})
+        return data
+
+    

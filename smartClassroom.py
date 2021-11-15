@@ -96,7 +96,7 @@ def handRealtime():
     #session['hand-detect-mode']=1
     return Response(hand_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/handRealTimeAndRecognize")
+@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/handRealTimeAndRecognize",methods=["GET","POST"])
 def handRealTimeAndRecognize():
     #session['hand-detect-mode']=1
     return Response(rmStartMode2(), mimetype='multipart/x-mixed-replace; boundary=frame')
