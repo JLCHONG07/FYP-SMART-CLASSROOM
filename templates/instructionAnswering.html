@@ -1,7 +1,7 @@
 {% extends "topTitle.html" %} {% block instruction %}
 
 <div class="row  pt-3 pb-3  mx-4">
-    <div class="container col-6 " style=" height:100vh ">
+    <div class="container col-6 " style=" height:60vh ">
 
 
 
@@ -13,7 +13,12 @@
         </div>
 
         <div class="text-center ">
-            <a type="submit" class="btn btn-outline-primary" name="submit" value="Begin2" href="{{url_for('answering')}}">Start Now</a>
+            <a type="submit" class="btn btn-outline-primary" name="submit" value="Begin2" href="{{url_for('answering')}}">Start Now</a> {% with invalid_questions = get_flashed_messages(category_filter=["invalid_questions"]) %} {% for message in invalid_questions
+            %}
+            <div class="alert alert-warning " style="" role="alert">
+                {{message}}
+            </div>
+            {%endfor%}{% endwith %}
         </div>
 
 
@@ -24,7 +29,22 @@
 
 
     </div>
+    <div>
+        <h3>Instruction:</h3>
+        <ul>
+            <li>- Make Sure Camera can be on </li>
+            <li>- Hand can be detected and able to clssified the left and right hand</li>
+            <li>- Gesture will be recognize by showing 1 to 4 sign</li>
+            <li>- Left hand will be use for choosing theanswer 1-4</li>
+            <li>- Right hand will be use for confirm the selection with holding palm sign and release the palm will reset the selected answer</li>
+            <li>- Points will be added if the answer is correct else point will remianded</li>
+            <li>- Click on start now above button to begin! Goodluck!</li>
+        </ul>
+    </div>
+
 </div>
+
+
 
 
 

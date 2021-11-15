@@ -118,10 +118,11 @@ def student_quizrooms():
 
                 if quizroom_id is not None:
                     #print("joined quiz room")
+                    session.pop("_flashes",None)
                     User.valid_add_detail(email,type,quizroom_id)
                     return redirect(url_for('studentSmartQuiz'))
                 else:
-                    joined_quizroom="You have joined the quizroom !"
+                    joined_quizroom="You have joined the quizroom or entered a invalid quizroom code!"
                     flash(joined_quizroom,"joined_quizroom_warning")
                     
                     return redirect(url_for('studentSmartQuiz'))

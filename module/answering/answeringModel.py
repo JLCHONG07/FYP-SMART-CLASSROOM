@@ -24,6 +24,7 @@ def answering():
     #print(question_number)
     total_questions=0
     questions=Question.display_all_question(quizroom_id)
+    print(questions)
 
     questions_array=question_number-1
     #answered_array=0
@@ -41,15 +42,20 @@ def answering():
     all_points=[]
 
  
+    if questions is not None:
+        for answer in questions['question_set']:
+                all_questions.append(answer['question'])
+                all_answer1.append(answer['answer1'])
+                all_answer2.append(answer['answer2'])
+                all_answer3.append(answer['answer3'])
+                all_answer4.append(answer['answer4'])
+                all_ans.append(answer['correct_answer'])
+                all_questions_id.append(answer['_id'])
 
-    for answer in questions['question_set']:
-            all_questions.append(answer['question'])
-            all_answer1.append(answer['answer1'])
-            all_answer2.append(answer['answer2'])
-            all_answer3.append(answer['answer3'])
-            all_answer4.append(answer['answer4'])
-            all_ans.append(answer['correct_answer'])
-            all_questions_id.append(answer['_id'])
+    else:
+        invalid_questions="Questions is not ready yet"
+        flash(invalid_questions,"invalid_questions")
+        return redirect(url_for("instruction"))
     #print(all_answer1[question_number-1])
 
          
