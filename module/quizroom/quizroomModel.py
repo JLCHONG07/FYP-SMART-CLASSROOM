@@ -132,6 +132,8 @@ def student_quizrooms():
                     print("Quizroom is joined")
                     session['quizroom_id']=_id
                     session['Question_No']=1
+                    session['points']=0
+                    session['ending']=False
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
                 else:
                     invalid="Please Select a Quizroom Below"

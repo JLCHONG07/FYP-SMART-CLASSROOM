@@ -1,5 +1,4 @@
-{% extends "topTitle.html" %} {% block answering %}
-
+{% extends "topTitle.html" %} {% block answering %} {% if not ending %}
 <div class="row  pt-3 pb-3  mx-4" style="border-bottom: 1px solid black;">
 
     <div class="container col-3 text-center">
@@ -27,7 +26,7 @@
 
     <div class="container col-6 " style=" height:50vh ">
 
-        {%if submitOrNext == "Next"%}
+        {%if submitOrNext == "Next" %}
         <div class="text-center" style="height: 45vh;">
             <div class="spinner-grow text-primary " role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -35,23 +34,26 @@
             <img src="{{ url_for('handRealTimeAndRecognize') }}">
 
         </div>
-        {%else%}
+        {%elif submitOrNext=="Submit"%}
 
         <div style="height: 45vh;">
-            <p>1234</p>
+            <tr class="table-list-content" style="cursor: pointer;">
+                <td>{{selected_answer}}</td>
+                <td>{{correct_answer}}</td>
+                <td>{{remarks}}</td>
+
+            </tr>
 
         </div>
 
         {%endif%}
         <form method="POST">
             <div class="text-center ">
-                {%if submitOrNext == "Next"%}
-                <button type="submit" class="btn btn-outline-primary mx-3" name="submit" value="CheckAnswer">Submit</a>
-                    {%else%}
-                <button type="submit" class="btn btn-outline-primary mx-3" name="submit" value="Next">Next</a>
-                    {%endif%}
-        </div>
-    </form>
+                {%if submitOrNext == "Next" %}
+                <button type="submit" class="btn btn-outline-primary mx-3" name="submit" value="CheckAnswer">Submit</button> {%else %}
+                <button type="submit" class="btn btn-outline-primary mx-3" name="submit" value="Next">Next</button> {%endif%}
+            </div>
+        </form>
 
 
     </div>
@@ -69,7 +71,7 @@
             <div class="col align-self-center">
                 <div class="points-number text-center">
 
-                    0
+                    {{points}}
                 </div>
                 <div class="points-word text-center">
                     Points
@@ -137,6 +139,7 @@
 
 
 </div>
+{% else %}
+<div>Total Point{{points}}</div>
 
-
-{% endblock %}
+{%endif%} {% endblock %}

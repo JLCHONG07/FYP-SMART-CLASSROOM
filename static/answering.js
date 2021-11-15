@@ -24,8 +24,13 @@ setInterval(function() {
         id = document.getElementById("count");
         id.innerHTML = counter;
     }
-    if (counter == 0) {
-        alert("Time is up!");
-    }
+    //if (counter == 0) {
+    //  alert("Time is up!");
+    // }
 
 }, 1000);
+
+
+$('#ending-quiz').click(function() {
+    alert("Congrate You Have Done All the Questions");
+})

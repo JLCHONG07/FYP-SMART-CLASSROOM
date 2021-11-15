@@ -7,11 +7,12 @@ from database import Database
 class Answer(object):
     
     _answered=0
-    def __init__(self,quizroom_id,email,points,answered_set):  
+    def __init__(self,quizroom_id,email,points,answered_set,_id):  
         self.quizroom_id=quizroom_id
         self.email=email
         self.points=points
         self.answered_set=answered_set
+        self._id=uuid.uuid4().hex if _id is None else _id
 
 
     def save_to_mongodb(self):
@@ -20,7 +21,7 @@ class Answer(object):
 
     def update_to_mongodb(self):
         #print("update")
-        Database.update(collection="answers",query={"quizroom_id":self.quizroom_id},update={"$push":
+        Database.update(collection="answers",query={"quizroom_id":self.quizroom_id,"email":self.email},update={"$push":
         {
                 "answered_set":{
                 "question_id":self.answered_set[0],
@@ -29,9 +30,17 @@ class Answer(object):
                 "remark":self.answered_set[3]
             }
         }},upsert=False,multi=True)
+
+    def update_point_to_mongodb(self):
+        #print("update")
+        Database.update(collection="answers",query={"quizroom_id":self.quizroom_id,"email":self.email},update={"$set":
+        {
+               "points":self.points
+        }},upsert=False,multi=True)   
     
     def json(self):
         return {
+            "_id":self._id,
             "quizroom_id":self.quizroom_id,
             "email":self.email,
             "points":self.points,
@@ -44,8 +53,8 @@ class Answer(object):
         }
 
     @classmethod
-    def get_answer(cls,email):
-        data=Database.find_one(collection="answers",query={"email":email})
+    def get_answer(cls,email,quizroom_id):
+        data=Database.find_one(collection="answers",query={"email":email,"quizroom_id":quizroom_id})
         #print(data)
         if data is not None:
             #print(cls(**data))
@@ -55,32 +64,38 @@ class Answer(object):
     def get_all_answers(email):
         return Database.find_one(collection="answers",query={"email":email})
 
-    @staticmethod
-    def display_all_answers(quizroom_id):
+    #@staticmethod
+    #def display_all_answers(quizroom_id):
          #print("display all question _id:",quizroom_id)
-         answer_exists=Answer.get_answer(quizroom_id)
+        # answer_exists=Answer.get_answer(quizroom_id)
          #print(question_exists)
-         if answer_exists is not None:
-             return Answer.get_all_answers(quizroom_id)
+         #if answer_exists is not None:
+             #return Answer.get_all_answers(quizroom_id)
 
 
     @classmethod
-    def save_with_check(cls,quizroom_id,email,points,answered_set):
+    def save_with_check(cls,quizroom_id,email,points,answered_set,_id):
         #check is that new answer for this user?
         #convert selected answer from 1,2,3,4 to a1,a2,a3,a4
         #compare is that selected answer == correct answer
         #assign remark to "true" if the answer is correct, else to "false"
         #if it is new user, save_to_mongodb
         #else update_to_mongodb
-        new_answer=Answer.get_answer(email)
+        new_answer=Answer.get_answer(email,quizroom_id)
         selected_answer=Answer.reassign_answer(answered_set[1])
         print("selected_answer",selected_answer)
         check_answer,points=Answer.check_answer(selected_answer,answered_set[2],points)
         answered_set[3]=Answer.checked_answer(check_answer)
         if new_answer is None:
-            new_answer=cls(quizroom_id,email,points,answered_set)
+            new_answer=cls(quizroom_id,email,points,answered_set,_id)
             new_answer.save_to_mongodb()
-    
+        else:
+            update_answered=cls(quizroom_id,email,points,answered_set,_id)
+            update_answered.update_to_mongodb()
+            update_answered=cls(quizroom_id,email,points,answered_set,_id)
+            update_answered.update_point_to_mongodb()
+
+
 
             
     @staticmethod
@@ -117,7 +132,7 @@ class Answer(object):
 
     @staticmethod
     def get_answered_details(quizroom_id,email):
-        data=Database.find(collection="answers",query={"quizroom_id":quizroom_id,"email":email},data={"answered_set":1})
+        data=Database.find(collection="answers",query={"quizroom_id":quizroom_id,"email":email},data={"points":1,"answered_set":1})
         return data
 
     

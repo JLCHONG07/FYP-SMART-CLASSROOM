@@ -24,8 +24,11 @@
     <div class="row topleftbar">
         <div class="pt-4">
             <!-- This h2 will shows the Page Title according to what the page is currently in.-->
-
+            {%if not ending%}
             <h3>{{question_no}}. {{questions|capitalize }}</h3>
+            {%else%}
+            <h3>Congratulation You have done all the Question</h3>
+            {%endif%}
 
         </div>
     </div>
