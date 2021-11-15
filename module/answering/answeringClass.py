@@ -4,9 +4,9 @@ import uuid
 from werkzeug.datastructures import MultiDict
 from database import Database
 
-class Question(object):
+class Answer(object):
     
-    def __init__(self,answer_set,_id):  
+    def __init__(self,answer_set,quizroom_id,_id):  
         self.quizroom_id=quizroom_id
         self.answer_set = answer_set
         self._id =uuid.uuid4().hex if _id is None else _id
