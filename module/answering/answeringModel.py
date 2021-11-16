@@ -75,7 +75,9 @@ def answering():
                 #session['Question_No']=1
                 print("ending")
                 session['ending']=True
-                Quizroom.update_student_progress(quizroom_id)
+                check_new_user_answer=Answer.new_answer_user(email,quizroom_id)
+                if check_new_user_answer:
+                    Quizroom.update_student_progress(quizroom_id)
                 #submitOrNext="Ending"
 
             return redirect(url_for('answering'))
@@ -119,6 +121,12 @@ def answering():
                 remarks=all_remarks[answered_array],
                 points=all_points[answered_array],
                 ending=ending)
+        elif request.form.get('submit')=="BackMenu":
+                print("Back to Menu")
+                session['ending']=False
+                session['Question_No']=1
+                session['points']=0
+                return redirect(url_for('quizMenu'))
                 #print('response answered',answered)
     #for a in questions['question_set']:
         #all_ans.append(a['correct_answer'])

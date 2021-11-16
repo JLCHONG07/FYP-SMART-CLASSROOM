@@ -1,40 +1,41 @@
 {% extends "topTitle.html" %} {% block answering %} {% if not ending %}
 
 <style>
-.ansDetails{
-    padding-top:20px;
-}
-
-b{
-    color:black;
-}
-h5{
-    padding-top:20px;
-}
-
-.fold {
-  position: relative;
-  height: 200px;
-  padding: 25px;
-  background: #fff
+    .ansDetails {
+        padding-top: 20px;
+    }
     
-}
-/* folding */
-.fold::before {
-  content:"";
-  position: absolute;
-  top: 25px;
-  right: 85px;
-  border-style: solid;
-  border-width: 0 100px 100px 0;
-  border-color:  rgb(103, 103, 221) rgb(255, 255, 255);
-  transition: all ease 0.5s;
-}
-.fold:hover::before {
-  border-width: 0 125px 125px 0;
-  border-color: rgb(103, 103, 221) rgb(255, 255, 255)
-}
-
+    b {
+        color: black;
+    }
+    
+    h5 {
+        padding-top: 20px;
+    }
+    
+    .fold {
+        position: relative;
+        height: 200px;
+        padding: 25px;
+        background: #fff
+    }
+    /* folding */
+    
+    .fold::before {
+        content: "";
+        position: absolute;
+        top: 25px;
+        right: 85px;
+        border-style: solid;
+        border-width: 0 100px 100px 0;
+        border-color: rgb(103, 103, 221) rgb(255, 255, 255);
+        transition: all ease 0.5s;
+    }
+    
+    .fold:hover::before {
+        border-width: 0 125px 125px 0;
+        border-color: rgb(103, 103, 221) rgb(255, 255, 255)
+    }
 </style>
 
 <div class="row  pt-3 pb-3  mx-4" style="border-bottom: 1px solid black;">
@@ -87,10 +88,16 @@ h5{
             <tr><td  style="padding-left:20px"><h3><b>Your answer is: {{remarks}}</b></h3></td></tr>
             </table>-->
 
-            <ul class = "ansDetails"style="list-style-type: none;background-color:rgb(142, 142, 252);width:640px;height:480px;padding:30px;">
-                <li><h5><b>You have chosen answer: {{selected_answer}}</b></h5></li>
-                <li><h5><b>Correct Answer: {{correct_answer}}</b></h5></li>
-                <li><h5><b>Your answer is: {{remarks}}</b></h5></li>
+            <ul class="ansDetails" style="list-style-type: none;background-color:rgb(142, 142, 252);width:640px;height:480px;padding:30px;">
+                <li>
+                    <h5><b>You have chosen answer: {{selected_answer}}</b></h5>
+                </li>
+                <li>
+                    <h5><b>Correct Answer: {{correct_answer}}</b></h5>
+                </li>
+                <li>
+                    <h5><b>Your answer is: {{remarks}}</b></h5>
+                </li>
             </ul>
         </div>
 
@@ -189,5 +196,6 @@ h5{
 </div>
 {% else %}
 <div>Total Point: {{points}} out of {{maxPoints}} points</div>
-
-{%endif%} {% endblock %}
+<form method="POST">
+    <button type="submit" class="btn btn-outline-primary mx-3" name="submit" value="BackMenu">Back To Quiz Room Menu</button>
+</form> {%endif%} {% endblock %}

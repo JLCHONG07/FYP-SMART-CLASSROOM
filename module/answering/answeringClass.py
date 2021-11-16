@@ -134,5 +134,14 @@ class Answer(object):
     def get_answered_details(quizroom_id,email):
         data=Database.find(collection="answers",query={"quizroom_id":quizroom_id,"email":email},data={"points":1,"answered_set":1})
         return data
+    
 
+    @staticmethod
+    def new_answer_user(email,quizroom_id):
+        new_users=Answer.get_answer(email,quizroom_id)
+        #print('new users',new_users)
+        if new_users is None:
+            return True
+        else:
+            return False
     
