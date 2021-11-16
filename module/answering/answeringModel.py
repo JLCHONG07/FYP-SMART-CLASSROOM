@@ -24,7 +24,7 @@ def answering():
     #print(question_number)
     total_questions=0
     questions=Question.display_all_question(quizroom_id)
-    print(questions)
+    #print(questions)
 
     questions_array=question_number-1
     #answered_array=0
@@ -63,7 +63,7 @@ def answering():
     if request.method=="POST":
         if request.form.get('submit')=="Next":
             total_questions=len(all_questions)
-            print("total questions:",total_questions)
+            #print("total questions:",total_questions)
             submitOrNext="Next"
             question_number+=1
             if question_number <= total_questions:
@@ -73,7 +73,7 @@ def answering():
             else:
                 #ending
                 #session['Question_No']=1
-                print("ending")
+                #print("ending")
                 session['ending']=True
                 check_new_user_answer=Answer.new_answer_user(email,quizroom_id)
                 if check_new_user_answer:
@@ -93,7 +93,7 @@ def answering():
                 answered_set=[question_id,selected_answered,correct_answer,remark]
                 Answer.save_with_check(quizroom_id,email,current_points,answered_set,_id)
                 answered_details=Answer.get_answered_details(quizroom_id,email)
-                print("answered_details",answered_details)
+                #print("answered_details",answered_details)
                 for answered_details in answered_details:
                     for answered_set in answered_details['answered_set']:
                         all_selected_answer.append(answered_set['selected_answer'])
@@ -104,7 +104,7 @@ def answering():
                 answered_array=0
                 total_answered=len(all_selected_answer)
          
-                print(total_answered)
+                #print(total_answered)
                 if total_answered >=1:
                     answered_array=total_answered-1
                 session['points']=all_points[answered_array]
@@ -122,7 +122,7 @@ def answering():
                 points=all_points[answered_array],
                 ending=ending)
         elif request.form.get('submit')=="BackMenu":
-                print("Back to Menu")
+                #print("Back to Menu")
                 session['ending']=False
                 session['Question_No']=1
                 session['points']=0

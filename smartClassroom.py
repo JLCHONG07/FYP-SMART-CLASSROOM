@@ -10,6 +10,7 @@ import module.quizroom.quizroomModel
 import module.answering.hand_detect_mode
 import module.questions.questionsModel
 import module.answering.answeringModel
+import module.ranking_report.reportModel
 
 
 app=Flask(__name__)
@@ -98,7 +99,7 @@ def createQuizQuestion():
 
 @app.route("/mainMenu/smartQuiz/quizMenu/reportSummary/")
 def reportSummary():
-    return render_template('reportSummary.html',title='Report Summary')
+   return module.ranking_report.reportModel.reportSummary()
 
 @app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/handRealTime")
 def handRealtime():

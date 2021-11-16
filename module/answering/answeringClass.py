@@ -64,6 +64,19 @@ class Answer(object):
     def get_all_answers(email):
         return Database.find_one(collection="answers",query={"email":email})
 
+    @staticmethod
+    def get_answered_question(quizroom_id,question_id,email):
+        data= Database.find(collection="answers",query={"email":email,"quizroom_id":quizroom_id},
+        data={"_id":0,"quizroom_id":0,"email":0,"points":0,"answered_set":{"$elemMatch":{"question_id":question_id}}})
+        #check the list len if the list length for question_id is empty mean it dones no has any length
+        question_id_exists=None
+        for x in data:
+            question_id_exists=len(x)
+        if question_id_exists==0:
+            return True
+        else:
+            return False
+
     #@staticmethod
     #def display_all_answers(quizroom_id):
          #print("display all question _id:",quizroom_id)
@@ -83,17 +96,25 @@ class Answer(object):
         #else update_to_mongodb
         new_answer=Answer.get_answer(email,quizroom_id)
         selected_answer=Answer.reassign_answer(answered_set[1])
-        print("selected_answer",selected_answer)
+        #print("selected_answer",selected_answer)
         check_answer,points=Answer.check_answer(selected_answer,answered_set[2],points)
         answered_set[3]=Answer.checked_answer(check_answer)
         if new_answer is None:
             new_answer=cls(quizroom_id,email,points,answered_set,_id)
             new_answer.save_to_mongodb()
         else:
-            update_answered=cls(quizroom_id,email,points,answered_set,_id)
-            update_answered.update_to_mongodb()
-            update_answered=cls(quizroom_id,email,points,answered_set,_id)
-            update_answered.update_point_to_mongodb()
+            check_question_id_exists=Answer.get_answered_question(quizroom_id,answered_set[0],email)
+           
+            if check_question_id_exists:
+                print("save None")
+                update_answered=cls(quizroom_id,email,points,answered_set,_id)
+                update_answered.update_to_mongodb()
+                update_answered=cls(quizroom_id,email,points,answered_set,_id)
+                update_answered.update_point_to_mongodb()
+            else:
+                print("save not None")
+                update_answered=cls(quizroom_id,email,points,answered_set,_id)
+                update_answered.update_point_to_mongodb()
 
 
 
