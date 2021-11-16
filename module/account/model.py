@@ -73,6 +73,16 @@ def login():
             return render_template('account_module/loginPage.html',title='Login',form=form)  
         else:
             return render_template('account_module/loginPage.html',title='Login',form=form)
+
+def profile():
+
+    type=session['type']
+    email=session['email']
+    print("type",type)
+    print("email",email)
+    user_details=User.find_user(type,email)
+    return render_template('profile.html',title="Profile",user=user_details)
+
       
 
        

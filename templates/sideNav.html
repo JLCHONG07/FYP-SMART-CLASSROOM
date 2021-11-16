@@ -10,16 +10,32 @@
 
 
         <ul class="container pt-5 ">
+            {%if title == "Profile"%}
+            <li class="container text-center mb-4 ">
+                <a href="{{url_for('mainMenu')}}"><img src="/static/img/teamwork1.svg" style="margin-right: 5%;"> <span class="px-1 mx-1 navbar-words ">Features</span>
+                </a>
+            </li>
 
+            <li class="container text-center mb-3 ">
+                <a href="{{url_for('profile')}} "><img src="/static/img/user1.svg " style="padding-right: 1%;"> <span class="px-2 mx-3 navbar-words active">Profile</span>
+                </a>
+
+            </li>
+
+
+            {%else %}
             <li class="container text-center mb-4 ">
                 <a href="{{url_for('mainMenu')}}"><img src="/static/img/teamwork1.svg" style="margin-right: 5%;"> <span class="px-1 mx-1 navbar-words active">Features</span>
                 </a>
             </li>
+
             <li class="container text-center mb-3 ">
-                <a href="# "><img src="/static/img/user1.svg " style="padding-right: 1%;"> <span class="px-2 mx-3 navbar-words ">Profile</span>
+                <a href="{{url_for('profile')}} "><img src="/static/img/user1.svg " style="padding-right: 1%;"> <span class="px-2 mx-3 navbar-words ">Profile</span>
                 </a>
 
             </li>
+
+            {% endif %}
 
             <li class="container text-center position-absolute  bottom-0 mb-5" onclick="logout()">
                 <a><span  style="padding-right: 1%;"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">

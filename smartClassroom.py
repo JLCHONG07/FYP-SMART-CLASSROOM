@@ -46,6 +46,15 @@ def mainMenu():
     else:
         return redirect(url_for('login'))
 
+@app.route("/profile")
+def profile():
+    if session["email"] is not None:
+        user=session["email"]
+        print(user)
+        return module.account.model.profile()
+    else:
+        return redirect(url_for('login'))
+
 @app.route("/mainMenu/smartQuiz",methods=["GET","POST"])
 def smartQuiz():
     if session['type'] == "admin":
