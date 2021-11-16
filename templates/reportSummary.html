@@ -1,22 +1,33 @@
 {% extends "topTitle.html" %} {% block title %} {% endblock %} {% block reportSummary %}
 
-            <div class="titleCtnr"><b>Report</b></div>
-            <div class="titleBox">
-                <div class="titleBoxContent">
-                    <b>Question</b>
-                    <b style="margin-left: 35%;">Total Students Correct</b>
-                    <b style="margin-left: 20%;">Total Students Wrong</b>
-                    <hr/>
-                    <b>Content</b><br><br>
-                    <hr/>
-                    <b>Content</b><br><br>
-                    <hr/>
-                    <b>Content</b><br><br>
-                    <hr/>
+<div class="titleCtnr " style="margin-left: auto ; margin-right: auto;"> <b>Report</b></div>
 
-                </div>
+<div class="titleBox " style="margin-left: auto; margin-right: auto; overflow-y: auto;">
 
-            </div>
-        </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Points</th>
 
-    {% endblock %}
+            </tr>
+        </thead>
+        <tbody>
+
+            {% if report.user_answered_details is not none %} {% for report in report.user_answered_details %}
+            <tr class="table-list-content" style="cursor: pointer;">
+                <th scope="row" class="question-list change-question-color">{{ report.email | truncate(20,true)}}</th>
+
+                <td>{{report.points}}</td>
+
+            </tr>
+
+            {% endfor %}{% endif %}
+
+        </tbody>
+    </table>
+
+</div>
+</div>
+
+{% endblock %}

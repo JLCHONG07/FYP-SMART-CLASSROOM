@@ -7,11 +7,12 @@ from database import Database
 class Answer(object):
     
     _answered=0
-    def __init__(self,quizroom_id,email,points,answered_set,_id):  
+    def __init__(self,quizroom_id,email,points,progress,answered_set,_id):  
         self.quizroom_id=quizroom_id
         self.email=email
         self.points=points
         self.answered_set=answered_set
+        self.progress=progress
         self._id=uuid.uuid4().hex if _id is None else _id
 
 
@@ -36,14 +37,16 @@ class Answer(object):
         Database.update(collection="answers",query={"quizroom_id":self.quizroom_id,"email":self.email},update={"$set":
         {
                "points":self.points
-        }},upsert=False,multi=True)   
-    
+        }},upsert=False,multi=True)  
+
+  
     def json(self):
         return {
             "_id":self._id,
             "quizroom_id":self.quizroom_id,
             "email":self.email,
             "points":self.points,
+            "progress":self.progress,
             "answered_set":[{
                 "question_id":self.answered_set[0],
                 "selected_answer":self.answered_set[1],
@@ -67,10 +70,12 @@ class Answer(object):
     @staticmethod
     def get_answered_question(quizroom_id,question_id,email):
         data= Database.find(collection="answers",query={"email":email,"quizroom_id":quizroom_id},
-        data={"_id":0,"quizroom_id":0,"email":0,"points":0,"answered_set":{"$elemMatch":{"question_id":question_id}}})
+        data={"_id":0,"quizroom_id":0,"email":0,"points":0,"progress":0,"answered_set":{"$elemMatch":{"question_id":question_id}}})
         #check the list len if the list length for question_id is empty mean it dones no has any length
+        
         question_id_exists=None
         for x in data:
+            print("question_id_exists",x)
             question_id_exists=len(x)
         if question_id_exists==0:
             return True
@@ -87,7 +92,7 @@ class Answer(object):
 
 
     @classmethod
-    def save_with_check(cls,quizroom_id,email,points,answered_set,_id):
+    def save_with_check(cls,quizroom_id,email,points,progress,answered_set,_id):
         #check is that new answer for this user?
         #convert selected answer from 1,2,3,4 to a1,a2,a3,a4
         #compare is that selected answer == correct answer
@@ -100,22 +105,30 @@ class Answer(object):
         check_answer,points=Answer.check_answer(selected_answer,answered_set[2],points)
         answered_set[3]=Answer.checked_answer(check_answer)
         if new_answer is None:
-            new_answer=cls(quizroom_id,email,points,answered_set,_id)
+            new_answer=cls(quizroom_id,email,points,progress,answered_set,_id)
             new_answer.save_to_mongodb()
         else:
             check_question_id_exists=Answer.get_answered_question(quizroom_id,answered_set[0],email)
-           
+            #only points will update and keep the first answer
             if check_question_id_exists:
                 print("save None")
-                update_answered=cls(quizroom_id,email,points,answered_set,_id)
+                update_answered=cls(quizroom_id,email,points,progress,answered_set,_id)
                 update_answered.update_to_mongodb()
-                update_answered=cls(quizroom_id,email,points,answered_set,_id)
+                update_answered=cls(quizroom_id,email,points,progress,answered_set,_id)
                 update_answered.update_point_to_mongodb()
             else:
                 print("save not None")
-                update_answered=cls(quizroom_id,email,points,answered_set,_id)
+                update_answered=cls(quizroom_id,email,points,progress,answered_set,_id)
                 update_answered.update_point_to_mongodb()
 
+
+    @staticmethod
+    def complete_update(quizroom_id,email,progress):
+         Database.update(collection="answers",query={"quizroom_id":quizroom_id,"email":email},update={"$set":
+        {
+               "progress":progress
+        }},upsert=False,multi=True) 
+    
 
 
             
@@ -158,10 +171,12 @@ class Answer(object):
     
 
     @staticmethod
-    def new_answer_user(email,quizroom_id):
+    def new_answer_user(email,quizroom_id,progress):
         new_users=Answer.get_answer(email,quizroom_id)
-        #print('new users',new_users)
-        if new_users is None:
+        print('new users',new_users.progress)
+        
+        if new_users.progress == "pending":
+            Answer.complete_update(quizroom_id,email,progress)
             return True
         else:
             return False

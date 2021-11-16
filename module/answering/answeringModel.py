@@ -8,6 +8,8 @@ from module.questions.questionsClass import Question
 from module.quizroom.quizroomClass import Quizroom
 import pyautogui
 
+from module.ranking_report.reportClass import Report
+
 
 
 def answering():
@@ -75,9 +77,16 @@ def answering():
                 #session['Question_No']=1
                 #print("ending")
                 session['ending']=True
-                check_new_user_answer=Answer.new_answer_user(email,quizroom_id)
+                save_email=email
+                save_points=current_points
+                progress="complete"
+                
+                user_answered_details=[save_email,save_points]
+                check_new_user_answer=Answer.new_answer_user(email,quizroom_id,progress)
+                print("check_new_user_answer",check_new_user_answer)
                 if check_new_user_answer:
                     Quizroom.update_student_progress(quizroom_id)
+                    Report.save_report(quizroom_id,user_answered_details,_id=None)
                 #submitOrNext="Ending"
 
             return redirect(url_for('answering'))
@@ -90,8 +99,9 @@ def answering():
                 correct_answer=all_ans[questions_array]
                 remark=None
                 _id=None
+                progress="pending"
                 answered_set=[question_id,selected_answered,correct_answer,remark]
-                Answer.save_with_check(quizroom_id,email,current_points,answered_set,_id)
+                Answer.save_with_check(quizroom_id,email,current_points,progress,answered_set,_id)
                 answered_details=Answer.get_answered_details(quizroom_id,email)
                 #print("answered_details",answered_details)
                 for answered_details in answered_details:

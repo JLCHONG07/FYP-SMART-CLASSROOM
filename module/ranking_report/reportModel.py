@@ -6,8 +6,11 @@ import uuid
 from module.answering.answeringClass import Answer
 from module.quizroom.quizroomClass import Quizroom
 from module.account.accountClass import User
-
+from module.ranking_report.reportClass import Report
 
 
 def reportSummary():
-      return render_template('reportSummary.html',title='Report Summary')
+      quizroom_id=session['quizroom_id']
+      report=Report.report_exists(quizroom_id)
+      print(report)
+      return render_template('reportSummary.html',title='Report Summary',report=report)
