@@ -6,7 +6,8 @@ from database import Database
 
 class Answer(object):
     
-    _answered=0
+    #_answered is a global variable in answer class which will be used in fingerCount.py to change the value of the answer when recognized the gesture
+    _answered="0"
     def __init__(self,quizroom_id,email,points,progress,answered_set,_id):  
         self.quizroom_id=quizroom_id
         self.email=email
@@ -15,10 +16,8 @@ class Answer(object):
         self.progress=progress
         self._id=uuid.uuid4().hex if _id is None else _id
 
-
     def save_to_mongodb(self):
         Database.insert(collection="answers",data=self.json())
-
 
     def update_to_mongodb(self):
         #print("update")
@@ -36,8 +35,21 @@ class Answer(object):
         #print("update")
         Database.update(collection="answers",query={"quizroom_id":self.quizroom_id,"email":self.email},update={"$set":
         {
-               "points":self.points
+               "points":self.points,
+               
         }},upsert=False,multi=True)  
+
+    def update_answer_to_mongodb(self):
+        #print("update")
+        Database.update(collection="answers",query={"quizroom_id":self.quizroom_id,"email":self.email},update={"$set":
+        {
+              "answered_set":{
+                "question_id":self.answered_set[0],
+                "selected_answer":self.answered_set[1],
+                "correct_answer":self.answered_set[2],
+                "remark":self.answered_set[3]
+            }
+        }},upsert=False,multi=True)     
 
   
     def json(self):
@@ -68,11 +80,14 @@ class Answer(object):
         return Database.find_one(collection="answers",query={"email":email})
 
     @staticmethod
+    #By applying this method, it will only save the first answering for the user by returning true or false
+    #If true mean the user did not do the question before
+    #if false mean the user do this question before
+    #it will only save one time even the user didnot fully answer the set of question
     def get_answered_question(quizroom_id,question_id,email):
         data= Database.find(collection="answers",query={"email":email,"quizroom_id":quizroom_id},
         data={"_id":0,"quizroom_id":0,"email":0,"points":0,"progress":0,"answered_set":{"$elemMatch":{"question_id":question_id}}})
-        #check the list len if the list length for question_id is empty mean it dones no has any length
-        
+        #check the list len if the list length for question_id is empty mean it dones no has any answer for this user
         question_id_exists=None
         for x in data:
             print("question_id_exists",x)
@@ -81,14 +96,6 @@ class Answer(object):
             return True
         else:
             return False
-
-    #@staticmethod
-    #def display_all_answers(quizroom_id):
-         #print("display all question _id:",quizroom_id)
-        # answer_exists=Answer.get_answer(quizroom_id)
-         #print(question_exists)
-         #if answer_exists is not None:
-             #return Answer.get_all_answers(quizroom_id)
 
 
     @classmethod
@@ -109,30 +116,30 @@ class Answer(object):
             new_answer.save_to_mongodb()
         else:
             check_question_id_exists=Answer.get_answered_question(quizroom_id,answered_set[0],email)
-            #only points will update and keep the first answer
+            #only points will update and keep the first answer set
             if check_question_id_exists:
                 print("save None")
                 update_answered=cls(quizroom_id,email,points,progress,answered_set,_id)
                 update_answered.update_to_mongodb()
-                update_answered=cls(quizroom_id,email,points,progress,answered_set,_id)
+                #update_answered=cls(quizroom_id,email,points,progress,answered_set,_id)
                 update_answered.update_point_to_mongodb()
             else:
                 print("save not None")
                 update_answered=cls(quizroom_id,email,points,progress,answered_set,_id)
                 update_answered.update_point_to_mongodb()
+                update_answered.update_answer_to_mongodb()
 
 
     @staticmethod
+    #Update the answer progress for the user from "pending" to "complete" status
     def complete_update(quizroom_id,email,progress):
          Database.update(collection="answers",query={"quizroom_id":quizroom_id,"email":email},update={"$set":
         {
                "progress":progress
         }},upsert=False,multi=True) 
     
-
-
-            
     @staticmethod
+    #Convert the confirm selected from 1,2,3,4 to a1,a2,a3,a4
     def reassign_answer(selected_answer):
         convert_result=None
         if selected_answer == "1":
@@ -147,6 +154,8 @@ class Answer(object):
         return convert_result
 
     @staticmethod
+    #Compare the selected answer is correct answer or wrong answer
+    #If correct answer will add 10 marks else remain unchange
     def check_answer(selected_answer,correct_answer,points):
         result=False
 
@@ -157,6 +166,9 @@ class Answer(object):
         return result,points
 
     @staticmethod
+    #Make the true answer to return the "true" words
+    #False will return "false" words
+    #This will user to store in "remark" data field
     def checked_answer(check_answer):
 
         if check_answer:
@@ -165,16 +177,17 @@ class Answer(object):
             return "false"
 
     @staticmethod
+    #Get the details for answering points and answered set
     def get_answered_details(quizroom_id,email):
         data=Database.find(collection="answers",query={"quizroom_id":quizroom_id,"email":email},data={"points":1,"answered_set":1})
         return data
     
 
     @staticmethod
+    #Update the user progress if the user didnot answer before
     def new_answer_user(email,quizroom_id,progress):
         new_users=Answer.get_answer(email,quizroom_id)
-        print('new users',new_users.progress)
-        
+        #print('new users',new_users.progress)
         if new_users.progress == "pending":
             Answer.complete_update(quizroom_id,email,progress)
             return True

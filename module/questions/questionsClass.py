@@ -1,7 +1,4 @@
-from types import coroutine
 import uuid
-
-from werkzeug.datastructures import MultiDict
 from database import Database
 
 class Question(object):
@@ -10,15 +7,6 @@ class Question(object):
         self.quizroom_id=quizroom_id
         self.question_set=question_set
         self._id=uuid.uuid4().hex if _id is None else _id
-        #self.question_no=question_no
-        #self.question=question
-        #self.answer1=answer1
-        #self.answer2=answer2
-        #self.answer3=answer3
-        #self.answer4=answer4
-        #self.correct_answer=correct_answer
-
-    
     
     def save_to_mongodb(self):
         Database.insert(collection="questions",data=self.json())
@@ -60,15 +48,15 @@ class Question(object):
             return cls(**data)
 
     @staticmethod
+    #This will get all the question_id
     def get_question_with_question_id(question_id):
         data= Database.find(collection="questions",query={"question_set._id":question_id}
         ,data={"_id":0,"quizroom_id":0,"question_set":{"$elemMatch":{"_id":question_id}}})
-        print(vars(data))
+        #print(vars(data))
         #for x in data:
             #print("my x")
             #print(x)
         if data is not None:
-            #print(cls(**data))
             return data
 
     @staticmethod
@@ -97,17 +85,13 @@ class Question(object):
 
     @staticmethod
     def search_question_id(question_id):
-
         exists_question=Question.get_question_with_question_id(question_id)
-       
         if exists_question is not None:
             return exists_question
 
     #edit question
     @staticmethod
     def edit_question(question_id,question,answer1,answer2,answer3,answer4,correct_ans):
-        #email=session['email']
-       # question_id=question_set[0]
         exists_question=Question.get_question_with_question_id(question_id)
         if exists_question is not None:
             #print(question_id,question,answer1,answer2,answer3,answer4,correct_ans)
@@ -126,6 +110,7 @@ class Question(object):
                 return False
     
     @staticmethod
+    #Removing the question
     def delete_question(question_id):
         exists_question=Question.get_question_with_question_id(question_id)
         if exists_question is not None:

@@ -1,9 +1,8 @@
-from flask import Flask,render_template,Response,request,redirect,url_for,flash
+from flask import Flask,render_template,Response,redirect,url_for
 from flask.globals import session
 from database import Database
 from hand_detection_and_recognation.fingerCount import rmStartMode2
-from hand_detection_and_recognation.hand_detection import hand_detection,hand_detection_mode_2
-from pymongo import MongoClient
+from hand_detection_and_recognation.hand_detection import hand_detection
 from module.account.accountClass import User
 import module.account.model
 import module.quizroom.quizroomModel
@@ -12,11 +11,8 @@ import module.questions.questionsModel
 import module.answering.answeringModel
 import module.ranking_report.reportModel
 
-
+#This is the main calling each function and classes
 app=Flask(__name__)
-#client=MongoClient("mongodb+srv://fypsmartclassroom:fypsmartclassroom@fypsmartclassroom.t8u8i.mongodb.net/test?ssl=true&ssl_cert_reqs=CERT_NONE")
-#smartclassroom_db=client["smartclassroom"]
-#users_db=smartclassroom_db["users"]
 
 app.secret_key = "abc"  
 
@@ -32,7 +28,6 @@ def home():
 @app.route("/login",methods=["GET","POST"])
 def login():
     return module.account.model.login()
-
 
 @app.route("/register",methods=["GET","POST"])
 def register():
@@ -67,18 +62,10 @@ def smartQuiz():
 def studentSmartQuiz():
     return module.quizroom.quizroomModel.student_quizrooms()
 
-
-#@app.route("/mainMenu/smartQuiz/editQuizRoom",methods=["GET","POST"])
-#def editQuizRoom():
- #   editCreated=True
-  #  return module.quizroom.quizroomModel.quizrooms(editCreated)
-  #  */
-
 @app.route("/mainMenu/smartQuiz/quizMenu")
 @app.route("/mainMenu/studentSmartQuiz/quizMenu")
 def quizMenu():
     return render_template('quizmenu.html',title='Quiz Menu')
-
 
 @app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction/")
 def instruction():
@@ -88,7 +75,6 @@ def instruction():
 def answering():
     return module.answering.answeringModel.answering()
     
-
 @app.route("/mainMenu/smartQuiz/quizMenu/questionSummary",methods=["GET","POST"])    
 def questionSummary():
     return module.questions.questionsModel.questionSummary()
@@ -111,14 +97,6 @@ def handRealTimeAndRecognize():
     #session['hand-detect-mode']=1
     return Response(rmStartMode2(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
-
-#@app.route("/mainMenu/studentSmartQuiz/quizMenu/instruction2/handRealTime2")
-#def handRealtime2():
- #   session['hand-detect-mode']=2
- #   #instruction()
- #   return Response(hand_detection_mode_2(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
 @app.route("/logout")
 @app.route("/mainMenu/logout")
 @app.route("/mainMenu/smartQuiz/quizMenu/logout")
@@ -129,17 +107,9 @@ def logout():
     User.logout()
     return redirect(url_for('login'))
 
-#@app.route("/mainMenu/joinQuizroom")
-#def join_quizroom():
-#   return module.quizroom.quizroomModel.join_quiz_room()
-
 @app.route("/mainMenu/create_quizroom")
 def create_quizroom():
    return module.quizroom.quizroomModel.create_quizroom()
-
-
-
-
 
 if __name__=='__main__':
     app.run(debug=True) 

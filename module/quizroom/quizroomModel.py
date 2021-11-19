@@ -1,6 +1,5 @@
 
-from flask import Flask,render_template,Response,request,redirect,url_for,flash
-import flask
+from flask import render_template,request,redirect,url_for,flash
 from flask.globals import session
 import uuid
 from module.answering.answeringClass import Answer
@@ -11,33 +10,33 @@ def quizrooms():
     email=session['email']
     if Quizroom.quizroom_exists(email):   
         create_quizroom=Quizroom.display_all_quizrooms(email)
-        
         #print(create_quizroom)
         #for x in create_quizroom:
         #    print(x)
-        #quizroom=create_quizroom['quizrooms']
         #print(quizroom)
         if request.method=="POST":
+
             session.pop("_flashes",None)
             #subject_name=request.form.get("quiz-room-name")
             if request.form.get('submit')=='Go':
+
                 _id=request.form.get("quiz-room-id")
-                
-                print(_id)
-                #print(subject_name)
                 #print(_id)
+                #print(subject_name)
                 if Quizroom.get_a_quizroom(_id,email):
+
                     session['quizroom_id']=_id
                     #print("Quizroom exists")
-                    
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
                 else:
+
                     invalid="Please Select a Quizroom Below"
                     flash(invalid,'quizroom_invalid_error')
                     #print("No select Quizroom")
                     return redirect(url_for('smartQuiz'))
                 
             elif request.form.get('submit')=='Edit':
+
                 session.pop("_flashes",None)
                 _id=request.form.get("edit-quiz-room-id")
                 subject_name=request.form.get("quiz-room-name")
@@ -49,11 +48,13 @@ def quizrooms():
                     #print("Successful updated")
                     return redirect(url_for('smartQuiz'))
             elif request.form.get('submit')=="Delete":
+
                 _id=request.form.get("edit-quiz-room-id")
                 confirm_message=request.form.get("delete-confirmation")
                 #print(_id)
                 #print(confirm_message)
                 if confirm_message == "Confirm":
+
                     #print(confirm_message)
                     if Quizroom.delete_quiz_room(_id,email):
                         #print("Successful delete")
@@ -64,9 +65,9 @@ def quizrooms():
                    # flash(invalid,'quizroom_edit_invalid_error')
                     return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=create_quizroom) 
 
-
         return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=create_quizroom)  
     else:
+
          return render_template('quizRoom.html',title='Smart Quiz',created_quizroom=[])  
 
 def create_quizroom():
@@ -88,7 +89,6 @@ def create_quizroom():
         total_student,
         total_scores,
         _id]
-    #classroom=Classroom(_id=_id,subject=subject,total_progress=total_progress,assigned_to=assigned_to,class_code=class_code,belongs_to=belongs_to)
     Quizroom.create_new_quizroom(belongs_to,quizrooms,_id=None)
     return redirect(url_for('smartQuiz'))
 
@@ -106,10 +106,11 @@ def student_quizrooms():
         #print(result)
         #for a in result:
            # for b in a['quizrooms']:
-
         if request.method=="POST":
+
             session.pop("_flashes",None)
             if request.form.get('submit')=="Join":
+
                 quiz_room_code=request.form.get('join-quiz-code')
                 #print(quiz_room_code)
                 quizroom_id=Quizroom.valid_quiz_room_code(quiz_room_code,quizrooms_id)
@@ -122,15 +123,17 @@ def student_quizrooms():
                     User.valid_add_detail(email,type,quizroom_id)
                     return redirect(url_for('studentSmartQuiz'))
                 else:
+
                     joined_quizroom="You have joined the quizroom or entered a invalid quizroom code!"
                     flash(joined_quizroom,"joined_quizroom_warning")
-                    
                     return redirect(url_for('studentSmartQuiz'))
                     
             elif request.form.get('submit')=='Go':
+
                 _id=request.form.get("quiz-room-id")
                 print(_id)
                 if Quizroom.joined_a_quizroom(_id,quizrooms_id):
+
                     print("Quizroom is joined")
                     session['quizroom_id']=_id
                     session['Question_No']=1
@@ -138,13 +141,14 @@ def student_quizrooms():
                     session['ending']=False
                     return render_template('quizmenu.html',title='Quiz Menu',type=session['type'])
                 else:
+
                     invalid="Please Select a Quizroom Below"
                     flash(invalid,'quizroom_invalid_error')
                     #print("No select Quizroom")
                     return redirect(url_for('studentSmartQuiz'))
-                
             
             elif request.form.get('submit')=='Delete':
+
                 _id=request.form.get("delete-quiz-room-id")
                 print(_id,email)
                 User.quit_quizroom(_id,email)
@@ -153,6 +157,7 @@ def student_quizrooms():
         
         return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=result)
     else:
+        
         return render_template('studentQuizRoom.html',title="Smart Quiz",joined_quizroom=[])
 
 

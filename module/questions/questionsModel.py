@@ -1,6 +1,5 @@
 import uuid
-from flask import Flask,render_template,Response,request,redirect,url_for,flash
-import flask
+from flask import render_template,request,redirect,url_for
 from flask.globals import session
 from module.questions.questionsClass import Question
 from module.quizroom.quizroomClass import Quizroom
@@ -32,14 +31,13 @@ def createQuestion():
     form2=questionForm()
     #check is that the question is click from questionSummary
     #if yes then retrieve the data based on the question_id
-    
     question_id=Question.search_question_id(question_id)
     edit_id=None
         #print(question_id)
     if question_id is not None:
         for question in question_id:
-                #after retreived the data assign back to form input
-                #hence the form input has the value
+            #after retreived the data assign back to form input
+            #hence the form input has the value
             edit_id=question.get('question_set')[0].get('_id')
             form2.question.data=question.get('question_set')[0].get('question')
             form2.answer1.data=question.get('question_set')[0].get('answer1')

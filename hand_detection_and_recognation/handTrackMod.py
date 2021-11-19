@@ -1,6 +1,5 @@
 from cv2 import cv2
 import mediapipe as mp
-import time
 from hand_detection_and_recognation import hand_detection
 
 
@@ -10,7 +9,6 @@ class handDetector():
         self.maxHands=maxHands
         self.detectionCon=detectionCon
         self.trackCon=trackCon
- 
         self.mpHands = mp.solutions.hands
         self.hands = self.mpHands.Hands(self.mode, self.maxHands,
                                         self.detectionCon, self.trackCon)

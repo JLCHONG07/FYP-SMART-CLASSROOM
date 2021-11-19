@@ -19,7 +19,6 @@ class quizroomForm(FlaskForm):
     assign_to=StringField('assign_to',validators=[DataRequired()])
     confirmation=StringField('confirmation',validators=[DataRequired()],render_kw={"placeholder": "Enter Confirm to Delete"})
 
-
 class questionForm(FlaskForm):
     question=StringField('question',validators=[DataRequired()],render_kw={"placeholder": "Type a Question"})
     answer1=StringField('answer1',validators=[DataRequired()],render_kw={"placeholder": "Option 1"})

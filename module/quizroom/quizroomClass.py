@@ -1,10 +1,6 @@
 import uuid
-
-from werkzeug.datastructures import cache_property
 from database import Database
 from random import randint
-
-
 
 class Quizroom(object):
 
@@ -53,21 +49,6 @@ class Quizroom(object):
 
         }
 
-    
-    #not json_update using as there is some problem (TypeError: spec must be an instance of dict, bson.son.SON, or any other type that inherits from collections.Mapping Traceback (most recent call last))
-    def json_update(self):
-        return{
-             "$push":{
-                "quizrooms":{
-                "subject":"subject2",
-                "total_progress":23,
-                "assigned_to":"Group 3",
-                "quiz_code":787878,
-                "_id":"4567890"
-                }
-             }
-        }
-    
 
     @classmethod
     def get_quizroom(cls,email):
@@ -96,7 +77,7 @@ class Quizroom(object):
 
     @staticmethod
     def display_all_quizrooms(email):
-       return  Database.find_one(collection="quizrooms",query={'belongs_to':email})
+       return Database.find_one(collection="quizrooms",query={'belongs_to':email})
 
     @classmethod
     def create_new_quizroom(cls,belongs_to,quizrooms,_id):

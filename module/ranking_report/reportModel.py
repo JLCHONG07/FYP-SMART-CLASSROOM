@@ -12,5 +12,5 @@ from module.ranking_report.reportClass import Report
 def reportSummary():
       quizroom_id=session['quizroom_id']
       report=Report.report_exists(quizroom_id)
-      print(report)
+      #print(report)
       return render_template('reportSummary.html',title='Report Summary',report=report)
