@@ -83,7 +83,7 @@ class Answer(object):
     #By applying this method, it will only save the first answering for the user by returning true or false
     #If true mean the user did not do the question before
     #if false mean the user do this question before
-    #it will only save one time even the user didnot fully answer the set of question
+    #it will only save one time to the report even the user didnot fully answer the set of question
     def get_answered_question(quizroom_id,question_id,email):
         data= Database.find(collection="answers",query={"email":email,"quizroom_id":quizroom_id},
         data={"_id":0,"quizroom_id":0,"email":0,"points":0,"progress":0,"answered_set":{"$elemMatch":{"question_id":question_id}}})
