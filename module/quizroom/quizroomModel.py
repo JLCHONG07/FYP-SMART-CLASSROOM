@@ -114,7 +114,7 @@ def student_quizrooms():
                 quiz_room_code=request.form.get('join-quiz-code')
                 #print(quiz_room_code)
                 quizroom_id=Quizroom.valid_quiz_room_code(quiz_room_code,quizrooms_id)
-                print("quizroom_id:",quizroom_id)
+                #print("quizroom_id:",quizroom_id)
                 Quizroom.update_total_student(quizroom_id,total_update_student=1)
 
                 if quizroom_id is not None:
@@ -131,7 +131,7 @@ def student_quizrooms():
             elif request.form.get('submit')=='Go':
 
                 _id=request.form.get("quiz-room-id")
-                print(_id)
+                #print(_id)
                 if Quizroom.joined_a_quizroom(_id,quizrooms_id):
 
                     print("Quizroom is joined")

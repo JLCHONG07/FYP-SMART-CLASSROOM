@@ -5,6 +5,7 @@ from module.questions.questionsClass import Question
 from module.quizroom.quizroomClass import Quizroom
 from appForm import questionForm
 
+#display all the questions
 def questionSummary():
     quizroom_id=session['quizroom_id']
     questions=Question.display_all_question(quizroom_id)
@@ -14,7 +15,7 @@ def questionSummary():
     if request.method=="POST":
         if request.form.get("submit")=="Edit":
             question_id=request.form.get("question-list-id")
-            print(question_id)
+            #print(question_id)
             session['question_id']=question_id
             return redirect(url_for('createQuizQuestion'))
 
@@ -25,6 +26,7 @@ def questionSummary():
 
     return render_template('questionSummary.html',title='Question Summary',questions=questions)
 
+#create a question
 def createQuestion():
     question_id=session['question_id']
     form=questionForm()
