@@ -74,6 +74,7 @@ class User(object):
 
         @staticmethod
         def logout():
+                #session.clear()
                 session['email']=None
                 session['type']=None
 

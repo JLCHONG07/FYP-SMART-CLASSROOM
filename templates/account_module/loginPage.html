@@ -78,7 +78,7 @@
         <div class="container mb-3  mt-5">
 
             {% for message in get_flashed_messages() %}
-            <p>{{message}} </p>
+            <p style="color:red;">{{message}} </p>
             {% endfor %}
             <div class="d-flex flex-row flex-wrap container  justify-content-center text-center" style="height: 6vh;">
                 <button type="submit" class="btn login-button text-uppercase fw-bold  text-center ">Login</button>

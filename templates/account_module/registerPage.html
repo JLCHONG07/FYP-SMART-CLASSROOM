@@ -91,13 +91,13 @@
                         </svg>
                 </div>
                 <div class="col-8 px-3">
-                    <input type="text" name="icno" class="input-text" placeholder="Enter Your MyCard Number">
+                    {{form.icno}}
                 </div>
             </div>
 
         </div>
         {% for message in get_flashed_messages() %}
-        <p id="error-message">{{message}} </p>
+        <p id="error-message" style="color:red">{{message}} </p>
         {% endfor %}
         <div class="container mb-3  mt-5">
             <div class="d-flex flex-row flex-wrap container  justify-content-center text-center" style="height: 6vh;">
